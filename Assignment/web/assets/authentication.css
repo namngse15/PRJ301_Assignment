@@ -1,0 +1,222 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600&display=swap");
+* {
+    font-family: "Poppins", sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    outline: none;
+    border: none;
+    text-decoration: none;
+    transition: all 0.2s linear;
+    font-size: 1.4rem;
+}
+
+html {
+    background:  #E4EBF5;
+    font-size: 62.5%;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    scroll-padding-top: 7rem;
+}
+body{
+    background:  #E4EBF5;
+}
+.notification {
+    width: 100%;
+}
+.notification p {
+    width: 100%;
+    text-align: center;
+    color:#ff1e00;
+}
+.form-modal{
+    position:relative;
+    width:45rem;
+    height:auto;
+    margin-top:17rem;
+    left:50%;
+    transform:translateX(-50%);
+    background: #E4EBF5;
+    box-shadow: 0.3rem 0.3rem 0.6rem #c8d0e7, 
+        -0.2rem -0.2rem 0.5rem #FFFFFF;
+    border-radius: 1rem;
+}
+
+.form-modal button{
+    cursor: pointer;
+    position: relative;
+    text-transform: capitalize;
+    font-size:1rem;
+    z-index: 2;
+    outline: none;
+    background: #E4EBF5;
+    box-shadow: inset 0.2rem 0.2rem 0.5rem #c8d0e7, 
+        inset -0.2rem -0.2rem 0.5rem #FFFFFF;
+    transition:0.2s;
+}
+.form-modal .btn{
+    border-radius: 20px;
+    border:none;
+    font-weight: bold;
+    font-size:1.2em;
+    padding:0.8em 1em 0.8em 1em!important;
+    transition:0.5s;
+    border:1px solid #E4EBF5;
+    margin:0.5em 0 0.5rem 0;
+}
+.login-block{
+    height: 10rem;
+}
+.form-modal .login , .form-modal .signup{
+    background: #E4EBF5;
+     box-shadow: inset 0.2rem 0.2rem 0.5rem #c8d0e7, 
+        inset -0.2rem -0.2rem 0.5rem #FFFFFF;
+    color:#000;
+}
+.form-modal .login:hover , .form-modal .signup:hover{
+box-shadow: 0.3rem 0.3rem 0.6rem #c8d0e7, 
+        -0.2rem -0.2rem 0.5rem #FFFFFF;
+}
+#login-toggle{
+ box-shadow: 0.3rem 0.3rem 0.6rem #c8d0e7, 
+        -0.2rem -0.2rem 0.5rem #FFFFFF;   
+}
+.form-toggle{
+    position: relative;
+    width:100%;
+    height:auto;
+}
+.form-toggle button{
+    width:50%;
+    float:left;
+    padding:1.5em;
+    margin-bottom:1.5em;
+    border:none;
+    transition: 0.2s;
+    font-size:1.1em;
+    font-weight: bold;
+    border-radius: 1rem 1rem 0rem 0;
+}
+.form-toggle button:nth-child(1){
+    border-bottom-right-radius: 20px;
+}
+
+.form-toggle button:nth-child(2){
+    border-bottom-left-radius: 20px;
+}
+.form-modal form{
+    position: relative;
+    width:90%;
+    height:auto;
+    left:50%;
+    transform:translateX(-50%);  
+}
+
+#login-form , #signup-form{
+    position:relative;
+    width:100%;
+    height:auto;
+    padding-bottom:1rem;
+}
+#signup-form{
+    display: none;
+}
+#login-form button , #signup-form button{
+    width:100%;
+    margin-top:0.5em;
+    padding:0.6em;
+}
+.form-modal .input-border{
+    background:#E4EBF5;
+    padding: 2px 8px;
+    border-radius: 30px;
+    box-shadow: 0.3rem 0.3rem 0.6rem #c8d0e7, 
+        -0.2rem -0.2rem 0.5rem #FFFFFF;
+    margin-bottom: 1rem;
+}
+.form-modal input:not(:nth-child(3)){
+    position: relative;
+    width:100%;
+    font-size:1em;
+    padding:1.2em 1.7em 1.2em 1.7em;
+    margin-top:0.6em;
+    margin-bottom:0.6em;
+    border-radius: 23px;
+    border:none;
+    background:#E4EBF5;
+    box-shadow: inset 0.2rem 0.2rem 0.5rem #c8d0e7, 
+        inset -0.2rem -0.2rem 0.5rem #FFFFFF;
+    outline:none;
+    font-weight: bold;
+    transition:0.4s;
+}
+.form-modal input:focus , .form-modal input:active{
+   box-shadow: 0.3rem 0.3rem 0.6rem #c8d0e7, 
+        -0.2rem -0.2rem 0.5rem #FFFFFF;
+}
+.form-modal input::-webkit-input-placeholder{
+    color:#222;
+}
+/* login-footer */
+.login-footer{
+    display:flex;
+    justify-content: space-between;
+}
+.login-footer label{
+    display:flex;
+    float: left;
+}
+.form-modal p{
+    font-size:16px;
+    font-weight: bold;
+    float:right;
+}
+.form-modal p a{
+    color: var(--orange);
+    text-decoration: none;
+    transition:0.2s;
+}
+.form-modal p a:hover{
+    color:#222;
+}
+@media only screen and (max-width:500px){
+    .form-modal{
+        width:90%;
+    }
+}
+/*modal-info*/
+.modal-nofi{
+    position:fixed;
+    top:0;
+    right:0;
+    left:0;
+    bottom:0;
+    z-index: 1100;
+    display: flex;
+}
+.modal-nofi-overlay{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.2); 
+}
+.modal-nofi-body{
+    width: 30rem;
+    margin: auto;
+    position: relative;
+    background-color: #fff;
+    border-radius:5px; 
+}
+.modal-nofi-fail{
+    text-align: center; 
+    padding: 1rem 0; 
+}
+.modal-nofi-fail i{
+    font-size: 6.1rem;
+    margin-bottom: 1rem;
+    color:#ff1e00;
+}
+.modal-nofi-fail p{
+    font-size: 1.4rem;
+    font-weight: bold;
+}

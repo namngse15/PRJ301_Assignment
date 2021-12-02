@@ -212,7 +212,7 @@ public class ProductDAO extends BaseDAO<Product> {
         return listProducts;
     }
 
-    public int getCountTotalProductWithBrand(int cateId, int brandId, int displayId,
+    public int getCountTotalProductByAllCate(int cateId, int brandId, int displayId,
             int processId, int priceId) {
         try {
             String sql = "select COUNT(*) \n"
@@ -220,33 +220,48 @@ public class ProductDAO extends BaseDAO<Product> {
             if (cateId != 0) {
                 sql += " where cateId=? ";
             }
-            if (brandId != 0) {
+            if (brandId != 0 && cateId == 0) {
                 sql += " where brandId=? ";
+            } else if (brandId != 0 && cateId != 0) {
+                sql += " and brandId=? ";
             }
-            if (displayId != 0) {
+            if (displayId != 0 && cateId == 0 && brandId == 0) {
                 sql += " where displaySize=? ";
+            } else if (cateId != 0 || brandId != 0) {
+                if (displayId != 0) {
+                    sql += " and displaySize=? ";
+                }
             }
-            if (processId != 0) {
+            if (processId != 0 && displayId == 0 && cateId == 0 && brandId == 0) {
                 sql += " where processor=? ";
+            } else if (displayId != 0 || cateId == 0 || brandId == 0) {
+                if (processId != 0) {
+                    sql += " and processor=? ";
+                }
             }
-            if (priceId != 0) {
+            if (priceId != 0 && processId == 0 && displayId == 0 && cateId == 0 && brandId == 0) {
                 sql += " where priceId=? ";
+            } else if (processId != 0 || displayId != 0 || cateId != 0 || brandId != 0) {
+                if (priceId != 0) {
+                    sql += " and priceId=? ";
+                }
             }
             PreparedStatement stm = connection.prepareStatement(sql);
+            int count = 1;
             if (cateId != 0) {
-                stm.setInt(1, cateId);
+                stm.setInt(count++, cateId);
             }
             if (brandId != 0) {
-                stm.setInt(1, brandId);
+                stm.setInt(count++, brandId);
             }
             if (displayId != 0) {
-                stm.setInt(1, displayId);
+                stm.setInt(count++, displayId);
             }
             if (processId != 0) {
-                stm.setInt(1, processId);
+                stm.setInt(count++, processId);
             }
             if (priceId != 0) {
-                stm.setInt(1, priceId);
+                stm.setInt(count++, priceId);
             }
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
@@ -256,6 +271,12 @@ public class ProductDAO extends BaseDAO<Product> {
             Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return 0;
+    }
+
+    public static void main(String[] args) {
+        ProductDAO d = new ProductDAO();
+        int count = d.getCountTotalProductByAllCate(1, 1, 13, 0, 0);
+        System.out.println(count);
     }
 
     public int getCountTotalProductByDisplay(int displaySize) {
@@ -749,7 +770,6 @@ public class ProductDAO extends BaseDAO<Product> {
 //        }
 //        return check > 0;
 //    }
-
     public boolean updateProduct(Product product) {
         int check = 0;
 
@@ -884,31 +904,5 @@ public class ProductDAO extends BaseDAO<Product> {
         } catch (Exception e) {
         }
         return check > 0;
-    }
-
-    public static void main(String[] args) {
-        ProductDAO dao = new ProductDAO();
-        OrdersDAO d = new OrdersDAO();
-
-        Product p = dao.getOneProduct("Legion7A2101CF");
-        List<Product> lists = dao.getAllProductByCategory(1, 0, 0, 0, 0);
-        for (Product list : lists) {
-            System.out.println(list.getName());
-        }
-        int count = dao.getCountTotalProductWithBrand(1, 0, 0, 0, 0);
-        // int count1 = d.getTotalOrderByProductandStatus("Legion7A2101CF");
-//        List<Orders> l = d.getOrdersByProductId("Legion7A2101CF");
-//        if (l.isEmpty()) {
-//            System.out.println("1");
-//        } else {
-//            for (Orders orders : l) {
-//                System.out.println(orders.getId() + "0");
-//            }
-//        }
-        System.out.println(p.getPriceId());
-//        System.out.println(count);
-//        for (Product list : lists) {
-//            System.out.println(list.getBattery());
-//        }
     }
 }

@@ -57,7 +57,7 @@
                         <div class="row">
                             <!--product item-->
                             <c:forEach items="${listProducts}" var="o">  
-                                <div class=" col-sm-4 col-md-4 col-lg-3 mt-2" style="display: flex">
+                                <div class="col-xl-3 col-xs-6 col-sm-4 col-md-4 col-lg-3 mt-2" style="display: flex">
                                     <!-- product -->
                                     <div class="make-3D-space">
                                         <div class="product-card">

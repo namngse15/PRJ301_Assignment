@@ -8,55 +8,189 @@
 <jsp:useBean id="CategoryDAO" class="dal.CategoryDAO"></jsp:useBean>
     <div class="col-xl-3">
         <div class="row">
-            <div class="col-12 col-xl-12 sidebar">
-                <div class="sidebar-border">
-                    <div class="sidebar-header text-uppercase font-weight-bold h4">
-                        <i class="fas fa-list-alt fa-1x ml-1 mr-1"></i>
-                        Categories
-                    </div>
-                </div>  
+            <div class="col-12 col-xl-12 sidebar">  
+                <!--Category-->
                 <div class="sidebar-border">
                     <ul class="sidebar-list">
                         <li class='submenu'>
                             <div class="submenu-header"><span>Category</span></div>
-                        <c:forEach items="${CategoryDAO.allCategory}" var="o">
-                            <input type="radio" name="" value="${o.id}">
-                            <label for="${o.id}">${o.name}</label>
-                        </c:forEach>
+                            <form action="filterproduct" method="get">                     
+                                <input type="hidden" name="pageIndex" value="${pageIndex}"/>
+                            <c:forEach items="${CategoryDAO.allCategory}" var="o">
+                                <div class="radiobtn"> 
+                                    <c:if test="${cateId == o.id}">
+                                        <input  class="state" type="radio" name="cateId" id="${o.name}" checked="checked" value="${o.id}"  onclick="this.form.submit();">
+                                        <label  class="label" for="${o.name}">
+                                            <div class="indicator"></div>
+                                        </label>
+                                    </c:if>
+                                    <c:if test="${cateId != o.id}">
+                                        <input class="state" type="radio" name="cateId" id="${o.name}" value="${o.id}"  onclick="this.form.submit();">
+                                        <label class="label" for="${o.name}">
+                                            <div class="indicator"></div>
+                                        </label>
+                                    </c:if>
+                                </div>
+                                <p>${o.name}</p>
+                            </c:forEach>
+                            <c:if test="${brandId!=null}">
+                                <input type="hidden" name="brandId" value="${brandId}"/>
+                            </c:if>
+                            <c:if test="${displaySize!=null}">
+                                <input type="hidden" name="displaySize" value="${displaySize}"/>
+                            </c:if>
+                            <c:if test="${processId!=null}">
+                                <input type="hidden" name="processId" value="${processId}"/>
+                            </c:if>
+                            <c:if test="${priceId!=null}">
+                                <input type="hidden" name="priceId" value="${priceId}"/>
+                            </c:if>
+                        </form>
                     </li> 
-                    <!--                    <li class='sub-menu'>
-                                            <button class="cateBtn"><span>Brand</span></button>
-                                            <ul>
-                    <c:forEach items="${CategoryDAO.allBrand}" var="o">
-                        <li><a class="${brandId== o.id ? "acitve":""}" href='filterproduct?brandId=${o.id}'></i>${o.name}</a>
-                        </li>
-                    </c:forEach>
-                </ul>
-            </li>     
-            <li class='sub-menu'>
-                <button class="cateBtn"><span>Display Size</span></button>
-                <ul>
-                    <c:forEach items="${CategoryDAO.allDisplaySize}" var="o">  
-                        <li><a href='filterproduct?displaySize=${o.size}'></i>${o.size}</a></li>
-                    </c:forEach>
-        </ul>
-    </li>  
-    <li class='sub-menu'>
-        <button class="cateBtn"><span>Processor</span></button>
-        <ul>
-                    <c:forEach items="${CategoryDAO.allProcessor}" var="o">  
-                        <li><a href='filterproduct?processId=${o.id}'></i>${o.name}</a></li>                               
-                    </c:forEach>
-        </ul>
-    </li> 
-    <li class='sub-menu'>
-        <button class="cateBtn"><span>Price</span></button>
-        <ul>
-                    <c:forEach items="${CategoryDAO.allPrice}" var="o">  
-                        <li><a href='filterproduct?priceId=${o.id}'></i>${o.amount}</a></li>
-                    </c:forEach>
-        </ul>
-    </li> -->
+                    <!--Brand-->
+                    <li class='submenu'>
+                        <div class="submenu-header"><span>Brand</span></div>
+                        <form action="filterproduct" method="get">                                               
+                            <input type="hidden" name="pageIndex" value="${pageIndex}"/>
+                            <c:if test="${cateId!=null}">
+                                <input type="hidden" name="cateId" value="${cateId}"/>
+                            </c:if>    
+                            <c:forEach items="${CategoryDAO.allBrand}" var="o">
+                                <div class="radiobtn"> 
+                                    <c:if test="${brandId == o.id}">
+                                        <input class="state" type="radio" name="brandId" value="${o.id}" id="${o.name}" checked="checked" onclick="this.form.submit();">
+                                        <label class="label" for="${o.name}">
+                                            <div class="indicator"></div>
+                                        </label>
+                                    </c:if>
+                                    <c:if test="${brandId != o.id}">
+                                        <input class="state" type="radio" name="brandId" value="${o.id}" id="${o.name}" onclick="this.form.submit();">
+                                        <label  class="label" for="${o.name}">
+                                            <div class="indicator"></div>
+                                        </label>
+                                    </c:if>
+                                </div>
+                                <p>${o.name}</p>
+                            </c:forEach>
+                            <c:if test="${displaySize!=null}">
+                                <input type="hidden" name="displaySize" value="${displaySize}"/>
+                            </c:if>
+                            <c:if test="${processId!=null}">
+                                <input type="hidden" name="processId" value="${processId}"/>
+                            </c:if>
+                            <c:if test="${priceId!=null}">
+                                <input type="hidden" name="priceId" value="${priceId}"/>
+                            </c:if>
+                        </form>
+                    </li>     
+                    <!--Display size-->
+                    <li class='submenu'>
+                        <div class="submenu-header"><span>Display Size</span></div>
+                        <form action="filterproduct" method="get">                                               
+                            <input type="hidden" name="pageIndex" value="${pageIndex}"/>
+                            <c:if test="${cateId!=null}">
+                                <input type="hidden" name="cateId" value="${cateId}"/>
+                            </c:if>    
+                            <c:if test="${brandId!=null}">
+                                <input type="hidden" name="brandId" value="${brandId}"/>
+                            </c:if>
+                            <c:forEach items="${CategoryDAO.allDisplaySize}" var="o"> 
+                                <div class="radiobtn">  
+                                    <c:if test="${displaySize == o.size}">
+                                        <input class="state" type="radio" name="displaySize" value="${o.size}" id="${o.size}" checked="checked" onclick="this.form.submit();">
+                                        <label  class="label" for="${o.size}">
+                                            <div class="indicator"></div>
+                                        </label>    
+                                    </c:if>
+                                    <c:if test="${displaySize != o.size}">
+                                        <input class="state" type="radio" name="displaySize" value="${o.size}" id="${o.size}" onclick="this.form.submit();">
+                                        <label  class="label" for="${o.size}">
+                                            <div class="indicator"></div>
+                                        </label>    
+                                    </c:if>
+                                </div>
+                                <p>${o.size}</p>
+                            </c:forEach>
+                            <c:if test="${processId!=null}">
+                                <input type="hidden" name="processId" value="${processId}"/>
+                            </c:if>
+                            <c:if test="${priceId!=null}">
+                                <input type="hidden" name="priceId" value="${priceId}"/>
+                            </c:if>
+                        </form>
+                    </li>  
+                    <!--Processor-->
+                    <li class='submenu'>
+                        <div class="submenu-header"><span>Processor</span></div>
+                        <form action="filterproduct" method="get">                                               
+                            <input type="hidden" name="pageIndex" value="${pageIndex}"/>
+                            <c:if test="${cateId!=null}">
+                                <input type="hidden" name="cateId" value="${cateId}"/>
+                            </c:if>    
+                            <c:if test="${brandId!=null}">
+                                <input type="hidden" name="brandId" value="${brandId}"/>
+                            </c:if>
+                            <c:if test="${displaySize!=null}">
+                                <input type="hidden" name="displaySize" value="${displaySize}"/>
+                            </c:if>
+                            <c:forEach items="${CategoryDAO.allProcessor}" var="o">  
+                                <div class="radiobtn">  
+                                    <c:if test="${processId == o.id}">
+                                        <input class="state" type="radio" name="processId" value="${o.id}" id="${o.name}" checked="checked" onclick="this.form.submit();">
+                                        <label  class="label" for="${o.name}">
+                                            <div class="indicator"></div>
+                                        </label>
+                                    </c:if>
+                                    <c:if test="${processId != o.id}">
+                                        <input class="state" type="radio" name="processId" value="${o.id}" id="${o.name}" onclick="this.form.submit();">
+                                        <label  class="label" for="${o.name}">
+                                            <div class="indicator"></div>
+                                        </label>
+                                    </c:if>
+                                </div>
+                                <p>${o.name}</p>
+                            </c:forEach>
+                            <c:if test="${priceId!=null}">
+                                <input type="hidden" name="priceId" value="${priceId}"/>
+                            </c:if>
+                        </form>
+                    </li> 
+                    <!--Price amount-->
+                    <li class='submenu'>
+                        <div class="submenu-header"><span>Price</span></div>
+                        <form action="filterproduct" method="get">                                               
+                            <input type="hidden" name="pageIndex" value="${pageIndex}"/>
+                            <c:if test="${cateId!=null}">
+                                <input type="hidden" name="cateId" value="${cateId}"/>
+                            </c:if>    
+                            <c:if test="${brandId!=null}">
+                                <input type="hidden" name="brandId" value="${brandId}"/>
+                            </c:if>
+                            <c:if test="${displaySize!=null}">
+                                <input type="hidden" name="displaySize" value="${displaySize}"/>
+                            </c:if>
+                            <c:if test="${processId!=null}">
+                                <input type="hidden" name="processId" value="${processId}"/>
+                            </c:if>
+                            <c:forEach items="${CategoryDAO.allPrice}" var="o"> 
+                                <div class="radiobtn">  
+                                    <c:if test="${priceId == o.id}">
+                                        <input class="state" type="radio" name="priceId" value="${o.id}" id="${o.id}" checked="checked" onclick="this.form.submit();">
+                                        <label  class="label" for="${o.id}">
+                                            <div class="indicator"></div>
+                                        </label>
+                                    </c:if>
+                                    <c:if test="${priceId != o.id}">
+                                        <input class="state" type="radio" name="priceId" value="${o.id}" id="${o.id}" onclick="this.form.submit();">
+                                        <label  class="label" for="${o.id}">
+                                            <div class="indicator"></div>
+                                        </label>
+                                    </c:if>
+                                </div>
+                                <p>${o.amount}</p>
+                            </c:forEach>
+                        </form>
+                    </li> 
                 </ul>
             </div> 
             <div class="sidebar-footer"></div>

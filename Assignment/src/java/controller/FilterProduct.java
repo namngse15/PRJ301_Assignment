@@ -77,7 +77,7 @@ public class FilterProduct extends HttpServlet {
         } catch (NumberFormatException e) {
         }
         int pageSize = 8;
-        int totalProduct = pdb.getCountTotalProductWithBrand(cateId, brandId, displaySize, processId, priceId);
+        int totalProduct = pdb.getCountTotalProductByAllCate(cateId, brandId, displaySize, processId, priceId);
         int totalPage = 0;
         int page = 0;
         if (totalProduct == 0) {
@@ -93,7 +93,6 @@ public class FilterProduct extends HttpServlet {
             }
             int next = pageIndex + 1;
             int back = pageIndex - 1;
-
             List<Product> listProducts = pdb.getAllProductByAllCategory(cateId, brandId, displaySize, processId, priceId, pageIndex, pageSize, sortId);
             request.setAttribute("listProducts", listProducts);
             request.setAttribute("totalPage", totalPage);
@@ -120,7 +119,6 @@ public class FilterProduct extends HttpServlet {
             request.setAttribute("pageIndex", pageIndex);
             request.setAttribute("next", next);
             request.setAttribute("back", back);
-            System.out.println("5");
         }
         request.getRequestDispatcher("home.jsp").forward(request, response);
 

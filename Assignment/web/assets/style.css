@@ -439,22 +439,12 @@ select{
 /* button view detail and add to card */
 .view_details {
     position: absolute;
-    top: 2.5rem;
+    top: 5rem;
     left: 50%;
     margin-left: -85px;
     border: 2px solid #fff;
-    padding: 1rem 0;
-    width: 17.2rem;
-    opacity: 0;
-    transition: all 200ms ease-out;
-}
-.add_to{
-    position: absolute;
-    top: 8rem;
-    left: 50%;
-    margin-left: -8.5rem;
-    border: 2px solid #fff;
-    padding: 1rem 0;
+    border-radius: 5px;
+    padding: 1.5rem 1rem;
     width: 17.2rem;
     opacity: 0;
     transition: all 200ms ease-out;
@@ -464,25 +454,13 @@ select{
     background-image: linear-gradient(71deg, #FBAB7E 0%, #F7CE68 100%);
     cursor: pointer;
 }
-.add_to:hover {
-    background-color: #FBAB7E;
-    background-image: linear-gradient(71deg, #FBAB7E 0%, #F7CE68 100%);
-    cursor: pointer;
-}
+
 .product-card.animate .view_details {
     opacity: 1;
     width: 15.2rem;
     font-size: 1.5rem;
     margin-left: -7.5rem;
-    top: 2.5rem;
-    transition: all 200ms ease-out;
-}
-.product-card.animate .add_to {
-    opacity: 1;
-    width: 15.2rem;
-    font-size: 1.5rem;
-    margin-left: -7.5rem;
-    top: 8rem;
+    top: 5rem;
     transition: all 200ms ease-out;
 }
 /* product detail*/

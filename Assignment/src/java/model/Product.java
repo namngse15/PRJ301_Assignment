@@ -18,14 +18,18 @@ public class Product {
     private int cateId;
     private int brandId;
     //software
+    private int osId;
     private String os;
     //hardware    
-    private int displaySize;
+    private int displayId;
     private String display;
-    private int processor;
-    private String processDetail;
+    private int processorId;
+    private String processor;
+    private int gpuId;
     private String gpu;
+    private int ramId;
     private String ram;
+    private int harddriveId;
     private String harddrive;
     private String port;
     private String battery;
@@ -35,28 +39,28 @@ public class Product {
     private int quantity;
     private String note;
     private String color;
-    private int rate ;
+    private int rate;
 
-    public int getPriceId() {
-        return priceId;
-    }
-
-    public Product(String id, String name, int cateId, 
-            int brandId, String os, int displaySize, String display, 
-            int processor, String processDetail, String gpu, String ram, 
-            String harddrive, String port, String battery, int priceId, 
-            int price, int quantity, String note, String color) {
+    public Product(String id, String name, int cateId, int brandId, 
+            int osId, String os, int displayId, String display, int processorId, 
+            String processor, int gpuId, String gpu, int ramId, String ram, int harddriveId, 
+            String harddrive, String port, String battery, int priceId, int price, int quantity, 
+            String note, String color, int rate, List<ProductImg> listImage) {
         this.id = id;
         this.name = name;
         this.cateId = cateId;
         this.brandId = brandId;
+        this.osId = osId;
         this.os = os;
-        this.displaySize = displaySize;
+        this.displayId = displayId;
         this.display = display;
+        this.processorId = processorId;
         this.processor = processor;
-        this.processDetail = processDetail;
+        this.gpuId = gpuId;
         this.gpu = gpu;
+        this.ramId = ramId;
         this.ram = ram;
+        this.harddriveId = harddriveId;
         this.harddrive = harddrive;
         this.port = port;
         this.battery = battery;
@@ -65,12 +69,52 @@ public class Product {
         this.quantity = quantity;
         this.note = note;
         this.color = color;
+        this.rate = rate;
+        this.listImage = listImage;
     }
-    
+
+
+
+    public int getOsId() {
+        return osId;
+    }
+
+    public void setOsId(int osId) {
+        this.osId = osId;
+    }
+
+    public int getGpuId() {
+        return gpuId;
+    }
+
+    public void setGpuId(int gpuId) {
+        this.gpuId = gpuId;
+    }
+
+    public int getRamId() {
+        return ramId;
+    }
+
+    public void setRamId(int ramId) {
+        this.ramId = ramId;
+    }
+
+    public int getHarddriveId() {
+        return harddriveId;
+    }
+
+    public void setHarddriveId(int harddriveId) {
+        this.harddriveId = harddriveId;
+    }
+
+    public int getPriceId() {
+        return priceId;
+    }
 
     public void setPriceId(int priceId) {
         this.priceId = priceId;
     }
+
     public int getRate() {
         return rate;
     }
@@ -123,12 +167,12 @@ public class Product {
         this.os = os;
     }
 
-    public int getDisplaySize() {
-        return displaySize;
+    public int getDisplayId() {
+        return displayId;
     }
 
-    public void setDisplaySize(int displaySize) {
-        this.displaySize = displaySize;
+    public void setDisplayId(int displayId) {
+        this.displayId = displayId;
     }
 
     public String getDisplay() {
@@ -139,20 +183,20 @@ public class Product {
         this.display = display;
     }
 
-    public int getProcessor() {
+    public int getProcessorId() {
+        return processorId;
+    }
+
+    public void setProcessorId(int processorId) {
+        this.processorId = processorId;
+    }
+
+    public String getProcessor() {
         return processor;
     }
 
-    public void setProcessor(int processor) {
+    public void setProcessor(String processor) {
         this.processor = processor;
-    }
-
-    public String getProcessDetail() {
-        return processDetail;
-    }
-
-    public void setProcessDetail(String processDetail) {
-        this.processDetail = processDetail;
     }
 
     public String getGpu() {
@@ -210,6 +254,7 @@ public class Product {
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
+
     public String getNote() {
         return note;
     }
@@ -233,12 +278,4 @@ public class Product {
     public void setListImage(List<ProductImg> listImage) {
         this.listImage = listImage;
     }
-
-    @Override
-    public String toString() {
-        return "Product{" + "id=" + id + ", name=" + name + ", cateId=" + cateId + ", brandId=" + brandId +  ", os=" + os + ", displaySize=" + displaySize + ", display=" + display + ", processor=" + processor + ", processDetail=" + processDetail + ", gpu=" + gpu + ", ram=" + ram + ", harddrive=" + harddrive + ", port=" + port + ", battery=" + battery + ", price=" + price + ", quantity=" + quantity + "note=" + note + ", color=" + color + ", listImage=" + listImage + '}';
-    }
-
- 
-
 }

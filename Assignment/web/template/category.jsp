@@ -42,6 +42,12 @@
                             <c:if test="${processId!=null}">
                                 <input type="hidden" name="processId" value="${processId}"/>
                             </c:if>
+                            <c:if test="${ramId!=null}">
+                                <input type="hidden" name="ramId" value="${ramId}"/>
+                            </c:if>
+                            <c:if test="${hddId!=null}">
+                                <input type="hidden" name="hddId" value="${hddId}"/>
+                            </c:if>
                             <c:if test="${priceId!=null}">
                                 <input type="hidden" name="priceId" value="${priceId}"/>
                             </c:if>
@@ -77,6 +83,12 @@
                             </c:if>
                             <c:if test="${processId!=null}">
                                 <input type="hidden" name="processId" value="${processId}"/>
+                            </c:if>
+                            <c:if test="${ramId!=null}">
+                                <input type="hidden" name="ramId" value="${ramId}"/>
+                            </c:if>
+                            <c:if test="${hddId!=null}">
+                                <input type="hidden" name="hddId" value="${hddId}"/>
                             </c:if>
                             <c:if test="${priceId!=null}">
                                 <input type="hidden" name="priceId" value="${priceId}"/>
@@ -114,6 +126,12 @@
                             <c:if test="${processId!=null}">
                                 <input type="hidden" name="processId" value="${processId}"/>
                             </c:if>
+                            <c:if test="${ramId!=null}">
+                                <input type="hidden" name="ramId" value="${ramId}"/>
+                            </c:if>
+                            <c:if test="${hddId!=null}">
+                                <input type="hidden" name="hddId" value="${hddId}"/>
+                            </c:if>
                             <c:if test="${priceId!=null}">
                                 <input type="hidden" name="priceId" value="${priceId}"/>
                             </c:if>
@@ -150,6 +168,95 @@
                                 </div>
                                 <p>${o.name}</p>
                             </c:forEach>
+                            <c:if test="${ramId!=null}">
+                                <input type="hidden" name="ramId" value="${ramId}"/>
+                            </c:if>
+                            <c:if test="${hddId!=null}">
+                                <input type="hidden" name="hddId" value="${hddId}"/>
+                            </c:if>
+                            <c:if test="${priceId!=null}">
+                                <input type="hidden" name="priceId" value="${priceId}"/>
+                            </c:if>
+                        </form>
+                    </li> 
+                    <!--Ram-->
+                    <li class='submenu'>
+                        <div class="submenu-header"><span>Ram</span></div>
+                        <form action="filterproduct" method="get">                                               
+                            <input type="hidden" name="pageIndex" value="${pageIndex}"/>
+                            <c:if test="${cateId!=null}">
+                                <input type="hidden" name="cateId" value="${cateId}"/>
+                            </c:if>    
+                            <c:if test="${brandId!=null}">
+                                <input type="hidden" name="brandId" value="${brandId}"/>
+                            </c:if>
+                            <c:if test="${displaySize!=null}">
+                                <input type="hidden" name="displaySize" value="${displaySize}"/>
+                            </c:if>
+                            <c:if test="${processId!=null}">
+                                <input type="hidden" name="processId" value="${processId}"/>
+                            </c:if>
+                            <c:forEach items="${CategoryDAO.allRam}" var="o">  
+                                <div class="radiobtn">  
+                                    <c:if test="${ramId == o.id}">
+                                        <input class="state" type="radio" name="ramId" value="${o.id}" id="${o.name}" checked="checked"  onclick="this.form.submit();">
+                                        <label  class="label" for="${o.name}">
+                                            <div class="indicator"></div>
+                                        </label>
+                                    </c:if>
+                                    <c:if test="${ramId != o.id}">
+                                        <input class="state" type="radio" name="ramId" value="${o.id}" id="${o.name}" onclick="this.form.submit();">
+                                        <label  class="label" for="${o.name}">
+                                            <div class="indicator"></div>
+                                        </label>
+                                    </c:if>
+                                </div>
+                                <p>${o.name}</p>
+                            </c:forEach>
+                            <c:if test="${hddId!=null}">
+                                <input type="hidden" name="hddId" value="${hddId}"/>
+                            </c:if>
+                            <c:if test="${priceId!=null}">
+                                <input type="hidden" name="priceId" value="${priceId}"/>
+                            </c:if>
+                        </form>
+                    </li> 
+                    <li class='submenu'>
+                        <div class="submenu-header"><span>HDD</span></div>
+                        <form action="filterproduct" method="get">                                               
+                            <input type="hidden" name="pageIndex" value="${pageIndex}"/>
+                            <c:if test="${cateId!=null}">
+                                <input type="hidden" name="cateId" value="${cateId}"/>
+                            </c:if>    
+                            <c:if test="${brandId!=null}">
+                                <input type="hidden" name="brandId" value="${brandId}"/>
+                            </c:if>
+                            <c:if test="${displaySize!=null}">
+                                <input type="hidden" name="displaySize" value="${displaySize}"/>
+                            </c:if>
+                            <c:if test="${processId!=null}">
+                                <input type="hidden" name="processId" value="${processId}"/>
+                            </c:if>    
+                            <c:if test="${ramId!=null}">
+                                <input type="hidden" name="ramId" value="${ramId}"/>
+                            </c:if>
+                            <c:forEach items="${CategoryDAO.allHdd}" var="o">  
+                                <div class="radiobtn">  
+                                    <c:if test="${hddId == o.id}">
+                                        <input class="state" type="radio" name="hddId" value="${o.id}" id="${o.id}" checked="checked"  onclick="this.form.submit();">
+                                        <label  class="label" for="${o.id}">
+                                            <div class="indicator"></div>
+                                        </label>
+                                    </c:if>
+                                    <c:if test="${hddId != o.id}">
+                                        <input class="state" type="radio" name="hddId" value="${o.id}" id="${o.id}" onclick="this.form.submit();">
+                                        <label  class="label" for="${o.id}">
+                                            <div class="indicator"></div>
+                                        </label>
+                                    </c:if>
+                                </div>
+                                <p>${o.name}</p>
+                            </c:forEach>
                             <c:if test="${priceId!=null}">
                                 <input type="hidden" name="priceId" value="${priceId}"/>
                             </c:if>
@@ -172,17 +279,23 @@
                             <c:if test="${processId!=null}">
                                 <input type="hidden" name="processId" value="${processId}"/>
                             </c:if>
+                            <c:if test="${ramId!=null}">
+                                <input type="hidden" name="ramId" value="${ramId}"/>
+                            </c:if>
+                            <c:if test="${hddId!=null}">
+                                <input type="hidden" name="hddId" value="${hddId}"/>
+                            </c:if>
                             <c:forEach items="${CategoryDAO.allPrice}" var="o"> 
                                 <div class="radiobtn">  
                                     <c:if test="${priceId == o.id}">
-                                        <input class="state" type="radio" name="priceId" value="${o.id}" id="${o.id}" checked="checked" onclick="this.form.submit();">
-                                        <label  class="label" for="${o.id}">
+                                        <input class="state" type="radio" name="priceId" value="${o.id}" id="${o.amount}" checked="checked" onclick="this.form.submit();">
+                                        <label  class="label" for="${o.amount}">
                                             <div class="indicator"></div>
                                         </label>
                                     </c:if>
                                     <c:if test="${priceId != o.id}">
-                                        <input class="state" type="radio" name="priceId" value="${o.id}" id="${o.id}" onclick="this.form.submit();">
-                                        <label  class="label" for="${o.id}">
+                                        <input class="state" type="radio" name="priceId" value="${o.id}" id="${o.amount}" onclick="this.form.submit();">
+                                        <label  class="label" for="${o.amount}">
                                             <div class="indicator"></div>
                                         </label>
                                     </c:if>

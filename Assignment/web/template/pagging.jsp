@@ -63,6 +63,12 @@
                 <c:if test="${processId!=null}">
                     <input type="hidden" name="processId" value="${processId}"/>
                 </c:if>
+                <c:if test="${ramId!=null}">
+                    <input type="hidden" name="ramId" value="${ramId}"/>
+                </c:if>
+                <c:if test="${hddId!=null}">
+                    <input type="hidden" name="hddId" value="${hddId}"/>
+                </c:if>
                 <c:if test="${priceId!=null}">
                     <input type="hidden" name="priceId" value="${priceId}"/>
                 </c:if>

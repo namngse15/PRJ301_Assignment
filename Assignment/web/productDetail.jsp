@@ -105,13 +105,6 @@
                         </div>
                         <!--product price and color-->
                         <div class="product-price-discount"><span>Price: <fmt:formatNumber value = "${product.price}" type = "currency"/></span></div>
-                        <div class="product-chosen">
-                            <form action="detail" method="get">
-                                <div>
-                                    
-                                </div>
-                            </form>  
-                        </div>
                         <div class="row combobox">
                             <!--add to cart-->
                             <form action="add-to-cart" method="post">
@@ -198,7 +191,7 @@
                                 <ul>
                                     <li>Operating system: <span>${product.os}</span></li>
                                     <li>Display: <span>${product.display}</span></li>
-                                    <li>Processor: <span>${product.processDetail}</span></li>
+                                    <li>Processor: <span>${product.processor}</span></li>
                                     <li>Ram: <span>${product.ram}</span></li>
                                     <li>Gpu: <span>${product.gpu}</span></li>
                                     <li>Hard drive: <span>${product.harddrive}</span></li>

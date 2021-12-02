@@ -68,10 +68,6 @@
                                                 <div class="image_overlay"></div>
                                                 <a href="detail?productId=${o.id}" class=" view_details font-weight-bold text-uppercase text-center text-white" style="text-decoration:none">View
                                                     details</a>
-                                                    <c:if test="${o.quantity>0}">     
-                                                    <a href="add-to-cart?productId=${o.id}" class=" add_to font-weight-bold text-uppercase text-center text-white" style="text-decoration:none">Add to cart
-                                                    </a>
-                                                </c:if>
                                                 <div class="stats">
                                                     <div class="block"></div>
                                                     <div class="stats-container">

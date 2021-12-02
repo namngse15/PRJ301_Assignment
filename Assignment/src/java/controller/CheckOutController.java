@@ -5,6 +5,9 @@
  */
 package controller;
 
+import dal.OrderDetailDAO;
+import dal.OrdersDAO;
+import dal.ProductDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -14,14 +17,18 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import model.Account;
 import model.Cart;
+import model.OrderDetail;
+import model.Orders;
+import model.Product;
 
 /**
  *
  * @author tenhik
  */
-@WebServlet(name = "CartRemoveController", urlPatterns = {"/removeProductInCart"})
-public class CartRemoveController extends HttpServlet {
+@WebServlet(name = "CheckOutController", urlPatterns = {"/payment"})
+public class CheckOutController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,29 +42,48 @@ public class CartRemoveController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        OrdersDAO odb = new OrdersDAO();
+        ProductDAO pdb = new ProductDAO();
+        OrderDetailDAO odd = new OrderDetailDAO();
 
-        String productId = request.getParameter("productId");
+        String phone = request.getParameter("phone");
+        String address = request.getParameter("address");
+        String total = request.getParameter("totalPrice");
+        String note = request.getParameter("note");
+
+        int totalPrice = 0;
+
+        try {
+            totalPrice = Integer.parseInt(total);
+        } catch (Exception e) {
+        }
+
         HttpSession session = request.getSession(true);
         List<Cart> listCarts = (List<Cart>) session.getAttribute("listCarts");
-        int totalPrice = 0;
-        //remove
-        for (Cart cart : listCarts) {
-            if (cart.getProductId().equals(productId)) {
-                listCarts.remove(cart);
-                break;
-            }
-        }
-        //update price
-        for (Cart cart : listCarts) {
-            int price = cart.getQuantity() * cart.getPrice();
-            totalPrice += price;
-        }
+        Account currentLogin = (Account) session.getAttribute("currentLogin");
+        Orders order = new Orders(currentLogin.getId(), address, phone, currentLogin.getEmail(), totalPrice, 1, note);
 
-        session.setAttribute("totalPrice", totalPrice);
-        if (listCarts.isEmpty()) {
-            response.sendRedirect("view-empty-cart");
-        } else {
-            response.sendRedirect("cart.jsp");
+        int orderId = odb.saveOrder(order);
+        if (orderId != 0) {
+            for (Cart cart : listCarts) {
+                Product product = pdb.getOneProduct(cart.getProductId());
+                int quantityInStock = product.getQuantity();
+                int quantityCart = cart.getQuantity();
+
+                if (quantityInStock > 0 && quantityCart < quantityInStock) {
+                    OrderDetail orderDetail = new OrderDetail(product.getName(), cart.getColor(), cart.getQuantity(), product.getPrice(), cart.getProductId(), orderId);
+                    boolean checkOdetail = odd.addOrder(orderDetail);
+                    int quantityAfter = quantityInStock - quantityCart;
+                    pdb.updateQuantity(quantityAfter,product.getId());
+
+
+                    if (checkOdetail == true) {
+                        request.setAttribute("checkOdetail", checkOdetail);
+                    }
+                }
+            }
+            session.removeAttribute("listCarts");
+            request.getRequestDispatcher("view-empty-cart").forward(request, response);
         }
     }
 

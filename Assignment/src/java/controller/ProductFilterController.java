@@ -42,12 +42,16 @@ public class ProductFilterController extends HttpServlet {
         String brand = request.getParameter("brandId");
         String display = request.getParameter("displaySize");
         String process = request.getParameter("processId");
+        String ram = request.getParameter("ramId");
+        String hdd = request.getParameter("hddId");
         String price = request.getParameter("priceId");
         int sortId = 0;
         int cateId = 0;
         int brandId = 0;
         int displaySize = 0;
         int processId = 0;
+        int ramId = 0;
+        int hddId = 0;
         int priceId = 0;
         //parse category
         if (cate != null) {
@@ -62,9 +66,18 @@ public class ProductFilterController extends HttpServlet {
         if (process != null) {
             processId = Integer.parseInt(process);
         }
+        if (ram != null) {
+            ramId = Integer.parseInt(ram);
+        }
+        if (hdd != null) {
+            hddId = Integer.parseInt(hdd);
+        }
         if (price != null) {
             priceId = Integer.parseInt(price);
         }
+        System.out.println(processId);
+        System.out.println(ramId);
+        System.out.println(hddId);
         //pagging product
         String indexPage = request.getParameter("pageIndex");
         int pageIndex = 1;
@@ -77,7 +90,8 @@ public class ProductFilterController extends HttpServlet {
         } catch (NumberFormatException e) {
         }
         int pageSize = 12;
-        int totalProduct = pdb.getCountTotalProductByAllCate(cateId, brandId, displaySize, processId, priceId);
+        int totalProduct = pdb.getCountTotalProductByAllCate(cateId, brandId, displaySize,
+                processId, ramId, hddId, priceId);
         int totalPage = 0;
         int page = 0;
         if (totalProduct == 0) {
@@ -93,7 +107,8 @@ public class ProductFilterController extends HttpServlet {
             }
             int next = pageIndex + 1;
             int back = pageIndex - 1;
-            List<Product> listProducts = pdb.getAllProductByAllCategory(cateId, brandId, displaySize, processId, priceId, pageIndex, pageSize, sortId);
+            List<Product> listProducts = pdb.getAllProductByAllCategory(cateId, brandId, displaySize,
+                    processId, ramId, hddId, priceId, pageIndex, pageSize, sortId);
             request.setAttribute("listProducts", listProducts);
             request.setAttribute("totalPage", totalPage);
             //set category
@@ -109,13 +124,19 @@ public class ProductFilterController extends HttpServlet {
             if (processId != 0) {
                 request.setAttribute("processId", processId);
             }
+            if (ramId != 0) {
+                request.setAttribute("ramId", ramId);
+            }
+            if (hddId != 0) {
+                request.setAttribute("hddId", hddId);
+            }
             if (priceId != 0) {
                 request.setAttribute("priceId", priceId);
             }
             if (sortId != 0) {
                 request.setAttribute("sortId", sortId);
             }
-            
+
             request.setAttribute("pageIndex", pageIndex);
             request.setAttribute("next", next);
             request.setAttribute("back", back);

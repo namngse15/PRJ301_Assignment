@@ -61,14 +61,18 @@ public class ProductDAO extends BaseDAO<Product> {
                 p.setBrandId(rs.getInt("brandId"));
                 p.setPriceId(rs.getInt("priceId"));
                 p.setPrice(rs.getInt("price"));
+                p.setOsId(rs.getInt("osId"));
                 p.setOs(rs.getString("os"));
-                p.setDisplaySize(rs.getInt("displaySize"));
+                p.setDisplayId(rs.getInt("displayId"));
                 p.setDisplay(rs.getString("display"));
-                p.setProcessor(rs.getInt("processor"));
-                p.setProcessDetail(rs.getString("processDetail"));
+                p.setProcessorId(rs.getInt("processorId"));
+                p.setProcessor(rs.getString("processor"));
+                p.setGpuId(rs.getInt("gpuId"));
                 p.setGpu(rs.getString("gpu"));
+                p.setRamId(rs.getInt("ramId"));
                 p.setRam(rs.getString("ram"));
-                p.setHarddrive(rs.getString("hardDrive"));
+                p.setHarddriveId(rs.getInt("harddriveId"));
+                p.setHarddrive(rs.getString("harddrive"));
                 p.setPort(rs.getString("port"));
                 p.setBattery(rs.getString("battery"));
                 p.setColor(rs.getString("color"));
@@ -118,14 +122,18 @@ public class ProductDAO extends BaseDAO<Product> {
                 p.setBrandId(rs.getInt("brandId"));
                 p.setPriceId(rs.getInt("priceId"));
                 p.setPrice(rs.getInt("price"));
+                p.setOsId(rs.getInt("osId"));
                 p.setOs(rs.getString("os"));
-                p.setDisplaySize(rs.getInt("displaySize"));
+                p.setDisplayId(rs.getInt("displayId"));
                 p.setDisplay(rs.getString("display"));
-                p.setProcessor(rs.getInt("processor"));
-                p.setProcessDetail(rs.getString("processDetail"));
+                p.setProcessorId(rs.getInt("processorId"));
+                p.setProcessor(rs.getString("processor"));
+                p.setGpuId(rs.getInt("gpuId"));
                 p.setGpu(rs.getString("gpu"));
+                p.setRamId(rs.getInt("ramId"));
                 p.setRam(rs.getString("ram"));
-                p.setHarddrive(rs.getString("hardDrive"));
+                p.setHarddriveId(rs.getInt("harddriveId"));
+                p.setHarddrive(rs.getString("harddrive"));
                 p.setPort(rs.getString("port"));
                 p.setBattery(rs.getString("battery"));
                 p.setColor(rs.getString("color"));
@@ -188,14 +196,18 @@ public class ProductDAO extends BaseDAO<Product> {
                 p.setBrandId(rs.getInt("brandId"));
                 p.setPriceId(rs.getInt("priceId"));
                 p.setPrice(rs.getInt("price"));
+                p.setOsId(rs.getInt("osId"));
                 p.setOs(rs.getString("os"));
-                p.setDisplaySize(rs.getInt("displaySize"));
+                p.setDisplayId(rs.getInt("displayId"));
                 p.setDisplay(rs.getString("display"));
-                p.setProcessor(rs.getInt("processor"));
-                p.setProcessDetail(rs.getString("processDetail"));
+                p.setProcessorId(rs.getInt("processorId"));
+                p.setProcessor(rs.getString("processor"));
+                p.setGpuId(rs.getInt("gpuId"));
                 p.setGpu(rs.getString("gpu"));
+                p.setRamId(rs.getInt("ramId"));
                 p.setRam(rs.getString("ram"));
-                p.setHarddrive(rs.getString("hardDrive"));
+                p.setHarddriveId(rs.getInt("harddriveId"));
+                p.setHarddrive(rs.getString("harddrive"));
                 p.setPort(rs.getString("port"));
                 p.setBattery(rs.getString("battery"));
                 p.setColor(rs.getString("color"));
@@ -213,7 +225,7 @@ public class ProductDAO extends BaseDAO<Product> {
     }
 
     public int getCountTotalProductByAllCate(int cateId, int brandId, int displayId,
-            int processId, int priceId) {
+            int processId,int ramId, int harddriveId, int priceId) {
         try {
             String sql = "select COUNT(*) \n"
                     + "from Product ";
@@ -226,22 +238,36 @@ public class ProductDAO extends BaseDAO<Product> {
                 sql += " and brandId=? ";
             }
             if (displayId != 0 && cateId == 0 && brandId == 0) {
-                sql += " where displaySize=? ";
+                sql += " where displayId=? ";
             } else if (cateId != 0 || brandId != 0) {
                 if (displayId != 0) {
-                    sql += " and displaySize=? ";
+                    sql += " and displayId=? ";
                 }
             }
             if (processId != 0 && displayId == 0 && cateId == 0 && brandId == 0) {
-                sql += " where processor=? ";
-            } else if (displayId != 0 || cateId == 0 || brandId == 0) {
+                sql += " where processorId=? ";
+            } else if (displayId != 0 || cateId != 0 || brandId != 0) {
                 if (processId != 0) {
-                    sql += " and processor=? ";
+                    sql += " and processorId=? ";
                 }
             }
-            if (priceId != 0 && processId == 0 && displayId == 0 && cateId == 0 && brandId == 0) {
-                sql += " where priceId=? ";
+            if (ramId != 0 && processId == 0 && displayId == 0 && cateId == 0 && brandId == 0) {
+                sql += " where ramId=? ";
             } else if (processId != 0 || displayId != 0 || cateId != 0 || brandId != 0) {
+                if (ramId != 0) {
+                    sql += " and ramId=? ";
+                }
+            }
+            if (harddriveId != 0 && ramId == 0 && processId == 0 && displayId == 0 && cateId == 0 && brandId == 0) {
+                sql += " where harddriveId=? ";
+            } else if (ramId != 0 || processId != 0 || displayId != 0 || cateId != 0 || brandId != 0) {
+                if (harddriveId != 0) {
+                    sql += " and harddriveId=? ";
+                }
+            }
+            if (priceId != 0 && harddriveId == 0 && ramId == 0 && processId == 0 && displayId == 0 && cateId == 0 && brandId == 0) {
+                sql += " where priceId=? ";
+            } else if (harddriveId != 0 || ramId != 0 || processId != 0 || displayId != 0 || cateId != 0 || brandId != 0) {
                 if (priceId != 0) {
                     sql += " and priceId=? ";
                 }
@@ -260,6 +286,12 @@ public class ProductDAO extends BaseDAO<Product> {
             if (processId != 0) {
                 stm.setInt(count++, processId);
             }
+            if (ramId != 0) {
+                stm.setInt(count++, ramId);
+            }
+            if (harddriveId != 0) {
+                stm.setInt(count++, harddriveId);
+            }
             if (priceId != 0) {
                 stm.setInt(count++, priceId);
             }
@@ -272,12 +304,8 @@ public class ProductDAO extends BaseDAO<Product> {
         }
         return 0;
     }
+    
 
-    public static void main(String[] args) {
-        ProductDAO d = new ProductDAO();
-        int count = d.getCountTotalProductByAllCate(1, 1, 13, 0, 0);
-        System.out.println(count);
-    }
 
     public int getCountTotalProductByDisplay(int displaySize) {
         try {
@@ -365,7 +393,7 @@ public class ProductDAO extends BaseDAO<Product> {
     }
 
     public List<Product> getAllProductByAllCategory(int cateId,
-            int brandId, int displayId, int processId, int priceId,
+            int brandId, int displayId, int processId, int ramId, int harddriveId, int priceId,
             int pageIndex, int pageSize, int sortId) {
         List<Product> listProducts = new ArrayList<>();
         try {
@@ -403,24 +431,38 @@ public class ProductDAO extends BaseDAO<Product> {
                 }
             }
             if (displayId != 0 && brandId == 0 && cateId == 0) {
-                sqlSecond += " displaySize=?\n";
+                sqlSecond += " displayId=?\n";
             } else if (brandId != 0 || cateId != 0) {
                 if (displayId != 0) {
-                    sqlSecond += "and displaySize=?\n";
+                    sqlSecond += "and displayId=?\n";
                 }
             }
-            if (processId != 0 && displayId == 0 && brandId == 0 && cateId == 0) {
-                sqlSecond += " processor=?\n";
-            } else if (displayId != 0 || brandId != 0 || cateId != 0) {
+            if (processId != 0 && displayId == 0 && cateId == 0 && brandId == 0) {
+                sqlSecond += " processorId=? ";
+            } else if (displayId != 0 || cateId != 0 || brandId != 0) {
                 if (processId != 0) {
-                    sqlSecond += "and processor=?\n";
+                    sqlSecond += " and processorId=? ";
                 }
             }
-            if (priceId != 0 && processId == 0 && displayId == 0 && brandId == 0 && cateId == 0) {
-                sqlSecond += " priceId=?\n";
-            } else if (processId != 0 || displayId != 0 || brandId != 0 || cateId != 0) {
+            if (ramId != 0 && processId == 0 && displayId == 0 && cateId == 0 && brandId == 0) {
+                sqlSecond += " ramId=? ";
+            } else if (processId != 0 || displayId != 0 || cateId != 0 || brandId != 0) {
+                if (ramId != 0) {
+                    sqlSecond += " and ramId=? ";
+                }
+            }
+            if (harddriveId != 0 && ramId == 0 && processId == 0 && displayId == 0 && cateId == 0 && brandId == 0) {
+                sqlSecond += " harddriveId=? ";
+            } else if (ramId != 0 || processId != 0 || displayId != 0 || cateId != 0 || brandId != 0) {
+                if (harddriveId != 0) {
+                    sqlSecond += " and harddriveId=? ";
+                }
+            }
+            if (priceId != 0 && harddriveId == 0 && ramId == 0 && processId == 0 && displayId == 0 && cateId == 0 && brandId == 0) {
+                sqlSecond += " priceId=? ";
+            } else if (harddriveId != 0 || ramId != 0 || processId != 0 || displayId != 0 || cateId != 0 || brandId != 0) {
                 if (priceId != 0) {
-                    sqlSecond += "and priceId=?\n";
+                    sqlSecond += " and priceId=? ";
                 }
             }
             String sqlThird = ") as t\n"
@@ -442,6 +484,12 @@ public class ProductDAO extends BaseDAO<Product> {
             if (processId != 0) {
                 stm.setInt(count++, processId);
             }
+            if (ramId != 0) {
+                stm.setInt(count++, ramId);
+            }
+            if (harddriveId != 0) {
+                stm.setInt(count++, harddriveId);
+            }
             if (priceId != 0) {
                 stm.setInt(count++, priceId);
             }
@@ -458,14 +506,18 @@ public class ProductDAO extends BaseDAO<Product> {
                 p.setBrandId(rs.getInt("brandId"));
                 p.setPriceId(rs.getInt("priceId"));
                 p.setPrice(rs.getInt("price"));
+                p.setOsId(rs.getInt("osId"));
                 p.setOs(rs.getString("os"));
-                p.setDisplaySize(rs.getInt("displaySize"));
+                p.setDisplayId(rs.getInt("displayId"));
                 p.setDisplay(rs.getString("display"));
-                p.setProcessor(rs.getInt("processor"));
-                p.setProcessDetail(rs.getString("processDetail"));
+                p.setProcessorId(rs.getInt("processorId"));
+                p.setProcessor(rs.getString("processor"));
+                p.setGpuId(rs.getInt("gpuId"));
                 p.setGpu(rs.getString("gpu"));
+                p.setRamId(rs.getInt("ramId"));
                 p.setRam(rs.getString("ram"));
-                p.setHarddrive(rs.getString("hardDrive"));
+                p.setHarddriveId(rs.getInt("harddriveId"));
+                p.setHarddrive(rs.getString("harddrive"));
                 p.setPort(rs.getString("port"));
                 p.setBattery(rs.getString("battery"));
                 p.setColor(rs.getString("color"));
@@ -481,7 +533,15 @@ public class ProductDAO extends BaseDAO<Product> {
         }
         return listProducts;
     }
-
+    public static void main(String[] args) {
+        ProductDAO d = new ProductDAO();
+        int count =d.getCountTotalProductByAllCate(0, 0, 0, 0, 2, 0, 0);
+        System.out.println(count);
+        List<Product> l = d.getAllProductByAllCategory(0, 0, 0, 1, 0, 0, 2, 1, 12, 0);
+        for (Product product : l) {
+            System.out.println(product.getName());    
+        }
+    }
     public List<Product> getAllProductByCategory(int cateId,
             int brandId, int displayId, int processId, int priceId) {
         List<Product> listProducts = new ArrayList<>();
@@ -525,14 +585,18 @@ public class ProductDAO extends BaseDAO<Product> {
                 p.setBrandId(rs.getInt("brandId"));
                 p.setPriceId(rs.getInt("priceId"));
                 p.setPrice(rs.getInt("price"));
+                p.setOsId(rs.getInt("osId"));
                 p.setOs(rs.getString("os"));
-                p.setDisplaySize(rs.getInt("displaySize"));
+                p.setDisplayId(rs.getInt("displayId"));
                 p.setDisplay(rs.getString("display"));
-                p.setProcessor(rs.getInt("processor"));
-                p.setProcessDetail(rs.getString("processDetail"));
+                p.setProcessorId(rs.getInt("processorId"));
+                p.setProcessor(rs.getString("processor"));
+                p.setGpuId(rs.getInt("gpuId"));
                 p.setGpu(rs.getString("gpu"));
+                p.setRamId(rs.getInt("ramId"));
                 p.setRam(rs.getString("ram"));
-                p.setHarddrive(rs.getString("hardDrive"));
+                p.setHarddriveId(rs.getInt("harddriveId"));
+                p.setHarddrive(rs.getString("harddrive"));
                 p.setPort(rs.getString("port"));
                 p.setBattery(rs.getString("battery"));
                 p.setColor(rs.getString("color"));
@@ -615,14 +679,18 @@ public class ProductDAO extends BaseDAO<Product> {
                 p.setBrandId(rs.getInt("brandId"));
                 p.setPriceId(rs.getInt("priceId"));
                 p.setPrice(rs.getInt("price"));
+                p.setOsId(rs.getInt("osId"));
                 p.setOs(rs.getString("os"));
-                p.setDisplaySize(rs.getInt("displaySize"));
+                p.setDisplayId(rs.getInt("displayId"));
                 p.setDisplay(rs.getString("display"));
-                p.setProcessor(rs.getInt("processor"));
-                p.setProcessDetail(rs.getString("processDetail"));
+                p.setProcessorId(rs.getInt("processorId"));
+                p.setProcessor(rs.getString("processor"));
+                p.setGpuId(rs.getInt("gpuId"));
                 p.setGpu(rs.getString("gpu"));
+                p.setRamId(rs.getInt("ramId"));
                 p.setRam(rs.getString("ram"));
-                p.setHarddrive(rs.getString("hardDrive"));
+                p.setHarddriveId(rs.getInt("harddriveId"));
+                p.setHarddrive(rs.getString("harddrive"));
                 p.setPort(rs.getString("port"));
                 p.setBattery(rs.getString("battery"));
                 p.setColor(rs.getString("color"));
@@ -780,13 +848,17 @@ public class ProductDAO extends BaseDAO<Product> {
                     + "brandId=?,\n"
                     + "priceId=?,\n"
                     + "price=?,\n"
+                    + "osId=?,\n"
                     + "os=?,\n"
-                    + "displaySize=?,\n"
+                    + "displayId=?,\n"
                     + "display=?,\n"
+                    + "processorId=?,\n"
                     + "processor=?,\n"
-                    + "processDetail=?,\n"
+                    + "gpuId=?,\n"
                     + "gpu=?,\n"
+                    + "ramId=?,\n"
                     + "ram=?,\n"
+                    + "harddriveId=?,\n"
                     + "harddrive=?,\n"
                     + "port=?,\n"
                     + "battery=?,\n"
@@ -800,20 +872,24 @@ public class ProductDAO extends BaseDAO<Product> {
             stm.setInt(3, product.getBrandId());
             stm.setInt(4, product.getPriceId());
             stm.setInt(5, product.getPrice());
-            stm.setString(6, product.getOs());
-            stm.setInt(7, product.getDisplaySize());
-            stm.setString(8, product.getDisplay());
-            stm.setInt(9, product.getProcessor());
-            stm.setString(10, product.getProcessDetail());
-            stm.setString(11, product.getGpu());
-            stm.setString(12, product.getRam());
-            stm.setString(13, product.getHarddrive());
-            stm.setString(14, product.getPort());
-            stm.setString(15, product.getBattery());
-            stm.setString(16, product.getColor());
-            stm.setInt(17, product.getQuantity());
-            stm.setString(18, product.getNote());
-            stm.setString(19, product.getId());
+            stm.setInt(6, product.getOsId());
+            stm.setString(7, product.getOs());
+            stm.setInt(8, product.getDisplayId());
+            stm.setString(9, product.getDisplay());
+            stm.setInt(10, product.getProcessorId());
+            stm.setString(11, product.getProcessor());
+            stm.setInt(12, product.getGpuId());
+            stm.setString(13, product.getGpu());
+            stm.setInt(14, product.getRamId());
+            stm.setString(15, product.getRam());
+            stm.setInt(16, product.getHarddriveId());
+            stm.setString(17, product.getHarddrive());
+            stm.setString(18, product.getPort());
+            stm.setString(19, product.getBattery());
+            stm.setString(20, product.getColor());
+            stm.setInt(21, product.getQuantity());
+            stm.setString(22, product.getNote());
+            stm.setString(23, product.getId());
             check = stm.executeUpdate();
 
         } catch (Exception e) {
@@ -852,29 +928,33 @@ public class ProductDAO extends BaseDAO<Product> {
     public boolean addProduct(Product product) {
         int check = 0;
         try {
-            String sql = "INSERT INTO Product(id,name,cateId,brandId,priceId,price,os,displaySize,display,processor,processDetail,\n"
-                    + "gpu,ram,harddrive,port,battery,color,quantity,note)\n"
-                    + "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
+            String sql = "INSERT INTO Product(id,name,cateId,brandId,priceId,price,osId,os,displayId,display,processorId,processor,gpuId,\n"
+                    + "gpu,ramId,ram,harddriveId,harddrive,port,battery,color,quantity)\n"
+                    + "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
             PreparedStatement stm = connection.prepareStatement(sql);
-            stm.setString(1, product.getId());
-            stm.setString(2, product.getName());
-            stm.setInt(3, product.getCateId());
-            stm.setInt(4, product.getBrandId());
-            stm.setInt(5, product.getPriceId());
-            stm.setInt(6, product.getPrice());
+            stm.setString(1, product.getName());
+            stm.setInt(2, product.getCateId());
+            stm.setInt(3, product.getBrandId());
+            stm.setInt(4, product.getPriceId());
+            stm.setInt(5, product.getPrice());
+            stm.setInt(6, product.getOsId());
             stm.setString(7, product.getOs());
-            stm.setInt(8, product.getDisplaySize());
+            stm.setInt(8, product.getDisplayId());
             stm.setString(9, product.getDisplay());
-            stm.setInt(10, product.getProcessor());
-            stm.setString(11, product.getProcessDetail());
-            stm.setString(12, product.getGpu());
-            stm.setString(13, product.getRam());
-            stm.setString(14, product.getHarddrive());
-            stm.setString(15, product.getPort());
-            stm.setString(16, product.getBattery());
-            stm.setString(17, product.getColor());
-            stm.setInt(18, product.getQuantity());
-            stm.setString(19, product.getNote());
+            stm.setInt(10, product.getProcessorId());
+            stm.setString(11, product.getProcessor());
+            stm.setInt(12, product.getGpuId());
+            stm.setString(13, product.getGpu());
+            stm.setInt(14, product.getRamId());
+            stm.setString(15, product.getRam());
+            stm.setInt(16, product.getHarddriveId());
+            stm.setString(17, product.getHarddrive());
+            stm.setString(18, product.getPort());
+            stm.setString(19, product.getBattery());
+            stm.setString(20, product.getColor());
+            stm.setInt(21, product.getQuantity());
+            stm.setString(22, product.getNote());
+            stm.setString(23, product.getId());
             check = stm.executeUpdate();
 
         } catch (Exception e) {

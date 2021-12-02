@@ -20,8 +20,8 @@ import model.Product;
  *
  * @author tenhik
  */
-@WebServlet(name = "FilterProduct", urlPatterns = {"/filterproduct"})
-public class FilterProduct extends HttpServlet {
+@WebServlet(name = "ProductSearchController", urlPatterns = {"/search"})
+public class ProductSearchController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,51 +35,29 @@ public class FilterProduct extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+
         ProductDAO pdb = new ProductDAO();
-        //get category
+
+        String search = request.getParameter("text");
         String sort = request.getParameter("sortId");
-        String cate = request.getParameter("cateId");
-        String brand = request.getParameter("brandId");
-        String display = request.getParameter("displaySize");
-        String process = request.getParameter("processId");
-        String price = request.getParameter("priceId");
         int sortId = 0;
-        int cateId = 0;
-        int brandId = 0;
-        int displaySize = 0;
-        int processId = 0;
-        int priceId = 0;
-        //parse category
-        if (cate != null) {
-            cateId = Integer.parseInt(cate);
-        }
-        if (brand != null) {
-            brandId = Integer.parseInt(brand);
-        }
-        if (display != null) {
-            displaySize = Integer.parseInt(display);
-        }
-        if (process != null) {
-            processId = Integer.parseInt(process);
-        }
-        if (price != null) {
-            priceId = Integer.parseInt(price);
-        }
-        //pagging product
+        //paging search by product name
         String indexPage = request.getParameter("pageIndex");
         int pageIndex = 1;
         try {
             pageIndex = Integer.parseInt(indexPage);
-        } catch (NumberFormatException e) {
+        } catch (Exception e) {
         }
         try {
             sortId = Integer.parseInt(sort);
-        } catch (NumberFormatException e) {
+        } catch (Exception e) {
         }
-        int pageSize = 8;
-        int totalProduct = pdb.getCountTotalProductByAllCate(cateId, brandId, displaySize, processId, priceId);
+        
+        int pageSize = 12;
+        int totalProduct = pdb.getCountTotalProductBySearch(search);
         int totalPage = 0;
         int page = 0;
+
         if (totalProduct == 0) {
             request.setAttribute("totalProduct", totalProduct);
             request.setAttribute("mess", "No product found");
@@ -93,35 +71,19 @@ public class FilterProduct extends HttpServlet {
             }
             int next = pageIndex + 1;
             int back = pageIndex - 1;
-            List<Product> listProducts = pdb.getAllProductByAllCategory(cateId, brandId, displaySize, processId, priceId, pageIndex, pageSize, sortId);
-            request.setAttribute("listProducts", listProducts);
-            request.setAttribute("totalPage", totalPage);
-            //set category
-            if (cateId != 0) {
-                request.setAttribute("cateId", cateId);
-            }
-            if (brandId != 0) {
-                request.setAttribute("brandId", brandId);
-            }
-            if (displaySize != 0) {
-                request.setAttribute("displaySize", displaySize);
-            }
-            if (processId != 0) {
-                request.setAttribute("processId", processId);
-            }
-            if (priceId != 0) {
-                request.setAttribute("priceId", priceId);
-            }
-            if (sortId != 0) {
-                request.setAttribute("sortId", sortId);
-            }
             
+            List<Product> listProducts = pdb.getAllProductPaggingBySearch(search, pageIndex, pageSize, sortId);
+
+            request.setAttribute("listProducts", listProducts);
+            request.setAttribute("text", search);
+            request.setAttribute("totalPage", totalPage);
             request.setAttribute("pageIndex", pageIndex);
             request.setAttribute("next", next);
             request.setAttribute("back", back);
+            request.setAttribute("sortId", sortId);
         }
         request.getRequestDispatcher("home.jsp").forward(request, response);
-
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -29,30 +29,27 @@
     </head>
     <jsp:useBean id="getCategory" scope="page" class="dal.CategoryDAO"></jsp:useBean> 
         <body>
-        <jsp:include page="header.jsp"/>
+        <jsp:include page="template/header.jsp"/>
         <!-- banner -->
         <div class="header-block">
         </div>
         <div class="container-fluid">
             <div class="row">
-                <jsp:include page="category.jsp"/>
+                <jsp:include page="template/category.jsp"/>
                 <div class="col-xl-9 row">
                     <!--no product-->
                     <c:if test="${totalProduct==0}"> 
                         <div class="col-md-12 ">
                             <div class="error-template">
-                                <h1>
-                                    Oops!</h1>
-                                <h2>
-                                    Product Not Found</h2>
+                                <img src="https://www.magentapress.in/images/img-no-products.png"alt="">
                             </div>
                         </div>
                     </c:if>
                     <!--sorting and pagging-->
                     <div class="col-xs-12">
                         <div class="filter">
-                            <jsp:include page="sort.jsp"/>
-                            <jsp:include page="pagging.jsp"/>
+                            <jsp:include page="template/sort.jsp"/>
+                            <jsp:include page="template/pagging.jsp"/>
                         </div>
                         <div class="row">
                             <!--product item-->
@@ -114,14 +111,7 @@
             </div>
         </div>
         <!-- footer -->
-        <jsp:include page="footer.jsp"/>
-        <script>
-            function pagging(page,cate,brand,sort) {
-              console.log(page);
-              console.log(cate);
-              console.log(sort);
-            }
-        </script>
+        <jsp:include page="template/footer.jsp"/>
         <script src="assets/main.js"></script>
     </body>
 

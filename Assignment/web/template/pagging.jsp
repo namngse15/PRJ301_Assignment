@@ -76,42 +76,25 @@
     <!--pagging with searching-->
     <c:if test="${text!=null}">
         <c:if test="${totalPage>0}">
-            <ul class="pagination">
-                <c:if test="${sortId!=0}">
-                    <c:if test="${back>0}">
-                        <li class="page-item"><a class="page-link " href="search?pageIndex=${back}&text=${text}&sortId=${sortId}">Previous</a></li>   
-                        </c:if>   
-                        <c:forEach begin="1" end="${totalPage}" step="1" var="i">
-                            <c:if test="${i==pageIndex}">
-                            <li class="page-item"><a href="search?pageIndex=${i}&text=${text}&sortId=${sortId}" class="page-link active-true">${i}</a></li>
-                            </c:if>
-                            <c:if test="${i!=pageIndex}">
-                            <li class="page-item"><a href="search?pageIndex=${i}&text=${text}&sortId=${sortId}" class="page-link active-false ">${i}</a></li>
-                            </c:if>
-                        </c:forEach>
-                        <c:if test="${next<totalPage+1}">
-                        <li class="page-item"><a class="page-link" href="search?pageIndex=${next}&text=${text}&sortId=${sortId}">Next</a></li>
-                        </c:if>
+            <form action="search" method="get">
+                <c:if test="${back>0}">
+                    <button type="submit" name="pageIndex" value="${back}">Previous</button>
+                </c:if>  
+                <c:forEach begin="1" end="${totalPage}" step="1" var="i">
+                    <c:if test="${i==pageIndex}">
+                        <button type="submit" class="active-true" name="pageIndex" value="${i}">${i}</button>
                     </c:if>
-
-                <c:if test="${sortId==0}">
-                    <c:if test="${back>0}">
-                        <li class="page-item"><a class="page-link " href="search?pageIndex=${back}&text=${text}">Previous</a></li>
-                        </c:if>
-                        <c:forEach begin="1" end="${totalPage}" step="1" var="i">
-                            <c:if test="${i==pageIndex}">
-                            <li class="page-item"><a href="search?pageIndex=${i}&text=${text}" class="page-link active-true">${i}</a></li>
-                            </c:if>
-                            <c:if test="${i!=pageIndex}">
-                            <li class="page-item"><a href="search?pageIndex=${i}&text=${text}" class="page-link active-false ">${i}</a></li>
-                            </c:if>
-                        </c:forEach>
-                        <c:if test="${next<totalPage+1}">
-                        <li class="page-item"><a class="page-link" href="search?pageIndex=${next}&text=${text}">Next</a></li>
-                        </c:if>
+                    <c:if test="${i!=pageIndex}">
+                        <button type="submit" class="active-false" name="pageIndex" value="${i}">${i}</button>
                     </c:if>
-            </ul>
+                </c:forEach>
+                <c:if test="${next<totalPage+1}">
+                    <button type="submit" name="pageIndex" value="${next}">Next</button>
+                </c:if>
+                <c:if test="${sortId!=null}">
+                    <input type="hidden" name="sortId" value="${sortId}"/>
+                </c:if>
+            </form>
         </c:if>  
     </c:if>
-
 </nav>

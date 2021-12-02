@@ -5,7 +5,6 @@
  */
 package controller;
 
-import dal.ProductDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -14,14 +13,15 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.Product;
+import javax.servlet.http.HttpSession;
+import model.Cart;
 
 /**
  *
  * @author tenhik
  */
-@WebServlet(name = "HomeController", urlPatterns = {"/home"})
-public class HomeController extends HttpServlet {
+@WebServlet(name = "CartReloadQuantityController", urlPatterns = {"/reloadquantity"})
+public class CartReloadQuantityController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,57 +35,47 @@ public class HomeController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        /* TODO output your page here. You may use following sample code. */
 
-        ProductDAO pdb = new ProductDAO();
-        //sort product
-        String sort = request.getParameter("sortId");
-        int sortId = 0;
+        String productId = request.getParameter("productId");
+        String color = request.getParameter("color");
+        String getQuantity = request.getParameter("quantity");
+        String reloadQtyBtn = request.getParameter("subQty");
+
+        int quantity = 0;
+        int totalPrice = 0;
+
         try {
-            sortId = Integer.parseInt(sort);
-        } catch (Exception e) {
-        }
-        
-        //pagging product
-        int pageIndex = 1;
-        try {
-            pageIndex = Integer.parseInt(request.getParameter("pageIndex"));
+            quantity = Integer.parseInt(getQuantity);
         } catch (Exception e) {
         }
 
-        int pageSize = 8;
-        int totalProduct = pdb.getCountTotalProduct();
-        int totalPage = 0;
-        int page = 0;
-
-        if (totalProduct == 0) {
-            request.setAttribute("totalProduct", totalProduct);
-            request.setAttribute("mess", "No product found");
-        } else {
-            page = totalProduct % pageSize;
-            totalPage = totalProduct / pageSize;
-            if (page == 0) {
-                totalPage = totalPage + 0;
-            } else {
-                totalPage = totalPage + 1;
+        HttpSession session = request.getSession(true);
+        List<Cart> listCarts = (List<Cart>) session.getAttribute("listCarts");
+        //quantity cart plus
+        if (reloadQtyBtn.equals("plus")) {
+            for (Cart cart : listCarts) {
+                if (cart.getProductId().equals(productId) && cart.getColor().equals(color)) {
+                    cart.setQuantity(cart.getQuantity() + 1);
+                }
             }
-
-            int next = pageIndex + 1;
-            int back = pageIndex - 1;
-
-            List<Product> listProducts = pdb.getAllProductPaggingandSorting(pageIndex, pageSize, sortId);
-
-            request.setAttribute("listProducts", listProducts);
-            request.setAttribute("next", next);
-            request.setAttribute("back", back);
-            request.setAttribute("totalPage", totalPage);
-            request.setAttribute("pageIndex", pageIndex);
-            if(sortId != 0) {
-            request.setAttribute("sortId", sortId);
+            for (Cart cart : listCarts) {
+                totalPrice += cart.getQuantity() * cart.getPrice();
             }
-
+        //quantity cart minus    
+        } else if (reloadQtyBtn.equals("minus")) {
+            for (Cart cart : listCarts) {
+                if (cart.getProductId().equals(productId) && cart.getColor().equals(color)) {
+                    cart.setQuantity(cart.getQuantity() - 1);
+                }
+            }
+            for (Cart cart : listCarts) {
+                totalPrice += cart.getQuantity() * cart.getPrice();
+            }
         }
-        request.getRequestDispatcher("home.jsp").forward(request, response);
+
+        session.setAttribute("totalPrice", totalPrice);
+        response.sendRedirect("cart.jsp");
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

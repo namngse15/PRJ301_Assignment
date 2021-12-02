@@ -36,7 +36,7 @@
     <jsp:useBean id="userInfo" scope="page" class="dal.AccountDAO"></jsp:useBean>
     <jsp:useBean id="reviewInfo" scope="page" class="dal.ReviewDAO"></jsp:useBean>                  
         <body>
-        <jsp:include page="header.jsp"/>
+        <jsp:include page="template/header.jsp"/>
         <div class="header-block">
         </div>
         <div class="container">
@@ -105,6 +105,13 @@
                         </div>
                         <!--product price and color-->
                         <div class="product-price-discount"><span>Price: <fmt:formatNumber value = "${product.price}" type = "currency"/></span></div>
+                        <div class="product-chosen">
+                            <form action="detail" method="get">
+                                <div>
+                                    
+                                </div>
+                            </form>  
+                        </div>
                         <div class="row combobox">
                             <!--add to cart-->
                             <form action="add-to-cart" method="post">
@@ -435,7 +442,7 @@
             </div>
         </c:if>  
         <!-- end modal review fail-->
-        <jsp:include page="footer.jsp"/>
+        <jsp:include page="template/footer.jsp"/>
     </body>
     <script>
 

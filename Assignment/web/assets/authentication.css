@@ -12,14 +12,14 @@
 }
 
 html {
-    background:  #E4EBF5;
+    background-image: linear-gradient(90deg, #facaa878 0%,#ddd6f3 6% ,#E4EBF5 60%)!important;
     font-size: 62.5%;
     overflow-x: hidden;
     scroll-behavior: smooth;
     scroll-padding-top: 7rem;
 }
 body{
-    background:  #E4EBF5;
+    background-image: linear-gradient(90deg, #facaa878 0%,#ddd6f3 6% ,#E4EBF5 60%)!important;
 }
 .notification {
     width: 100%;
@@ -36,7 +36,7 @@ body{
     margin-top:17rem;
     left:50%;
     transform:translateX(-50%);
-    background: #E4EBF5;
+    background-image: linear-gradient(100deg, #facaa878 0%,#ddd6f3 6% ,#E4EBF5 60%)!important;
     box-shadow: 0.3rem 0.3rem 0.6rem #c8d0e7, 
         -0.2rem -0.2rem 0.5rem #FFFFFF;
     border-radius: 1rem;
@@ -54,6 +54,9 @@ body{
         inset -0.2rem -0.2rem 0.5rem #FFFFFF;
     transition:0.2s;
 }
+.form-modal button:first-child{
+    background-image: linear-gradient(149deg, #facaa878 0%,#ddd6f3 23% ,#E4EBF5 76%);
+}
 .form-modal .btn{
     border-radius: 20px;
     border:none;
@@ -68,17 +71,17 @@ body{
     height: 10rem;
 }
 .form-modal .login , .form-modal .signup{
-    background: #E4EBF5;
-     box-shadow: inset 0.2rem 0.2rem 0.5rem #c8d0e7, 
+        background-image: linear-gradient(71deg, #FBAB7E 0%, #F7CE68 100%);
+    box-shadow: inset 0.2rem 0.2rem 0.5rem #c8d0e7, 
         inset -0.2rem -0.2rem 0.5rem #FFFFFF;
     color:#000;
 }
 .form-modal .login:hover , .form-modal .signup:hover{
-box-shadow: 0.3rem 0.3rem 0.6rem #c8d0e7, 
+    box-shadow: 0.3rem 0.3rem 0.6rem #c8d0e7, 
         -0.2rem -0.2rem 0.5rem #FFFFFF;
 }
 #login-toggle{
- box-shadow: 0.3rem 0.3rem 0.6rem #c8d0e7, 
+    box-shadow: 0.3rem 0.3rem 0.6rem #c8d0e7, 
         -0.2rem -0.2rem 0.5rem #FFFFFF;   
 }
 .form-toggle{
@@ -127,7 +130,7 @@ box-shadow: 0.3rem 0.3rem 0.6rem #c8d0e7,
     padding:0.6em;
 }
 .form-modal .input-border{
-    background:#E4EBF5;
+    background-image: linear-gradient(149deg, #facaa878 0%,#ddd6f3 23% ,#E4EBF5 76%);
     padding: 2px 8px;
     border-radius: 30px;
     box-shadow: 0.3rem 0.3rem 0.6rem #c8d0e7, 
@@ -143,7 +146,7 @@ box-shadow: 0.3rem 0.3rem 0.6rem #c8d0e7,
     margin-bottom:0.6em;
     border-radius: 23px;
     border:none;
-    background:#E4EBF5;
+    background-image: linear-gradient(149deg, #facaa878 0%,#ddd6f3 23% ,#E4EBF5 76%);
     box-shadow: inset 0.2rem 0.2rem 0.5rem #c8d0e7, 
         inset -0.2rem -0.2rem 0.5rem #FFFFFF;
     outline:none;
@@ -151,7 +154,7 @@ box-shadow: 0.3rem 0.3rem 0.6rem #c8d0e7,
     transition:0.4s;
 }
 .form-modal input:focus , .form-modal input:active{
-   box-shadow: 0.3rem 0.3rem 0.6rem #c8d0e7, 
+    box-shadow: 0.3rem 0.3rem 0.6rem #c8d0e7, 
         -0.2rem -0.2rem 0.5rem #FFFFFF;
 }
 .form-modal input::-webkit-input-placeholder{

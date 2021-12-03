@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <c:if test="${totalProduct != 0}">
     <!--sort without category-->
-    <c:if test="${priceId==null&&cateId==null&&brandId==null&&displaySize==null&&processId==null&&text==null}">
+    <c:if test="${priceId==null&&cateId==null&&brandId==null&&displaySize==null&&processId==null&&ramId==null&&hddId==null&&text==null}">
         <div class="sortbar">
             <form action="home" method="get">
                 <input type="hidden" name="pageIndex" value="${pageIndex}"/>
@@ -23,7 +23,7 @@
         </div>
     </c:if>
     <!--sort with category-->
-    <c:if test="${priceId!=null||cateId!=null||brandId!=null||displaySize!=null||processId!=null}">     
+    <c:if test="${priceId!=null||cateId!=null||brandId!=null||displaySize!=null||processId!=null||ramId!=null||hddId!=null}">     
         <div class="sortbar">
             <form action="filterproduct" method="get">
                 <input type="hidden" name="pageIndex" value="${pageIndex}"/>

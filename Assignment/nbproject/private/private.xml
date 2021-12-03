@@ -3,14 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/tenhik/Documents/GitHub/Assignment/Assignment/src/java/model/Product.java</file>
             <file>file:/C:/Users/tenhik/Documents/GitHub/Assignment/Assignment/web/assets/style.css</file>
-            <file>file:/C:/Users/tenhik/Documents/GitHub/Assignment/Assignment/web/productDetail.jsp</file>
-            <file>file:/C:/Users/tenhik/Documents/GitHub/Assignment/Assignment/src/java/controller/AddToCartController.java</file>
-            <file>file:/C:/Users/tenhik/Documents/GitHub/Assignment/Assignment/web/cart.jsp</file>
-            <file>file:/C:/Users/tenhik/Documents/GitHub/Assignment/Assignment/src/java/dal/ProductDAO.java</file>
+            <file>file:/C:/Users/tenhik/Documents/GitHub/Assignment/Assignment/web/template/category.jsp</file>
             <file>file:/C:/Users/tenhik/Documents/GitHub/Assignment/Assignment/src/java/dal/ReviewDAO.java</file>
-            <file>file:/C:/Users/tenhik/Documents/GitHub/Assignment/Assignment/web/home.jsp</file>
+            <file>file:/C:/Users/tenhik/Documents/GitHub/Assignment/Assignment/src/java/controller/ProductController.java</file>
         </group>
     </open-files>
 </project-private>

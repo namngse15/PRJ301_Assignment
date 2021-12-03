@@ -75,9 +75,39 @@ public class ProductFilterController extends HttpServlet {
         if (price != null) {
             priceId = Integer.parseInt(price);
         }
-        System.out.println(processId);
-        System.out.println(ramId);
-        System.out.println(hddId);
+        System.out.println(" cate " + cateId);
+        System.out.println(" brand " + brandId);
+
+        //set attribute for category
+        if (cateId != 0) {
+            request.setAttribute("cateId", cateId);
+        }
+        if (brandId != 0) {
+            request.setAttribute("brandId", brandId);
+        }
+        if (displaySize != 0) {
+            request.setAttribute("displaySize", displaySize);
+        }
+        if (processId != 0) {
+            request.setAttribute("processId", processId);
+        }
+        if (ramId != 0) {
+            request.setAttribute("ramId", ramId);
+        }
+        if (hddId != 0) {
+            request.setAttribute("hddId", hddId);
+        }
+        if (priceId != 0) {
+            request.setAttribute("priceId", priceId);
+        }
+        //sort product
+        try {
+            sortId = Integer.parseInt(sort);
+        } catch (NumberFormatException e) {
+        }
+        if (sortId != 0) {
+            request.setAttribute("sortId", sortId);
+        }
         //pagging product
         String indexPage = request.getParameter("pageIndex");
         int pageIndex = 1;
@@ -85,10 +115,8 @@ public class ProductFilterController extends HttpServlet {
             pageIndex = Integer.parseInt(indexPage);
         } catch (NumberFormatException e) {
         }
-        try {
-            sortId = Integer.parseInt(sort);
-        } catch (NumberFormatException e) {
-        }
+        request.setAttribute("pageIndex", pageIndex);
+
         int pageSize = 12;
         int totalProduct = pdb.getCountTotalProductByAllCate(cateId, brandId, displaySize,
                 processId, ramId, hddId, priceId);
@@ -109,35 +137,14 @@ public class ProductFilterController extends HttpServlet {
             int back = pageIndex - 1;
             List<Product> listProducts = pdb.getAllProductByAllCategory(cateId, brandId, displaySize,
                     processId, ramId, hddId, priceId, pageIndex, pageSize, sortId);
-            request.setAttribute("listProducts", listProducts);
-            request.setAttribute("totalPage", totalPage);
-            //set category
-            if (cateId != 0) {
-                request.setAttribute("cateId", cateId);
-            }
-            if (brandId != 0) {
-                request.setAttribute("brandId", brandId);
-            }
-            if (displaySize != 0) {
-                request.setAttribute("displaySize", displaySize);
-            }
-            if (processId != 0) {
-                request.setAttribute("processId", processId);
-            }
-            if (ramId != 0) {
-                request.setAttribute("ramId", ramId);
-            }
-            if (hddId != 0) {
-                request.setAttribute("hddId", hddId);
-            }
-            if (priceId != 0) {
-                request.setAttribute("priceId", priceId);
-            }
-            if (sortId != 0) {
-                request.setAttribute("sortId", sortId);
+            if (!listProducts.isEmpty()) {
+                request.setAttribute("listProducts", listProducts);
+            } else {
+                request.setAttribute("listProducts", "null");
             }
 
-            request.setAttribute("pageIndex", pageIndex);
+            System.out.println(listProducts);
+            request.setAttribute("totalPage", totalPage);
             request.setAttribute("next", next);
             request.setAttribute("back", back);
         }

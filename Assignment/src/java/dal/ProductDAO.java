@@ -44,6 +44,7 @@ public class ProductDAO extends BaseDAO<Product> {
         }
         return listImages;
     }
+//get one product detail and product related
 
     public Product getOneProduct(String id) {
         try {
@@ -89,69 +90,34 @@ public class ProductDAO extends BaseDAO<Product> {
         return null;
     }
 
-    public int getCountTotalProduct() {
-        try {
-            String sql = "select COUNT(*) \n"
-                    + "from Product ";
-            PreparedStatement stm = connection.prepareStatement(sql);
-            ResultSet rs = stm.executeQuery();
-            int count = 0;
-            while (rs.next()) {
-                count = rs.getInt(1);
-            }
-            return count;
-        } catch (SQLException ex) {
-            Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return 0;
-    }
-
-    public List<Product> getAllProduct() {
-        ReviewDAO rdb = new ReviewDAO();
+//get product by id related
+    public List<Product> getProductRelatedById(String id) {
         List<Product> listProducts = new ArrayList<>();
         try {
-            String sql = "select * from\n"
-                    + "Product\n";
+            String sql = "select p.id, p.name, p.processor ,p.ram,p.harddrive\n"
+                    + "from Product p\n"
+                    + "where id like ?";
             PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setString(1, id + "%");
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                 Product p = new Product();
                 p.setId(rs.getString("id"));
                 p.setName(rs.getString("name"));
-                p.setCateId(rs.getInt("cateId"));
-                p.setBrandId(rs.getInt("brandId"));
-                p.setPriceId(rs.getInt("priceId"));
-                p.setPrice(rs.getInt("price"));
-                p.setOsId(rs.getInt("osId"));
-                p.setOs(rs.getString("os"));
-                p.setDisplayId(rs.getInt("displayId"));
-                p.setDisplay(rs.getString("display"));
-                p.setProcessorId(rs.getInt("processorId"));
                 p.setProcessor(rs.getString("processor"));
-                p.setGpuId(rs.getInt("gpuId"));
-                p.setGpu(rs.getString("gpu"));
-                p.setRamId(rs.getInt("ramId"));
                 p.setRam(rs.getString("ram"));
-                p.setHarddriveId(rs.getInt("harddriveId"));
                 p.setHarddrive(rs.getString("harddrive"));
-                p.setPort(rs.getString("port"));
-                p.setBattery(rs.getString("battery"));
-                p.setColor(rs.getString("color"));
-                p.setQuantity(rs.getInt("quantity"));
-                p.setNote(rs.getString("note"));
-                int rate = rdb.getAverageProduct(rs.getString("id"));
                 List<ProductImg> listImages = getListImageByPid(rs.getString("id"));
-                p.setRate(rate);
                 p.setListImage(listImages);
                 listProducts.add(p);
             }
-
         } catch (SQLException ex) {
             Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return listProducts;
     }
 
+//get product without filter: home
     public List<Product> getAllProductPaggingandSorting(
             int pageIndex, int pageSize, int sId) {
         List<Product> listProducts = new ArrayList<>();
@@ -224,8 +190,9 @@ public class ProductDAO extends BaseDAO<Product> {
         return listProducts;
     }
 
+//filter product: get product by all category
     public int getCountTotalProductByAllCate(int cateId, int brandId, int displayId,
-            int processId,int ramId, int harddriveId, int priceId) {
+            int processId, int ramId, int harddriveId, int priceId) {
         try {
             String sql = "select COUNT(*) \n"
                     + "from Product ";
@@ -295,93 +262,6 @@ public class ProductDAO extends BaseDAO<Product> {
             if (priceId != 0) {
                 stm.setInt(count++, priceId);
             }
-            ResultSet rs = stm.executeQuery();
-            while (rs.next()) {
-                return rs.getInt(1);
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return 0;
-    }
-    
-
-
-    public int getCountTotalProductByDisplay(int displaySize) {
-        try {
-            String sql = "select COUNT(*) \n"
-                    + "from Product "
-                    + " where displaySize=? ";
-            PreparedStatement stm = connection.prepareStatement(sql);
-            stm.setInt(1, displaySize);
-            ResultSet rs = stm.executeQuery();
-            while (rs.next()) {
-                return rs.getInt(1);
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return 0;
-    }
-
-    public int getCountTotalProductByProcessor(int processor) {
-        try {
-            String sql = "select COUNT(*) \n"
-                    + "from Product "
-                    + " where processor=? ";
-            PreparedStatement stm = connection.prepareStatement(sql);
-            stm.setInt(1, processor);
-            ResultSet rs = stm.executeQuery();
-            while (rs.next()) {
-                return rs.getInt(1);
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return 0;
-    }
-
-    public int getCountTotalProductByCate(int cateId) {
-        try {
-            String sql = "select COUNT(*) \n"
-                    + "from Product "
-                    + " where cateId=? ";
-            PreparedStatement stm = connection.prepareStatement(sql);
-            stm.setInt(1, cateId);
-            ResultSet rs = stm.executeQuery();
-            while (rs.next()) {
-                return rs.getInt(1);
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return 0;
-    }
-
-    public int getCountTotalProductByPrice(int priceId) {
-        try {
-            String sql = "select COUNT(*) \n"
-                    + "from Product "
-                    + " where priceId=? ";
-            PreparedStatement stm = connection.prepareStatement(sql);
-            stm.setInt(1, priceId);
-            ResultSet rs = stm.executeQuery();
-            while (rs.next()) {
-                return rs.getInt(1);
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return 0;
-    }
-
-    public int getCountTotalProductByBrand(int brandId) {
-        try {
-            String sql = "select COUNT(*) \n"
-                    + "from Product "
-                    + " where brandId=? ";
-            PreparedStatement stm = connection.prepareStatement(sql);
-            stm.setInt(1, brandId);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                 return rs.getInt(1);
@@ -533,86 +413,8 @@ public class ProductDAO extends BaseDAO<Product> {
         }
         return listProducts;
     }
-    public static void main(String[] args) {
-        ProductDAO d = new ProductDAO();
-        int count =d.getCountTotalProductByAllCate(0, 0, 0, 0, 2, 0, 0);
-        System.out.println(count);
-        List<Product> l = d.getAllProductByAllCategory(0, 0, 0, 1, 0, 0, 2, 1, 12, 0);
-        for (Product product : l) {
-            System.out.println(product.getName());    
-        }
-    }
-    public List<Product> getAllProductByCategory(int cateId,
-            int brandId, int displayId, int processId, int priceId) {
-        List<Product> listProducts = new ArrayList<>();
-        try {
 
-            String sql = "select p.*\n"
-                    + "from Product p\n";
-            if (cateId != 0) {
-                sql += "where p.cateId=?";
-            } else if (brandId != 0) {
-                sql += "where p.brandId=?";
-            } else if (displayId != 0) {
-                sql += "where p.displaySize=?";
-            } else if (processId != 0) {
-                sql += "where p.processor=?";
-            } else if (priceId != 0) {
-                sql += "where p.priceId=?";
-            }
-            PreparedStatement stm = connection.prepareStatement(sql);
-            if (cateId != 0) {
-                stm.setInt(1, cateId);
-            }
-            if (brandId != 0) {
-                stm.setInt(1, brandId);
-            }
-            if (displayId != 0) {
-                stm.setInt(1, displayId);
-            }
-            if (processId != 0) {
-                stm.setInt(1, processId);
-            }
-            if (priceId != 0) {
-                stm.setInt(1, priceId);
-            }
-            ResultSet rs = stm.executeQuery();
-            while (rs.next()) {
-                Product p = new Product();
-                p.setId(rs.getString("id"));
-                p.setName(rs.getString("name"));
-                p.setCateId(rs.getInt("cateId"));
-                p.setBrandId(rs.getInt("brandId"));
-                p.setPriceId(rs.getInt("priceId"));
-                p.setPrice(rs.getInt("price"));
-                p.setOsId(rs.getInt("osId"));
-                p.setOs(rs.getString("os"));
-                p.setDisplayId(rs.getInt("displayId"));
-                p.setDisplay(rs.getString("display"));
-                p.setProcessorId(rs.getInt("processorId"));
-                p.setProcessor(rs.getString("processor"));
-                p.setGpuId(rs.getInt("gpuId"));
-                p.setGpu(rs.getString("gpu"));
-                p.setRamId(rs.getInt("ramId"));
-                p.setRam(rs.getString("ram"));
-                p.setHarddriveId(rs.getInt("harddriveId"));
-                p.setHarddrive(rs.getString("harddrive"));
-                p.setPort(rs.getString("port"));
-                p.setBattery(rs.getString("battery"));
-                p.setColor(rs.getString("color"));
-                p.setQuantity(rs.getInt("quantity"));
-                p.setNote(rs.getString("note"));
-                List<ProductImg> listImages = getListImageByPid(rs.getString("id"));
-                p.setListImage(listImages);
-                listProducts.add(p);
-            }
-
-        } catch (SQLException ex) {
-            Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return listProducts;
-    }
-
+//get product by name
     public int getCountTotalProductBySearch(String text) {
         try {
             String sql = "select COUNT(*)\n"
@@ -707,6 +509,228 @@ public class ProductDAO extends BaseDAO<Product> {
         return listProducts;
     }
 
+//count product by product entity    
+    public int getCountTotalProductByCate(int cateId) {
+        try {
+            String sql = "select COUNT(*) \n"
+                    + "from Product "
+                    + " where cateId=? ";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, cateId);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
+
+    public int getCountTotalProductByBrand(int brandId) {
+        try {
+            String sql = "select COUNT(*) \n"
+                    + "from Product "
+                    + " where brandId=? ";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, brandId);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
+
+    public int getCountTotalProductByDisplay(int displaySize) {
+        try {
+            String sql = "select COUNT(*) \n"
+                    + "from Product "
+                    + " where displayId=? ";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, displaySize);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
+
+    public int getCountTotalProductByProcessor(int processor) {
+        try {
+            String sql = "select COUNT(*) \n"
+                    + "from Product "
+                    + " where processorId=? ";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, processor);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
+
+    public int getCountTotalProductByPrice(int priceId) {
+        try {
+            String sql = "select COUNT(*) \n"
+                    + "from Product "
+                    + " where priceId=? ";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, priceId);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
+
+    public List<Product> getAllProductByCategory(int cateId,
+            int brandId, int displayId, int processId, int priceId) {
+        List<Product> listProducts = new ArrayList<>();
+        try {
+
+            String sql = "select p.*\n"
+                    + "from Product p\n";
+            if (cateId != 0) {
+                sql += "where p.cateId=?";
+            } else if (brandId != 0) {
+                sql += "where p.brandId=?";
+            } else if (displayId != 0) {
+                sql += "where p.displaySize=?";
+            } else if (processId != 0) {
+                sql += "where p.processor=?";
+            } else if (priceId != 0) {
+                sql += "where p.priceId=?";
+            }
+            PreparedStatement stm = connection.prepareStatement(sql);
+            if (cateId != 0) {
+                stm.setInt(1, cateId);
+            }
+            if (brandId != 0) {
+                stm.setInt(1, brandId);
+            }
+            if (displayId != 0) {
+                stm.setInt(1, displayId);
+            }
+            if (processId != 0) {
+                stm.setInt(1, processId);
+            }
+            if (priceId != 0) {
+                stm.setInt(1, priceId);
+            }
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                Product p = new Product();
+                p.setId(rs.getString("id"));
+                p.setName(rs.getString("name"));
+                p.setCateId(rs.getInt("cateId"));
+                p.setBrandId(rs.getInt("brandId"));
+                p.setPriceId(rs.getInt("priceId"));
+                p.setPrice(rs.getInt("price"));
+                p.setOsId(rs.getInt("osId"));
+                p.setOs(rs.getString("os"));
+                p.setDisplayId(rs.getInt("displayId"));
+                p.setDisplay(rs.getString("display"));
+                p.setProcessorId(rs.getInt("processorId"));
+                p.setProcessor(rs.getString("processor"));
+                p.setGpuId(rs.getInt("gpuId"));
+                p.setGpu(rs.getString("gpu"));
+                p.setRamId(rs.getInt("ramId"));
+                p.setRam(rs.getString("ram"));
+                p.setHarddriveId(rs.getInt("harddriveId"));
+                p.setHarddrive(rs.getString("harddrive"));
+                p.setPort(rs.getString("port"));
+                p.setBattery(rs.getString("battery"));
+                p.setColor(rs.getString("color"));
+                p.setQuantity(rs.getInt("quantity"));
+                p.setNote(rs.getString("note"));
+                List<ProductImg> listImages = getListImageByPid(rs.getString("id"));
+                p.setListImage(listImages);
+                listProducts.add(p);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return listProducts;
+    }
+
+//get all product: admin
+    public int getCountTotalProduct() {
+        try {
+            String sql = "select COUNT(*) \n"
+                    + "from Product ";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            ResultSet rs = stm.executeQuery();
+            int count = 0;
+            while (rs.next()) {
+                count = rs.getInt(1);
+            }
+            return count;
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
+
+    public List<Product> getAllProduct() {
+        ReviewDAO rdb = new ReviewDAO();
+        List<Product> listProducts = new ArrayList<>();
+        try {
+            String sql = "select * from\n"
+                    + "Product\n";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                Product p = new Product();
+                p.setId(rs.getString("id"));
+                p.setName(rs.getString("name"));
+                p.setCateId(rs.getInt("cateId"));
+                p.setBrandId(rs.getInt("brandId"));
+                p.setPriceId(rs.getInt("priceId"));
+                p.setPrice(rs.getInt("price"));
+                p.setOsId(rs.getInt("osId"));
+                p.setOs(rs.getString("os"));
+                p.setDisplayId(rs.getInt("displayId"));
+                p.setDisplay(rs.getString("display"));
+                p.setProcessorId(rs.getInt("processorId"));
+                p.setProcessor(rs.getString("processor"));
+                p.setGpuId(rs.getInt("gpuId"));
+                p.setGpu(rs.getString("gpu"));
+                p.setRamId(rs.getInt("ramId"));
+                p.setRam(rs.getString("ram"));
+                p.setHarddriveId(rs.getInt("harddriveId"));
+                p.setHarddrive(rs.getString("harddrive"));
+                p.setPort(rs.getString("port"));
+                p.setBattery(rs.getString("battery"));
+                p.setColor(rs.getString("color"));
+                p.setQuantity(rs.getInt("quantity"));
+                p.setNote(rs.getString("note"));
+                int rate = rdb.getAverageProduct(rs.getString("id"));
+                List<ProductImg> listImages = getListImageByPid(rs.getString("id"));
+                p.setRate(rate);
+                p.setListImage(listImages);
+                listProducts.add(p);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return listProducts;
+    }
+
+//get product: color and quantity
     public String getColorByProductId(String pId) {
         try {
             String sql = "select p.color\n"
@@ -747,23 +771,7 @@ public class ProductDAO extends BaseDAO<Product> {
         return 0;
     }
 
-    public boolean updateQuantity(int quantityProduct, String productId) {
-        int check = 0;
-
-        try {
-            String sql = "update Product\n"
-                    + "set quantity = ?\n"
-                    + "where id=?;";
-            PreparedStatement stm = connection.prepareStatement(sql);
-            stm.setInt(1, quantityProduct);
-            stm.setString(2, productId);
-            check = stm.executeUpdate();
-
-        } catch (Exception e) {
-        }
-        return check > 0;
-    }
-
+//remove product
     public boolean removeProducImgtbyId(String pid) {
         int check = 0;
         try {
@@ -838,6 +846,24 @@ public class ProductDAO extends BaseDAO<Product> {
 //        }
 //        return check > 0;
 //    }
+//update product entity    
+    public boolean updateQuantity(int quantityProduct, String productId) {
+        int check = 0;
+
+        try {
+            String sql = "update Product\n"
+                    + "set quantity = ?\n"
+                    + "where id=?;";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, quantityProduct);
+            stm.setString(2, productId);
+            check = stm.executeUpdate();
+
+        } catch (Exception e) {
+        }
+        return check > 0;
+    }
+
     public boolean updateProduct(Product product) {
         int check = 0;
 
@@ -925,6 +951,7 @@ public class ProductDAO extends BaseDAO<Product> {
         return check > 0;
     }
 
+//add product    
     public boolean addProduct(Product product) {
         int check = 0;
         try {

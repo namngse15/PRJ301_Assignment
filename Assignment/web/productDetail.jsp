@@ -171,6 +171,54 @@
                     </div>
                 </div> 
                 <!-- end product side form-->
+                <!--product related-->
+                <div class="col-md-12 mt-5">
+                    <div class="row"> 
+                        <c:forEach items="${listProductRelated}" var="o">
+                            <c:if test="${product.id == o.id}">
+                                <div class="col-lg-6 relate-product checked">
+                                    <form action="detail" method="get">
+                                        <input type="hidden" name="productId" value="${o.id}">
+                                        <button type="submit"> 
+                                            <div class="relate-product-img">
+                                                <c:forEach items="${o.listImage}" var="i"> 
+                                                    <img src="${i.img1}" alt="">
+                                                </c:forEach>
+                                            </div>
+                                            <div class="relate-product-content">
+                                                <div class="relate-des"><label>Name:</label><span>${o.name}</span></div>
+                                                <div class="relate-des"><label>CPU:</label><span>${o.processor}</span></div>
+                                                <div class="relate-des"><label>RAM:</label><span>${o.ram}</span></div>
+                                                <div class="relate-des"><label>HDD:</label><span>${o.harddrive}</span></div>
+                                            </div>
+                                        </button>
+                                    </form>
+                                </div>
+                            </c:if>
+                            <c:if test="${product.id != o.id}">
+                                <div class="col-lg-6 relate-product">
+                                    <form action="detail" method="get">
+                                        <input type="hidden" name="productId" value="${o.id}">
+                                        <button type="submit"> 
+                                            <div class="relate-product-img">
+                                                <c:forEach items="${o.listImage}" var="i"> 
+                                                    <img src="${i.img1}" alt="">
+                                                </c:forEach>
+                                            </div>
+                                            <div class="relate-product-content">
+                                                <div class="relate-des"><label>Name:</label><span>${o.name}</span></div>
+                                                <div class="relate-des"><label>CPU:</label><span>${o.processor}</span></div>
+                                                <div class="relate-des"><label>RAM:</label><span>${o.ram}</span></div>
+                                                <div class="relate-des"><label>HDD:</label><span>${o.harddrive}</span></div>
+                                            </div>
+                                        </button>
+                                    </form>
+                                </div>
+                            </c:if>
+                        </c:forEach>
+                    </div>
+                </div>
+                <!--end product related-->
                 <!--product detai des and review-->
                 <div class="col-md-12">
                     <div class="product-descrption">

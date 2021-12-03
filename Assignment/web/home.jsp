@@ -87,10 +87,17 @@
                                                         <c:if test="${o.cateId==5}">
                                                             <p>Easy access</p>
                                                         </c:if>
-
                                                         <div class="product-options">
-                                                            <strong>Category:</strong>
-                                                            <span>${getCategory.getCategoryById(o.cateId)}</span>
+                                                            <strong>CPU:</strong>
+                                                            <span>${getCategory.getProcessorById(o.processorId)}</span>
+                                                        </div>
+                                                        <div class="product-options">
+                                                            <strong>RAM:</strong>
+                                                            <span>${o.ram}</span>
+                                                        </div>
+                                                        <div class="product-options">
+                                                            <strong>HDD:</strong>
+                                                            <span>${o.harddrive}</span>
                                                         </div>
                                                     </div>
                                                 </div>

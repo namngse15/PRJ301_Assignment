@@ -8,6 +8,7 @@ package controller;
 import dal.ProductDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -44,7 +45,12 @@ public class ProductDetailController extends HttpServlet {
         String getQuantityEdit =request.getParameter("quanity");
 
         Product p = pdb.getOneProduct(productId);
-  
+        //get related product
+        String idSplit[] = productId.split("@");
+        String productIdSplit = idSplit[0];
+        List<Product> listProductRelated= pdb.getProductRelatedById(productIdSplit);
+         
+        request.setAttribute("listProductRelated",listProductRelated);
         request.setAttribute("product", p);
         request.setAttribute("color",color);
         request.setAttribute("quantity",getQuantityEdit);

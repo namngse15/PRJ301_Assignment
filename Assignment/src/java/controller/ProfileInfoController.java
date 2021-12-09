@@ -41,7 +41,6 @@ public class ProfileInfoController extends HttpServlet {
         //user info  
         String oldPass = request.getParameter("pass");
         String fullName = request.getParameter("fullName");
-        System.out.println(fullName);
         String email = request.getParameter("email");
         String phone = request.getParameter("phone");
         String address = request.getParameter("address");
@@ -52,7 +51,6 @@ public class ProfileInfoController extends HttpServlet {
         Account account = (Account) session.getAttribute("currentLogin");
         //check password
         if (account.getPassword().equals(oldPass)) {
-            System.out.println(account.getId());
             Account a = new Account(account.getId(), fullName, phone, email, address, date, account.getUsername());
             checkAccount=adb.updateAccount(a);
         } 

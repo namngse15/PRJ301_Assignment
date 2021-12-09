@@ -1,7 +1,3 @@
-
-/* global google */
-
-
 //header navbar,search
 let account_modal = document.querySelector('.account-menu');
 let searchForm = document.querySelector('.search-form');
@@ -18,7 +14,18 @@ document.querySelector('#menu-btn').onclick = () => {
     account_modal.classList.remove('active');
     searchForm.classList.remove('active');
 }
-
+//video slider
+let videoBtn = document.querySelectorAll('.vid-btn');
+videoBtn.forEach(btn => {
+    //change butto color  
+    btn.addEventListener('click', () => {
+        document.querySelector('.control .active').classList.remove('active');
+        btn.classList.add('active');
+        //change vid src
+        let src = btn.getAttribute('data-src');
+        document.querySelector('#video-slider').src=src;
+    });
+});
 //product image
 function chooseImg(image) {
     var src = image.src;
@@ -72,4 +79,3 @@ $('.cateBtn').on("click", function () {
     $('button-active').not(this).removeClass('button-active');
     $(this).toggleClass('button-active');
 })
-//google-map api

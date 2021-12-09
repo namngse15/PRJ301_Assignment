@@ -16,6 +16,7 @@
         <title>Laptop Store</title>
         <!--css file-->
         <link rel="stylesheet" href="assets/style.css">
+        <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
         <!-- boostrap -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
@@ -30,9 +31,7 @@
     <jsp:useBean id="getCategory" scope="page" class="dal.CategoryDAO"></jsp:useBean> 
         <body>
         <jsp:include page="template/header.jsp"/>
-        <!-- banner -->
-        <div class="header-block">
-        </div>
+        <jsp:include page="template/banner.jsp"/>
         <div class="container-fluid">
             <div class="row">
                 <jsp:include page="template/category.jsp"/>
@@ -115,6 +114,17 @@
         </div>
         <!-- footer -->
         <jsp:include page="template/footer.jsp"/>
+        <script>
+            document.addEventListener("DOMContentLoaded", function (event) {
+                var scrollpos = localStorage.getItem('scrollpos');
+                if (scrollpos)
+                    window.scrollTo(0, scrollpos);
+            });
+
+            window.onbeforeunload = function (e) {
+                localStorage.setItem('scrollpos', window.scrollY);
+            };
+        </script>
         <script src="assets/main.js"></script>
     </body>
 

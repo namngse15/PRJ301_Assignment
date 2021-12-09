@@ -13,7 +13,8 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
+        <title>Login</title>
+        <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
         <!-- boostrap -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
@@ -26,9 +27,25 @@
         <!-- font awesome -->
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
               integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+        <% Cookie[] cookies = request.getCookies();%>
     </head>
 
     <body>
+        <%
+            String username = "";
+            String password = "";
+
+            if (cookies != null) {
+                for (Cookie cooky : cookies) {
+                    if (cooky.getName().equals("username")) {
+                        username = cooky.getValue();
+                    }
+                    if (cooky.getName().equals("password")) {
+                        password = cooky.getValue();
+                    }
+                }
+            }
+        %>
         <div class="form-modal">
             <div class="form-toggle">
                 <button id="login-toggle" onclick="toggleLogin()">log in</button>
@@ -40,13 +57,13 @@
                 <form action="login" method="post">
                     <input type="hidden" name="loginAction" value="true">
                     <div class="input-border">
-                        <input type="text"  name="username" placeholder="Enter email or username" required/>
+                        <input type="text"  name="username" value="<%=username%>" placeholder="Enter email or username" required/>
                     </div> 
                     <div class="input-border">
-                        <input type="password" name="password" placeholder="Enter password" required/>
+                        <input type="password" name="password" value="<%=password%>" placeholder="Enter password" required/>
                     </div>
+                    <input type="checkbox" name ="remember" value="remember"/> Remember me <br/>
                     <button type="submit" class="btn login" value="Login">login</button>
-
                     <c:if test="${statement != null}">
                         <div class="notification">
                             <p class="">${statement}</p>
@@ -58,24 +75,15 @@
 
             <div id="signup-form">
                 <form action="create-account" method="post">
-                    <div class="input-border">
-                        <input type="email" name="email" placeholder="Enter your email" value="${email}"required/>
-                    </div>
-                    <div class="input-border">
-                        <input type="text" name="user" placeholder="Enter your username" onChange="checkUser()" value="${user}"required/>
-                    </div>
+                    <input type="email" name="email" placeholder="Enter your email" value="${email}"required/>
+                    <input type="text" name="user" placeholder="Enter your username" onChange="checkUser()" value="${user}"required/>
+                    <input type="password" name="pass" placeholder="Create password" onChange="checkPass()" value="${pass}" required/>
                     <input hidden />
-                    <div class="input-border">
-                        <input type="password" name="pass" placeholder="Create password" onChange="checkPass()" value="${pass}" required/>
-                    </div>
-                    <div class="input-border">
-                        <input type="password" name="confirm" placeholder="Re-enter password" onChange="checkPass()" required/>
-                    </div>
+                    <input type="password" name="confirm" placeholder="Re-enter password" onChange="checkPass()" required/>
                     <button type="submit" class="btn signup">create account</button>
                     <hr />
                 </form>
             </div>
-
         </div>
         <c:if test="${checkUser==2}">
             <div onclick="closeModal()" class="modal-nofi" id="modal-edit">

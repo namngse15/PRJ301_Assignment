@@ -41,25 +41,7 @@ public class AccountDAO extends BaseDAO<Account> {
         return 0;
     }
 
-    public String getAccountByID(int id) {
-        String result = "";
-        try {
-            String sql = "select username,email\n"
-                    + "from Account\n"
-                    + "where roleId=2"
-                    + "and id=?";
-            PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setInt(1, id);
-            ResultSet rs = statement.executeQuery();
-            while (rs.next()) {
-                result = rs.getString("username");
-                return result;
-            }
-        } catch (SQLException e) {
 
-        }
-        return null;
-    }
 
     public String getAccountByUserName(String username) {
         String result = "";

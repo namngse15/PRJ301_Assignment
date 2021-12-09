@@ -866,7 +866,6 @@ public class ProductDAO extends BaseDAO<Product> {
 
     public boolean updateProduct(Product product) {
         int check = 0;
-
         try {
             String sql = "update Product\n"
                     + "set name=?,\n"
@@ -889,10 +888,13 @@ public class ProductDAO extends BaseDAO<Product> {
                     + "port=?,\n"
                     + "battery=?,\n"
                     + "color=?,\n"
-                    + "quantity=?,\n"
-                    + "note=?\n"
-                    + "where id=?";
+                    + "quantity=?\n";
+            if (product.getNote() != null) {
+                sql += "note=?\n";
+            }
+            sql += "where id=?";
             PreparedStatement stm = connection.prepareStatement(sql);
+            int count = 22;
             stm.setString(1, product.getName());
             stm.setInt(2, product.getCateId());
             stm.setInt(3, product.getBrandId());
@@ -914,15 +916,26 @@ public class ProductDAO extends BaseDAO<Product> {
             stm.setString(19, product.getBattery());
             stm.setString(20, product.getColor());
             stm.setInt(21, product.getQuantity());
-            stm.setString(22, product.getNote());
-            stm.setString(23, product.getId());
+            if (product.getNote() != null) {
+                stm.setString(count++, product.getNote());
+            }
+            stm.setString(count, product.getId());
             check = stm.executeUpdate();
 
         } catch (Exception e) {
         }
         return check > 0;
     }
-
+    public static void main(String[] args) {
+        ProductDAO d = new ProductDAO();
+        Product p = new Product("GalaxyBookF2A01NS@I58256GB","Samsung Galaxy Book 2",1, 5, 1,"Windows 10 Home", 13,"13.3 Inch FHD QLED", 
+        7,"Intel Core i5 1135G7(4 cores, 8threads)", 2,"Intel Iris Xe", 2,"8GB LDDR4X", 
+                2,"256 m.2 NVMe","1x USB-C, 2x USB-A, 1x HDMI, 1x microSD, 1x Jack 3.5mm"
+                ,"54Wh", 2,609,11,"white");
+        boolean check = d.updateProduct(p);
+        System.out.println(check);
+        
+    }
     public boolean updateProductWithImg(String pId, String img1, String img2) {
         int check = 0;
         try {
@@ -959,29 +972,28 @@ public class ProductDAO extends BaseDAO<Product> {
                     + "gpu,ramId,ram,harddriveId,harddrive,port,battery,color,quantity)\n"
                     + "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
             PreparedStatement stm = connection.prepareStatement(sql);
-            stm.setString(1, product.getName());
-            stm.setInt(2, product.getCateId());
-            stm.setInt(3, product.getBrandId());
-            stm.setInt(4, product.getPriceId());
-            stm.setInt(5, product.getPrice());
-            stm.setInt(6, product.getOsId());
-            stm.setString(7, product.getOs());
-            stm.setInt(8, product.getDisplayId());
-            stm.setString(9, product.getDisplay());
-            stm.setInt(10, product.getProcessorId());
-            stm.setString(11, product.getProcessor());
-            stm.setInt(12, product.getGpuId());
-            stm.setString(13, product.getGpu());
-            stm.setInt(14, product.getRamId());
-            stm.setString(15, product.getRam());
-            stm.setInt(16, product.getHarddriveId());
-            stm.setString(17, product.getHarddrive());
-            stm.setString(18, product.getPort());
-            stm.setString(19, product.getBattery());
-            stm.setString(20, product.getColor());
-            stm.setInt(21, product.getQuantity());
-            stm.setString(22, product.getNote());
-            stm.setString(23, product.getId());
+            stm.setString(1, product.getId());
+            stm.setString(2, product.getName());
+            stm.setInt(3, product.getCateId());
+            stm.setInt(4, product.getBrandId());
+            stm.setInt(5, product.getPriceId());
+            stm.setInt(6, product.getPrice());
+            stm.setInt(7, product.getOsId());
+            stm.setString(8, product.getOs());
+            stm.setInt(9, product.getDisplayId());
+            stm.setString(10, product.getDisplay());
+            stm.setInt(11, product.getProcessorId());
+            stm.setString(12, product.getProcessor());
+            stm.setInt(13, product.getGpuId());
+            stm.setString(14, product.getGpu());
+            stm.setInt(15, product.getRamId());
+            stm.setString(16, product.getRam());
+            stm.setInt(17, product.getHarddriveId());
+            stm.setString(18, product.getHarddrive());
+            stm.setString(19, product.getPort());
+            stm.setString(20, product.getBattery());
+            stm.setString(21, product.getColor());
+            stm.setInt(22, product.getQuantity());
             check = stm.executeUpdate();
 
         } catch (Exception e) {

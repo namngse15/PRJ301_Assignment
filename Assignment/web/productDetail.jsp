@@ -13,9 +13,10 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Laptop Store</title>
+        <title>Product Detail</title>
         <!--css file-->
-        <link rel="stylesheet" href="assets/style.css">
+        <link rel="stylesheet" href="assets/style.css">     
+        <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
         <!-- boostrap -->
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
@@ -255,12 +256,12 @@
                                 <c:if test="${reviewInfo.getNumberReviewByProduct(product.id) == 0}">
                                     <p class="mb-20">There are no reviews yet.</p>
                                 </c:if>
-                                <!--review >0 --> 
+                                <!--review > 0 --> 
                                 <c:if test="${reviewInfo.getNumberReviewByProduct(product.id) > 0}">
                                     <c:forEach var="o" items="${reviewInfo.getAllReviewByProductId(product.id)}">
                                         <div class="user-rating">
                                             <div class="rating-content">
-                                                <p>${o.fullname}</p>
+                                                <p class="text-capitalize">${userInfo.getAccountById(o.accountId).name}</p>
 
                                                 <!--user rating-->
                                                 <div class="rate">

@@ -12,8 +12,6 @@ package model;
 public class Review {
 
     private int id;
-    private String fullname;
-    private String email;
     private int rate;
     private String message;
     private int accountId;
@@ -22,15 +20,8 @@ public class Review {
     public Review() {
     }
 
-    public Review(String fullname, int rate, String message, String ProductId) {
-        this.fullname = fullname;
-        this.rate = rate;
-        this.message = message;
-        this.ProductId = ProductId;
-    }
-        public Review(String fullname, String email, int rate, String message, int accountId, String ProductId) {
-        this.fullname = fullname;
-        this.email = email;
+
+        public Review(int rate, String message, int accountId, String ProductId) {
         this.rate = rate;
         this.message = message;
         this.accountId = accountId;
@@ -39,8 +30,6 @@ public class Review {
 
     public Review(int id, String fullname, String email, int rate, String message, int accountId, String ProductId) {
         this.id = id;
-        this.fullname = fullname;
-        this.email = email;
         this.rate = rate;
         this.message = message;
         this.accountId = accountId;
@@ -53,22 +42,6 @@ public class Review {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public String getFullname() {
-        return fullname;
-    }
-
-    public void setFullname(String fullname) {
-        this.fullname = fullname;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public int getRate() {

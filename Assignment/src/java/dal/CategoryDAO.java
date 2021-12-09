@@ -699,6 +699,25 @@ public class CategoryDAO extends BaseDAO {
         }
         return listP;
     }
+
+    public String getGpuById(int id) {
+        String result = "";
+        try {
+            String sql = "  select*\n"
+                    + "  from ProGpu\n"
+                    + "  where id=?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, id);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                result = rs.getString("name");
+                return result;
+            }
+        } catch (SQLException e) {
+
+        }
+        return null;
+    }
 //os    
 
     public List<Os> getAllOs() {
@@ -720,6 +739,25 @@ public class CategoryDAO extends BaseDAO {
             Logger.getLogger(CategoryDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return listP;
+    }
+
+    public String getOsById(int id) {
+        String result = "";
+        try {
+            String sql = "  select*\n"
+                    + "  from ProOs\n"
+                    + "  where id=?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, id);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                result = rs.getString("name");
+                return result;
+            }
+        } catch (SQLException e) {
+
+        }
+        return null;
     }
 
     public static void main(String[] args) {

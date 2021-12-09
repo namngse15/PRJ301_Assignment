@@ -32,8 +32,6 @@ public class ReviewDAO extends BaseDAO<Review> {
                 r.setId(rs.getInt("id"));
                 r.setAccountId(rs.getInt("accountId"));
                 r.setProductId(rs.getString("productId"));
-                r.setFullname(rs.getString("fullname"));
-                r.setEmail(rs.getString("email"));
                 r.setRate(rs.getInt("rate"));
                 r.setMessage(rs.getString("message"));
                 listReviews.add(r);
@@ -114,15 +112,13 @@ public class ReviewDAO extends BaseDAO<Review> {
     public boolean insertReview(Review review) {
         int check = 0;
         try {
-            String sql = "insert into ReviewProduct(accountId,fullname,email,rate,message,productId)\n"
-                    + "values(?,?,?,?,?,?)";
+            String sql = "insert into ReviewProduct(accountId,rate,message,productId)\n"
+                    + "values(?,?,?,?)";
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setInt(1, review.getAccountId());
-            stm.setString(2, review.getFullname());
-            stm.setString(3, review.getEmail());
-            stm.setInt(4, review.getRate());
-            stm.setString(5, review.getMessage());
-            stm.setString(6, review.getProductId());
+            stm.setInt(2, review.getRate());
+            stm.setString(3, review.getMessage());
+            stm.setString(4, review.getProductId());
             check = stm.executeUpdate();
         } catch (SQLException e) {
         }

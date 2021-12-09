@@ -21,13 +21,13 @@
 
 html {
     font-size: 62.5%;
-    background-color: #E4EBF5;
+    background-image: linear-gradient(100deg, #facaa878 0%,#ddd6f3 6% ,#E4EBF5 60%)!important;
     overflow-x: hidden;
     scroll-behavior: smooth;
     scroll-padding-top: 7rem;
 }
 body {
-    background-color: #E4EBF5 !important;
+    background-image: linear-gradient(100deg, #facaa878 0%,#ddd6f3 6% ,#E4EBF5 60%)!important;
 }
 .header {
     position: fixed;
@@ -39,7 +39,7 @@ body {
     align-items: center;
     justify-content: space-between;
     padding: 2rem 9%;
-    background-color: #E4EBF5;
+    background-image: linear-gradient(149deg, #facaa878 0%,#ddd6f3 23% ,#E4EBF5 76%);
     box-shadow: 0.3rem 0.3rem 0.6rem #c8d0e7, 
         -0.2rem -0.2rem 0.5rem #FFFFFF;
 }
@@ -67,7 +67,8 @@ body {
     width: 4.5rem;
     line-height: 4.5rem;
     border-radius: 0.5rem;
-    background: rgb(255, 193, 79);
+    background-color: #FBAB7E;
+    background-image: linear-gradient(71deg, #FBAB7E 0%, #F7CE68 100%);
     box-shadow: rgb(224, 201, 129) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -4px -4px 7px 1px inset;
     color: var(--black);
     font-size: 2rem;
@@ -185,7 +186,7 @@ body {
 .sidebar ul li button{
     width: 100%;
     height: 12rem;
-    background: #E4EBF5;
+    background-image: linear-gradient(149deg, #facaa878 0%,#ddd6f3 10% ,#E4EBF5 116%);
     box-shadow: inset 0.2rem 0.2rem 0.5rem #c8d0e7, 
         inset -0.2rem -0.2rem 0.5rem #FFFFFF;
     transition:0.2s;
@@ -260,6 +261,9 @@ body {
 }
 .profile-save button:hover{
     box-shadow: rgba(240, 156, 46, 0.4) 5px 5px, rgba(240, 179, 46, 0.3) 10px 10px, rgba(240, 172, 46, 0.2) 15px 15px, rgba(240, 188, 46, 0.1) 20px 20px, rgba(240, 162, 46, 0.05) 25px 25px;
+}
+.edit-image .image_overlay img{
+    border-radius: 20% !important;
 }
 .edit-image-title p{
     font-size: 2.5rem; 
@@ -362,7 +366,7 @@ body {
 #modal-amount,
 #modal-brand,
 #modal-category{
-  display: none;
+    display: none;
 }
 #modal-edit-category{
     display: flex;
@@ -402,14 +406,14 @@ input:focus{
     background-color: #E4EBF5;
 }
 .modal-add-flex label{
-  margin-left: 1rem;
+    margin-left: 1rem;
 }
 .modal-add-flex select{
-        border: 1px solid #000;  
-        border-radius: 1rem;
-        width:15%;       
-        padding: 0.3rem 0.1rem;
-        margin: 2rem 0;
+    border: 1px solid #000;  
+    border-radius: 1rem;
+    width:15%;       
+    padding: 0.3rem 0.1rem;
+    margin: 2rem 0;
 }
 .modal-add-flex select:nth-child(4){
     width: 16%;
@@ -419,6 +423,12 @@ input:focus{
 }
 .modal-add-flex .choose-big{
     width: 39% !important;
+}
+.modal-add-flex .choose-mid{
+    width: 30% !important;
+}
+.modal-add-flex .choose-mid-2{
+    width: 36% !important;
 }
 .modal-add-flex .input-1{
     width: 14% !important;

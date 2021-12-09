@@ -14,9 +14,10 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Laptop Store</title>
+        <title>Administrator's Products</title>
         <!--css file-->
         <link rel="stylesheet" href="assets/admin.css">
+        <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
         <!-- boostrap -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
@@ -38,10 +39,10 @@
     <jsp:useBean id="getReview" scope="page" class="dal.ReviewDAO"></jsp:useBean> 
     <jsp:useBean id="getNumber" scope="page" class="dal.OrdersDAO"></jsp:useBean> 
         <body>
-        <jsp:include page="adminHeader.jsp"/>
+        <jsp:include page="adminTemplate/adminHeader.jsp"/>
         <div class="header-block">
         </div>
-        <jsp:include page="adminSidemenu.jsp"/>
+        <jsp:include page="adminTemplate/adminSidemenu.jsp"/>
         <div class="content-wrapper">
             <!--table product-->
             <c:if test="${viewProductDetail == null&&viewProductReview == null}">
@@ -86,7 +87,7 @@
                                             <a href="#" onclick="removeProduct('${o.id}')">Remove</a>
                                         </c:if>
                                     </td>
-                                    <td><a href="admin-product?editProduct=true&viewProductDetail=true&productId=${o.id}">Edit</a></td>
+                                    <td><a href="admin-product?editProduct=true&viewProductDetail=true&productId=${o.id}&price=${o.price}&quantity=${o.quantity}">Edit</a></td>
                                 </tr>                              
                             </c:forEach>
                         </tbody>
@@ -169,7 +170,7 @@
                                 </td>
                                 <td>${product.display}</td>
                                 <td>${product.os}</td>
-                                <td>${product.processDetail}</td>
+                                <td>${product.processor}</td>
                                 <td>${product.gpu}</td>
                                 <td>${product.ram}</td>
                                 <td>${product.harddrive}</td>
@@ -678,39 +679,7 @@
                 <!--end table product by processor-->
             </div>
             <!-- footer -->
-            <footer class="pt-4 my-md-5 pt-md-5 border-top container">
-                <div class="row">
-                    <div class="col-12 col-md">
-                        <i class="fas fa-laptop fa-3x mb-3 ml-3"></i>
-                        <small class="d-block mb-3 text-muted">© 2017-2018</small>
-                    </div>
-                    <div class="col-6 col-md">
-                        <h5 class="font-weight-bold ">Features</h5>
-                        <ul class="list-unstyled text-small">
-                            <li><a class="text-muted" href="#">Home</a></li>
-                            <li><a class="text-muted" href="#">Product</a></li>
-                            <li><a class="text-muted" href="#">Contact</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-6 col-md">
-                        <h5 class="font-weight-bold ">User</h5>
-                        <ul class="list-unstyled text-small">
-                            <li><a class="text-muted" href="#">Profile</a></li>
-                            <li><a class="text-muted" href="#">Sign in</a></li>
-                            <li><a class="text-muted" href="#">Log in</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-6 col-md">
-                        <h5 class="font-weight-bold ">About</h5>
-                        <ul class="list-unstyled text-small">
-                            <li><a class="text-muted" href="#">Team</a></li>
-                            <li><a class="text-muted" href="#">Locations</a></li>
-                            <li><a class="text-muted" href="#">Privacy</a></li>
-                            <li><a class="text-muted" href="#">Terms</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </footer>
+            <jsp:include page="adminTemplate/adminFooter.jsp"/>
         </div> 
         <!--modal add product-->                
         <div class="modal-nofi" id="modal-product">
@@ -736,40 +705,49 @@
                             </div>
                             <div class="modal-add-flex ">
                                 <label>ID:</label>
-                                <input class="input-3" name="productId" type="text" placeholder="Enter product id" required>
+                                <input class="" name="productId" type="text" placeholder="Enter product id" required>
                                 <label>Name:</label>
-                                <input class="input-7" name="productName" type="text" placeholder="Enter product name" required>
+                                <input class="" name="productName" type="text" placeholder="Enter product name" required>
                             </div>
                             <div class="modal-add-flex">
                                 <label style="margin-left:1.4rem">Brand:</label>
-                                <select name="brandId" required>
+                                <select name="brandId" class="choose-big" required>
                                     <option>Choose</option>
                                     <c:forEach items="${getCategory.allBrand}" var="o">  
                                         <option value="${o.id}">${o.name}</option>
                                     </c:forEach>
                                 </select>
                                 <label>Category:</label>
-                                <select name="cateId" required>
+                                <select name="cateId" class="choose-mid" required>
                                     <option>Choose</option>
                                     <c:forEach items="${getCategory.allCategory}" var="o">  
                                         <option value="${o.id}">${o.name}</option>
                                     </c:forEach>
                                 </select>
-                                <label>Amount:</label>
-                                <select name="priceId" required>
+                            </div>
+                            <div class="modal-add-flex">
+                                <label>Price:</label>
+                                <input class="input-3" name="productPrice" type="number" placeholder="Enter price" required>
+                                <label>Quantity:</label>
+                                <input class="input-2" name="productQuan" type="text" placeholder="Enter quantity" required>
+                                <label>OS:</label>
+                                <input class="input-2" name="productOs" type="text" placeholder="Enter os" required>
+                            </div>
+                            <div class="modal-add-flex">
+                                <label style="margin-left:1.4rem">Amount:</label>
+                                <select name="priceId" class="choose-mid-2" required>
                                     <option>Choose</option>
                                     <c:forEach items="${getCategory.allPrice}" var="o">  
                                         <option value="${o.id}">${o.amount}</option>
                                     </c:forEach>
                                 </select>
-                            </div>
-                            <div class="modal-add-flex">
-                                <label>Price:</label>
-                                <input class="input-2" name="productPrice" type="number" placeholder="Enter price" required>
-                                <label>Quantity:</label>
-                                <input class="input-2" name="productQuan" type="text" placeholder="Enter quantity" required>
                                 <label>OS:</label>
-                                <input class="input-3" name="productOs" type="text" placeholder="Enter os" required>
+                                <select name="osId" class="choose-big" required>
+                                    <option>Choose</option>
+                                    <c:forEach items="${getCategory.allOs}" var="o">  
+                                        <option value="${o.id}">${o.name}</option>
+                                    </c:forEach>
+                                </select>
                             </div>
                             <div class="modal-add-half mt-3 mb-3">
                                 <label>Port:</label>
@@ -793,11 +771,34 @@
                                     </c:forEach>
                                 </select>
                             </div>
-                            <div class="modal-add-flex mb-3">
+                            <div class="modal-add-flex mb-1">
                                 <label>Display:</label>
                                 <input class="input-2" name="productDisplay" type="text" placeholder="Enter display detail" required>
                                 <label>CPU:</label>
                                 <input class="input-7" name="productCpu" type="text" placeholder="Enter processor detail" required>
+                            </div>
+                            <div class="modal-add-flex">
+                                <label style="margin-left:1.4rem">RAM:</label>
+                                <select name="ramId" required>
+                                    <option>Ram</option>
+                                    <c:forEach items="${getCategory.allRam}" var="o">  
+                                        <option value="${o.id}">${o.name}</option>
+                                    </c:forEach>
+                                </select>
+                                <label>GPU:</label>
+                                <select name="gpuId" required>
+                                    <option>Gpu</option>
+                                    <c:forEach items="${getCategory.allGpu}" var="o">  
+                                        <option value="${o.id}">${o.name}</option>
+                                    </c:forEach>
+                                </select>
+                                <label>HDD:</label>
+                                <select name="hddId" class="choose-mid-2" required>
+                                    <option>Hdd</option>
+                                    <c:forEach items="${getCategory.allHdd}" var="o">  
+                                        <option value="${o.id}">${o.name}</option>
+                                    </c:forEach>
+                                </select>
                             </div>
                             <div class="modal-add-flex mb-3">
                                 <label>RAM:</label>
@@ -833,18 +834,18 @@
                 <div class="modal-nofi-overlay"></div>
                 <div class="modal-add modal-dialog-scrollable">
                     <form action="admin-crud" method="post">
-                        <h5 class="modal-add-title">Edit product</h5>
+                        <h5 class="modal-add-title">Update product</h5>
                         <div class="modal-add-full border-bottom">
                         </div>
                         <div class="modal-checkout-body mt-3">
                             <input name="edit" value="true" hidden>
                             <div class="modal-upper">
                                 <div class="modal-add-full mt-3 mb-3">
-                                    <c:forEach var="i" items="${product.listImage}">                                          
-                                        <label>Image 1</label> 
-                                        <input  class="mb-3" name="productImg1" type="url" placeholder="https://example.com/users/" value=" ${i.img1}" required>
+                                    <c:forEach items="${product.listImage}" var="i">
+                                        <label>Image 1</label>                              
+                                        <input  class="mb-3" name="productImg1" value="${i.img1}" type="url" placeholder="https://example.com/users/" required>
                                         <label>Image 2</label>
-                                        <input  name="productImg2" type="url" placeholder="https://example.com/users/" value=" ${i.img2}">
+                                        <input  name="productImg2" type="url" value="${i.img2}" placeholder="https://example.com/users/">
                                     </c:forEach>
                                 </div>
                                 <div class="modal-add-full border-bottom">
@@ -854,13 +855,13 @@
                                 </div>
                                 <div class="modal-add-flex ">
                                     <label>ID:</label>
-                                    <input class="input-3" name="productId" type="text" placeholder="Enter product id" value="${product.id}" required>
+                                    <input class="" name="productId" type="text" value="${product.id}" placeholder="Enter product id" required>
                                     <label>Name:</label>
-                                    <input class="input-7" name="productName" type="text" placeholder="Enter product name" value="${product.name}" required>
+                                    <input class="" name="productName" type="text" value="${product.name}" placeholder="Enter product name" required>
                                 </div>
                                 <div class="modal-add-flex">
                                     <label style="margin-left:1.4rem">Brand:</label>
-                                    <select name="brandId"  required>
+                                    <select name="brandId" class="choose-big" required>
                                         <option value="${product.brandId}">${getCategory.getBrandById(product.brandId)}</option>
                                         <c:forEach items="${getCategory.allBrand}" var="o">  
                                             <c:if test="${product.brandId != o.id}">
@@ -869,16 +870,26 @@
                                         </c:forEach>
                                     </select>
                                     <label>Category:</label>
-                                    <select  name="cateId" required>
+                                    <select name="cateId" class="choose-mid" required>
                                         <option value="${product.cateId}">${getCategory.getCategoryById(product.cateId)}</option>
-                                        <c:forEach items="${getCategory.allCategory}" var="o">  
+                                        <c:forEach items="${getCategory.allCategory}" var="o"> 
                                             <c:if test="${product.cateId != o.id}">
                                                 <option value="${o.id}">${o.name}</option>
                                             </c:if>
                                         </c:forEach>
                                     </select>
-                                    <label>Amount:</label>
-                                    <select name="priceId"  required>
+                                </div>
+                                <div class="modal-add-flex">
+                                    <label>Price:</label>
+                                    <input class="input-3" name="productPrice" type="number" value="${product.price}" placeholder="Enter price" required>
+                                    <label>Quantity:</label>
+                                    <input class="input-2" name="productQuan" type="text" value="${product.quantity}" placeholder="Enter quantity" required>
+                                    <label>OS:</label>
+                                    <input class="input-2" name="productOs" type="text" value="${product.os}" placeholder="Enter os" required>
+                                </div>
+                                <div class="modal-add-flex">
+                                    <label style="margin-left:1.4rem">Amount:</label>
+                                    <select name="priceId" class="choose-mid-2" required>
                                         <option value="${product.priceId}">${getCategory.getPriceById(product.priceId)}</option>
                                         <c:forEach items="${getCategory.allPrice}" var="o">  
                                             <c:if test="${product.priceId != o.id}">
@@ -886,66 +897,94 @@
                                             </c:if>
                                         </c:forEach>
                                     </select>
-                                </div>
-                                <div class="modal-add-flex">
-                                    <label>Price:</label>
-                                    <input class="input-2" name="productPrice" type="number" placeholder="Enter price" value="${product.price}" required>
-                                    <label>Quantity:</label>
-                                    <input class="input-2" name="productQuan" type="text" placeholder="Enter quantity" value="${product.quantity}" required>
                                     <label>OS:</label>
-                                    <input class="input-3" name="productOs" type="text" placeholder="Enter os" value="${product.os}" required>
+                                    <select name="osId" class="choose-big" required>
+                                        <option value="${product.osId}">${getCategory.getOsById(product.osId)}</option>
+                                        <c:forEach items="${getCategory.allOs}" var="o">  
+                                            <c:if test="${product.osId != o.id}">
+                                                <option value="${o.id}">${o.name}</option>
+                                            </c:if>
+                                        </c:forEach>
+                                    </select>
                                 </div>
                                 <div class="modal-add-half mt-3 mb-3">
                                     <label>Port:</label>
-                                    <input  name="productPort" type="text" placeholder="Enter product port" value="${product.port}" required>
+                                    <input  name="productPort" type="text" value="${product.port}" placeholder="Enter product port" required>
                                 </div>
                                 <div class="modal-add-full border-bottom">
                                 </div>
                                 <div class="modal-add-flex">
                                     <label style="margin-left:1.4rem">Display size:</label>
-                                    <select name="displaySize"  required>
-                                        <option value="${product.displaySize}">${product.displaySize}</option>
+                                    <select  name="displaySize" required>
+                                        <option value="${product.displayId}">${product.displayId}</option>
                                         <c:forEach items="${getCategory.allDisplaySize}" var="o">  
-                                            <c:if test="${product.displaySize != o.size}">
+                                            <c:if test="${product.displayId != o.size}">
                                                 <option value="${o.size}">${o.size}</option>
                                             </c:if>
                                         </c:forEach>
                                     </select>
                                     <label>Processor(CPU):</label>
                                     <select name="processorId" class="choose-big" required>
-                                        <option value="${product.processor}">${getCategory.getProcessorById(product.processor)}</option>
+                                        <option value="${product.processorId}">${getCategory.getProcessorById(product.processorId)}</option>
                                         <c:forEach items="${getCategory.allProcessor}" var="o">  
-                                            <c:if test="${product.processor != o.id}">
+                                            <c:if test="${product.processorId != o.id}">
+                                                <option value="${o.id}">${o.name}</option>
+                                            </c:if>
+                                        </c:forEach>
+                                    </select>
+                                </div>
+                                <div class="modal-add-flex mb-1">
+                                    <label>Display:</label>
+                                    <input class="input-2" name="productDisplay" type="text" value="${product.display}" placeholder="Enter display detail" required>
+                                    <label>CPU:</label>
+                                    <input class="input-7" name="productCpu" type="text" value="${product.processor}" placeholder="Enter processor detail" required>
+                                </div>
+                                <div class="modal-add-flex">
+                                    <label style="margin-left:1.4rem">RAM:</label>
+                                    <select name="ramId" required>
+                                        <option value="${product.ramId}">${getCategory.getRamById(product.ramId)}</option>
+                                        <c:forEach items="${getCategory.allRam}" var="o">  
+                                            <c:if test="${product.ramId != o.id}">
+                                                <option value="${o.id}">${o.name}</option>
+                                            </c:if>
+                                        </c:forEach>
+                                    </select>
+                                    <label>GPU:</label>
+                                    <select name="gpuId" class="choose-mid" required>
+                                        <option value="${product.gpuId}">${getCategory.getGpuById(product.gpuId)}</option>
+                                        <c:forEach items="${getCategory.allGpu}" var="o">  
+                                            <c:if test="${product.gpuId != o.id}">
+                                                <option value="${o.id}">${o.name}</option>
+                                            </c:if>
+                                        </c:forEach>
+                                    </select>
+                                    <label>HDD:</label>
+                                    <select name="hddId" required>
+                                        <option value="${product.harddriveId}">${getCategory.getHddById(product.harddriveId)}</option>
+                                        <c:forEach items="${getCategory.allHdd}" var="o">  
+                                            <c:if test="${product.harddriveId != o.id}">
                                                 <option value="${o.id}">${o.name}</option>
                                             </c:if>
                                         </c:forEach>
                                     </select>
                                 </div>
                                 <div class="modal-add-flex mb-3">
-                                    <label>Display:</label>
-                                    <input class="input-2" name="productDisplay" type="text" placeholder="Enter display detail" value="${product.display}" required>
-                                    <label>CPU:</label>
-                                    <input class="input-7" name="productCpu" type="text" placeholder="Enter processor detail" value="${product.processDetail}" required>
-                                </div>
-                                <div class="modal-add-flex mb-3">
                                     <label>RAM:</label>
-                                    <input class="input-2" name="productRam" type="text" placeholder="Enter ram detail" value="${product.ram}" required>
+                                    <input class="input-2" name="productRam" type="text" value="${product.ram}" placeholder="Enter ram detail"required>
                                     <label>GPU:</label>
-                                    <input class="input-8" name="productGpu" type="text" placeholder="Enter gpu detail" value="${product.gpu}" required>
+                                    <input class="input-8" name="productGpu" type="text" value="${product.gpu}" placeholder="Enter gpu detail" required>
                                 </div>
                                 <div class="modal-add-flex mb-3">
                                     <label>HDD:</label>
-                                    <input class="input-3" name="productHd" type="text" placeholder="Enter hard drive"  value="${product.harddrive}" required>
+                                    <input class="input-3" name="productHd" type="text" value="${product.harddrive}" placeholder="Enter hard drive" required>
                                     <label>Battery:</label>
-                                    <input class="input-1" name="productBattery" type="text" placeholder="Enter battery" value="${product.battery}" required>
+                                    <input class="input-1" name="productBattery" type="text" value="${product.battery}" placeholder="Enter battery" required>
                                     <label>Color:</label>
-                                    <input class="input-3" name="productColor" type="text" placeholder="Enter color"  value="${product.color}" required>
+                                    <input class="input-3" name="productColor" type="text" value="${product.color}" placeholder="Enter color" required>
                                 </div>
                                 <div class="modal-add-half mt-3 mb-3">
-                                    <label>Note:</label>
+                                    <label>Notes:</label>
                                     <input  name="note" type="text" placeholder="Note something here">
-                                </div>
-                                <div class="modal-add-full border-bottom">
                                 </div>
                             </div>
                         </div>

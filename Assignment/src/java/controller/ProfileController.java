@@ -49,44 +49,47 @@ public class ProfileController extends HttpServlet {
         //edit status
         String editStatus = request.getParameter("editStatus");
         String getOrderId = request.getParameter("orderId");
-        int orderId = 0;
-        int statusId = 0;
-        try {
-            orderId = Integer.parseInt(getOrderId);
-        } catch (NumberFormatException e) {
-        }
-         try {
-            statusId = Integer.parseInt(editStatus);
-        } catch (NumberFormatException e) {
-        }
-        
-        OrdersDAO odb = new OrdersDAO();
-        OrderStatusDAO osbd = new OrderStatusDAO();
+        //check login
+        if (account != null) {
+            int orderId = 0;
+            int statusId = 0;
+            try {
+                orderId = Integer.parseInt(getOrderId);
+            } catch (NumberFormatException e) {
+            }
+            try {
+                statusId = Integer.parseInt(editStatus);
+            } catch (NumberFormatException e) {
+            }
 
-        List<Orders> listOrders = odb.getAllOrders(account.getId());
-        List<OrderDetail> listOrDetails = (List<OrderDetail>) request.getAttribute("listOrDetails");
-        //view and edit order status
-        int roleUserId = 2;
-        List<OrderStatus> listOrderStatus = osbd.getListStatusByRoleId(roleUserId);
-        boolean checkEditStatus = false;
-        
-        if (statusId != 0 && orderId != 0) {
-            checkEditStatus = odb.editOrderStatus(orderId, statusId);
-            List<Orders> listOrder = odb.getAllOrders(account.getId());
-            request.setAttribute("orderView", orderView);
-            request.setAttribute("listOrders", listOrder);
-        } else if (orderView != null && accountView == null) {
-            request.setAttribute("listOrders", listOrders);
-            request.setAttribute("listStatus", listOrderStatus);
-            request.setAttribute("orderView", orderView);
-        } else if (orderView != null && listOrDetails != null) {
-            request.setAttribute("listOrDetails", listOrDetails);
-            request.setAttribute("orderView", orderView);
+            OrdersDAO odb = new OrdersDAO();
+            OrderStatusDAO osbd = new OrderStatusDAO();
+
+            List<Orders> listOrders = odb.getAllOrders(account.getId());
+            List<OrderDetail> listOrDetails = (List<OrderDetail>) request.getAttribute("listOrDetails");
+            //view and edit order status
+            int roleUserId = 2;
+            List<OrderStatus> listOrderStatus = osbd.getListStatusByRoleId(roleUserId);
+            boolean checkEditStatus = false;
+            if (statusId != 0 && orderId != 0) {
+                checkEditStatus = odb.editOrderStatus(orderId, statusId);
+                List<Orders> listOrder = odb.getAllOrders(account.getId());
+                request.setAttribute("orderView", orderView);
+                request.setAttribute("listOrders", listOrder);
+            } else if (orderView != null && accountView == null) {
+                request.setAttribute("listOrders", listOrders);
+                request.setAttribute("listStatus", listOrderStatus);
+                request.setAttribute("orderView", orderView);
+            } else if (orderView != null && listOrDetails != null) {
+                request.setAttribute("listOrDetails", listOrDetails);
+                request.setAttribute("orderView", orderView);
+            } else {
+                request.setAttribute("accountView", accountView);
+            }
+            request.getRequestDispatcher("profile.jsp").forward(request, response);
         } else {
-            request.setAttribute("accountView", accountView);
+            response.sendRedirect("login");
         }
-
-        request.getRequestDispatcher("profile.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

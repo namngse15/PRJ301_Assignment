@@ -40,12 +40,13 @@ public class Product {
     private String note;
     private String color;
     private int rate;
+    private List<ProductImg> listImage;
 
-    public Product(String id, String name, int cateId, int brandId, 
-            int osId, String os, int displayId, String display, int processorId, 
-            String processor, int gpuId, String gpu, int ramId, String ram, int harddriveId, 
-            String harddrive, String port, String battery, int priceId, int price, int quantity, 
-            String note, String color, int rate, List<ProductImg> listImage) {
+    public Product(String id, String name, int cateId, int brandId,
+            int osId, String os, int displayId, String display, int processorId,
+            String processor, int gpuId, String gpu, int ramId, String ram, int harddriveId,
+            String harddrive, String port, String battery, int priceId, int price, int quantity,
+            String note, String color) {
         this.id = id;
         this.name = name;
         this.cateId = cateId;
@@ -69,11 +70,35 @@ public class Product {
         this.quantity = quantity;
         this.note = note;
         this.color = color;
-        this.rate = rate;
-        this.listImage = listImage;
     }
-
-
+      public Product(String id, String name, int cateId, int brandId,
+            int osId, String os, int displayId, String display, int processorId,
+            String processor, int gpuId, String gpu, int ramId, String ram, int harddriveId,
+            String harddrive, String port, String battery, int priceId, int price, int quantity,
+             String color) {
+        this.id = id;
+        this.name = name;
+        this.cateId = cateId;
+        this.brandId = brandId;
+        this.osId = osId;
+        this.os = os;
+        this.displayId = displayId;
+        this.display = display;
+        this.processorId = processorId;
+        this.processor = processor;
+        this.gpuId = gpuId;
+        this.gpu = gpu;
+        this.ramId = ramId;
+        this.ram = ram;
+        this.harddriveId = harddriveId;
+        this.harddrive = harddrive;
+        this.port = port;
+        this.battery = battery;
+        this.priceId = priceId;
+        this.price = price;
+        this.quantity = quantity;
+        this.color = color;
+    }
 
     public int getOsId() {
         return osId;
@@ -122,7 +147,6 @@ public class Product {
     public void setRate(int rate) {
         this.rate = rate;
     }
-    private List<ProductImg> listImage;
 
     public Product() {
     }

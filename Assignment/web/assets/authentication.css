@@ -137,7 +137,7 @@ body{
         -0.2rem -0.2rem 0.5rem #FFFFFF;
     margin-bottom: 1rem;
 }
-.form-modal input:not(:nth-child(3)){
+.form-modal input:not(:nth-child(4)){
     position: relative;
     width:100%;
     font-size:1em;
@@ -223,3 +223,4 @@ body{
     font-size: 1.4rem;
     font-weight: bold;
 }
+

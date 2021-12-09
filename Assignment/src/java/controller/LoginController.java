@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -35,6 +36,7 @@ public class LoginController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        Cookie[] cookies = request.getCookies();
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         //check view login or action a login
@@ -56,15 +58,25 @@ public class LoginController extends HttpServlet {
                     switch (account.getRoleId()) {
                         //admin
                         case 1:
-                            HttpSession adminsss = request.getSession();
-                            adminsss.setAttribute("adminLogin", account);
-                            adminsss.setMaxInactiveInterval(24 * 60 * 60);
+                            HttpSession adminSession = request.getSession();
+                            adminSession.setAttribute("adminLogin", account);
+                            adminSession.setMaxInactiveInterval(24 * 60 * 60);
                             request.setAttribute("account", account);
                             request.getRequestDispatcher("admin").forward(request, response);
                             break;
                         //user    
                         case 2:
                             db.updateStatus(1, account.getUsername());
+                            //add cookies
+                            String remember = request.getParameter("remember");
+                            if (remember != null) {
+                                Cookie c_user = new Cookie("username", username);
+                                Cookie c_pass = new Cookie("password", password);
+                                c_user.setMaxAge(3600 * 24 * 30);
+                                c_pass.setMaxAge(3600 * 24 * 30);
+                                response.addCookie(c_pass);
+                                response.addCookie(c_user);
+                            }
                             HttpSession session = request.getSession();
                             session.setAttribute("currentLogin", account);
                             session.setMaxInactiveInterval(24 * 60 * 60);

@@ -146,7 +146,7 @@
                                                 <td><fmt:formatDate pattern="dd-MM-yyyy" value = "${o.date}"/></td>
                                                 <td>${orderStatus.getOrderStatusById(o.statusId).name}</td>
                                                 <td>
-                                                    <c:if test="${o.statusId == 3}">
+                                                    <c:if test="${o.statusId == 5}">
                                                         <form action="profile">
                                                             <input type="hidden" name="viewOrder" value="true"/>
                                                             <input type="hidden" name="orderId" value="${o.id}"/>

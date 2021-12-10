@@ -578,6 +578,57 @@ public class ProductDAO extends BaseDAO<Product> {
         return 0;
     }
 
+    public int getCountTotalProductByGpu(int gpuId) {
+        try {
+            String sql = "select COUNT(*) \n"
+                    + "from Product "
+                    + " where gpuId=? ";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, gpuId);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
+
+    public int getCountTotalProductByRam(int ramId) {
+        try {
+            String sql = "select COUNT(*) \n"
+                    + "from Product "
+                    + " where ramId=? ";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, ramId);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
+
+    public int getCountTotalProductByHdd(int hddId) {
+        try {
+            String sql = "select COUNT(*) \n"
+                    + "from Product "
+                    + " where harddriveId=? ";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, hddId);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
+
     public int getCountTotalProductByPrice(int priceId) {
         try {
             String sql = "select COUNT(*) \n"
@@ -593,77 +644,6 @@ public class ProductDAO extends BaseDAO<Product> {
             Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return 0;
-    }
-
-    public List<Product> getAllProductByCategory(int cateId,
-            int brandId, int displayId, int processId, int priceId) {
-        List<Product> listProducts = new ArrayList<>();
-        try {
-
-            String sql = "select p.*\n"
-                    + "from Product p\n";
-            if (cateId != 0) {
-                sql += "where p.cateId=?";
-            } else if (brandId != 0) {
-                sql += "where p.brandId=?";
-            } else if (displayId != 0) {
-                sql += "where p.displaySize=?";
-            } else if (processId != 0) {
-                sql += "where p.processor=?";
-            } else if (priceId != 0) {
-                sql += "where p.priceId=?";
-            }
-            PreparedStatement stm = connection.prepareStatement(sql);
-            if (cateId != 0) {
-                stm.setInt(1, cateId);
-            }
-            if (brandId != 0) {
-                stm.setInt(1, brandId);
-            }
-            if (displayId != 0) {
-                stm.setInt(1, displayId);
-            }
-            if (processId != 0) {
-                stm.setInt(1, processId);
-            }
-            if (priceId != 0) {
-                stm.setInt(1, priceId);
-            }
-            ResultSet rs = stm.executeQuery();
-            while (rs.next()) {
-                Product p = new Product();
-                p.setId(rs.getString("id"));
-                p.setName(rs.getString("name"));
-                p.setCateId(rs.getInt("cateId"));
-                p.setBrandId(rs.getInt("brandId"));
-                p.setPriceId(rs.getInt("priceId"));
-                p.setPrice(rs.getInt("price"));
-                p.setOsId(rs.getInt("osId"));
-                p.setOs(rs.getString("os"));
-                p.setDisplayId(rs.getInt("displayId"));
-                p.setDisplay(rs.getString("display"));
-                p.setProcessorId(rs.getInt("processorId"));
-                p.setProcessor(rs.getString("processor"));
-                p.setGpuId(rs.getInt("gpuId"));
-                p.setGpu(rs.getString("gpu"));
-                p.setRamId(rs.getInt("ramId"));
-                p.setRam(rs.getString("ram"));
-                p.setHarddriveId(rs.getInt("harddriveId"));
-                p.setHarddrive(rs.getString("harddrive"));
-                p.setPort(rs.getString("port"));
-                p.setBattery(rs.getString("battery"));
-                p.setColor(rs.getString("color"));
-                p.setQuantity(rs.getInt("quantity"));
-                p.setNote(rs.getString("note"));
-                List<ProductImg> listImages = getListImageByPid(rs.getString("id"));
-                p.setListImage(listImages);
-                listProducts.add(p);
-            }
-
-        } catch (SQLException ex) {
-            Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return listProducts;
     }
 
 //get all product: admin
@@ -926,16 +906,7 @@ public class ProductDAO extends BaseDAO<Product> {
         }
         return check > 0;
     }
-    public static void main(String[] args) {
-        ProductDAO d = new ProductDAO();
-        Product p = new Product("GalaxyBookF2A01NS@I58256GB","Samsung Galaxy Book 2",1, 5, 1,"Windows 10 Home", 13,"13.3 Inch FHD QLED", 
-        7,"Intel Core i5 1135G7(4 cores, 8threads)", 2,"Intel Iris Xe", 2,"8GB LDDR4X", 
-                2,"256 m.2 NVMe","1x USB-C, 2x USB-A, 1x HDMI, 1x microSD, 1x Jack 3.5mm"
-                ,"54Wh", 2,609,11,"white");
-        boolean check = d.updateProduct(p);
-        System.out.println(check);
-        
-    }
+
     public boolean updateProductWithImg(String pId, String img1, String img2) {
         int check = 0;
         try {

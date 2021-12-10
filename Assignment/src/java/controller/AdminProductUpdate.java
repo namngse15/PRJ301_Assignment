@@ -8,7 +8,6 @@ package controller;
 import dal.ProductDAO;
 import dal.ReviewDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -22,7 +21,7 @@ import model.Review;
  *
  * @author tenhik
  */
-@WebServlet(name = "AdminProductCRUD", urlPatterns = {"/admin-crud"})
+@WebServlet(name = "AdminProductUpdate", urlPatterns = {"/admin-update-product"})
 public class AdminProductUpdate extends HttpServlet {
 
     /**
@@ -156,7 +155,7 @@ public class AdminProductUpdate extends HttpServlet {
             List<Review> listReview = rdb.getAllReviewByProductId(removeProductId);
             //boolean checkReProduct = pdb.removeProductbyId(removeProductId, listReview);
         }
-        request.getRequestDispatcher("admin-listProduct").forward(request, response);
+        request.getRequestDispatcher("admin-product").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -43,11 +43,11 @@ public class OrderStatusDAO extends BaseDAO<OrderStatus> {
             if (roleId == 1) {
                 sql = "select*\n"
                         + "from OrderStatus\n"
-                        + "where id=1 or id=2 or id =3 or id=4 or id=5";
+                        + "where id=1 or id=2 or id =3 or id=4 or id=5 or 7";
             } else {
                 sql = "select*\n"
                         + "from OrderStatus\n"
-                        + "where id=4 or id=6";
+                        + "where id=6 or id=7";
             }
 
             PreparedStatement stm = connection.prepareStatement(sql);

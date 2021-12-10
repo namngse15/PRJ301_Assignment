@@ -4,14 +4,16 @@ document.querySelector('#account-btn').onclick = () => {
     account_modal.classList.toggle('active');
 };
 
-function toggleAdministrator() {
+function buttonAdmin() {
     location.href = "admin";
 }
-function toggleUser() {
+function buttonUser() {
     location.href = "admin-user";
 }
-function toggleProduct() {
-    location.href = "admin-listProduct";
+function buttonProduct() {
+    location.href = "admin-product";
 }
-
+function buttonCategory() {
+    location.href = "admin-category";
+}
 

@@ -69,7 +69,7 @@ public class CreateAccountController extends HttpServlet {
             HttpSession session = request.getSession();
             session.setAttribute("currentLogin", account);
             request.setAttribute("account", account);
-            request.getRequestDispatcher("profile?viewAccount=true").forward(request, response);
+            request.getRequestDispatcher("profileCreate.jsp").forward(request, response);
         } else {
             request.setAttribute("checkInsert", checkInsert);
             request.getRequestDispatcher("login.jsp").forward(request, response);

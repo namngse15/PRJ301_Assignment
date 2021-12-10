@@ -114,7 +114,6 @@
                                     <label for="color">Color</label>
                                     <div class="product-choose"> 
                                         <select id="color" name="color" class="form-control form-control-lg p-0 pl-3 text-uppercase">
-                                            <option disabled selected>Select</option>
                                             <c:forTokens items="${product.color}" delims="," var="o" varStatus="status">
                                                 <c:if test="${status.index==0}">
                                                     <option class="text-uppercase" value="${o}">${o}</option>

@@ -18,16 +18,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import model.Account;
 import model.Product;
 
 /**
  *
  * @author tenhik
  */
-@WebServlet(name = "AdminProductViewController", urlPatterns = {"/admin-listProduct"})
-public class AdminProductViewController extends HttpServlet {
+@WebServlet(name = "AdminProduct", urlPatterns = {"/admin-product"})
+public class AdminProduct extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -42,9 +40,6 @@ public class AdminProductViewController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         ProductDAO pdb = new ProductDAO();
-
-        HttpSession session = request.getSession(true);
-        Account adminAccount = (Account) session.getAttribute("adminLogin");
         List<Product> listProducts = pdb.getAllProduct();
 
         int count = pdb.getCountTotalProduct();
@@ -55,11 +50,8 @@ public class AdminProductViewController extends HttpServlet {
         request.setAttribute("listProducts", listProducts);
         request.setAttribute("localDate", localdate);
         request.setAttribute("countproduct", count);
-        if(adminAccount != null) {
         request.getRequestDispatcher("adminProduct.jsp").forward(request, response);
-        } else {
-            response.sendRedirect("home");
-        }
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

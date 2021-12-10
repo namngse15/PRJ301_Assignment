@@ -133,7 +133,7 @@
                                         <th scope="row">${o.id}</th>
                                         <td>${orderStatus.getOrderStatusById(o.statusId).name}</td>                                       
                                         <td>
-                                            <c:if test="${o.statusId != 6}" >
+                                            <c:if test="${o.statusId != 6 && o.statusId != 7}" >
                                                 <form action="admin-user">
                                                     <input type="hidden" name="orderId" value="${o.id}"/>
                                                     <select name="editStatus" id="myselect" onchange="this.form.submit()">
@@ -153,7 +153,7 @@
                                         <td>${o.phone}</td>
                                         <td>${o.email}</td>
                                         <td>
-                                            <c:if test="${o.statusId ==4||o.statusId== 6}">
+                                            <c:if test="${o.statusId ==3||o.statusId == 6||o.statusId== 7}">
                                                 <a href="#" onclick="removeOrder(${o.id},${o.statusId})">Remove</a>
                                             </c:if>
                                         </td>

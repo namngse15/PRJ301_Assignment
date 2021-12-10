@@ -77,6 +77,7 @@ public class LoginController extends HttpServlet {
                                 response.addCookie(c_pass);
                                 response.addCookie(c_user);
                             }
+                            
                             HttpSession session = request.getSession();
                             session.setAttribute("currentLogin", account);
                             session.setMaxInactiveInterval(24 * 60 * 60);

@@ -26,8 +26,8 @@ import model.Review;
  *
  * @author tenhik
  */
-@WebServlet(name = "AdminProductUpdate", urlPatterns = {"/admin-product"})
-public class AdminProductViewByCateController extends HttpServlet {
+@WebServlet(name = "AdminProductDetailView", urlPatterns = {"/adminViewProductDetail"})
+public class AdminProductDetailView extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -47,17 +47,6 @@ public class AdminProductViewByCateController extends HttpServlet {
         String viewProductDetail = request.getParameter("viewProductDetail");
         String getPrice = request.getParameter("price");
         String getQuantity = request.getParameter("quantity");
-        //view product by each category type
-        String viewProductBrand = request.getParameter("viewProductByBrand");
-        String getBrandId = request.getParameter("brandId");
-        String viewProductPrice = request.getParameter("viewProductByPrice");
-        String getPriceId = request.getParameter("priceId");
-        String viewProductCate = request.getParameter("viewProductByCate");
-        String getCateId = request.getParameter("cateId");
-        String viewProductDiplay = request.getParameter("viewProductByDisplay");
-        String getDisplayId = request.getParameter("displaySize");
-        String viewProductProcess = request.getParameter("viewProductByProcess");
-        String getProcessId = request.getParameter("processId");
         //view product review
         String viewProductReview = request.getParameter("viewProductReview");
         String productId = request.getParameter("productId");
@@ -77,35 +66,7 @@ public class AdminProductViewByCateController extends HttpServlet {
             quantity = Integer.parseInt(getQuantity);
         } catch (Exception e) {
         }
-        //view product by each category type
-        int priceId = 0;
-        int brandId = 0;
-        int displaySize = 0;
-        int cpu = 0;
-        int cate = 0;
-        try {
-            priceId = Integer.parseInt(getPriceId);
-        } catch (NumberFormatException e) {
-        }
-        try {
-            brandId = Integer.parseInt(getBrandId);
-        } catch (NumberFormatException e) {
-        }
-        try {
-            displaySize = Integer.parseInt(getDisplayId);
-        } catch (NumberFormatException e) {
-        }
-        try {
-            cpu = Integer.parseInt(getProcessId);
-        } catch (NumberFormatException e) {
-        }
-        try {
-            cate = Integer.parseInt(getCateId);
-        } catch (NumberFormatException e) {
-        }
 
-        int countProductByCate = pdb.getCountTotalProductByAllCate(cate, brandId, displaySize, cpu, ram, hdd, priceId);
-        List<Product> listProductsByCate = pdb.getAllProductByCategory(cate, brandId, displaySize, cpu, priceId);
         Product product = pdb.getOneProduct(productId);
 
         //getlocale date
@@ -123,32 +84,6 @@ public class AdminProductViewByCateController extends HttpServlet {
             request.setAttribute("price", price);
             request.setAttribute("quantity", quantity);
             request.setAttribute("localDate", localdate);
-        }
-        //view product each category type
-        if (viewProductBrand != null) {
-            request.setAttribute("countProductByCate", countProductByCate);
-            request.setAttribute("viewProductBrand", viewProductBrand);
-            request.setAttribute("listProductByCate", listProductsByCate);
-        }
-        if (viewProductPrice != null) {
-            request.setAttribute("countProductByCate", countProductByCate);
-            request.setAttribute("viewProductPrice", viewProductPrice);
-            request.setAttribute("listProductByCate", listProductsByCate);
-        }
-        if (viewProductCate != null) {
-            request.setAttribute("countProductByCate", countProductByCate);
-            request.setAttribute("viewProductCate", viewProductCate);
-            request.setAttribute("listProductByCate", listProductsByCate);
-        }
-        if (viewProductDiplay != null) {
-            request.setAttribute("countProductByCate", countProductByCate);
-            request.setAttribute("viewProductDisplay", viewProductDiplay);
-            request.setAttribute("listProductByCate", listProductsByCate);
-        }
-        if (viewProductProcess != null) {
-            request.setAttribute("countProductByCate", countProductByCate);
-            request.setAttribute("viewProductProcess", viewProductProcess);
-            request.setAttribute("listProductByCate", listProductsByCate);
         }
         if (viewProductReview != null) {
             request.setAttribute("viewProductReview", viewProductReview);

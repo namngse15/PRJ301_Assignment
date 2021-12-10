@@ -448,7 +448,20 @@ public class CategoryDAO extends BaseDAO {
         }
         return 0;
     }
-//CRUD processor
+//CRUD ram
+
+    public boolean addRam(String ram) {
+        int check = 0;
+        try {
+            String sql = "INSERT INTO ProRam(name)\n"
+                    + "VALUES(?)";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setString(1, ram);
+            check = stm.executeUpdate();
+        } catch (Exception e) {
+        }
+        return check > 0;
+    }
 
     public boolean editRam(int id, String ram) {
         int check = 0;
@@ -717,6 +730,65 @@ public class CategoryDAO extends BaseDAO {
 
         }
         return null;
+    }
+
+    public int getCountGpu() {
+        try {
+            String sql = "select COUNT(*)\n"
+                    + "from ProGpu";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            ResultSet rs = stm.executeQuery();
+            int count = 0;
+            while (rs.next()) {
+                count = rs.getInt(1);
+            }
+            return count;
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
+//CRUD gpu
+
+    public boolean addGpu(String gpu) {
+        int check = 0;
+        try {
+            String sql = "INSERT INTO ProGpu(name)\n"
+                    + "VALUES(?)";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setString(1, gpu);
+            check = stm.executeUpdate();
+        } catch (Exception e) {
+        }
+        return check > 0;
+    }
+
+    public boolean editGpu(int id, String gpu) {
+        int check = 0;
+        try {
+            String sql = "update ProGpu\n"
+                    + "set name=?\n"
+                    + "where id =?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setString(1, gpu);
+            stm.setInt(2, id);
+            check = stm.executeUpdate();
+        } catch (Exception e) {
+        }
+        return check > 0;
+    }
+
+    public boolean removeGpu(int id) {
+        int check = 0;
+        try {
+            String sql = "delete ProGpu\n"
+                    + "where id=?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, id);
+            check = stm.executeUpdate();
+        } catch (Exception e) {
+        }
+        return check > 0;
     }
 //os    
 

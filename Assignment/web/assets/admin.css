@@ -361,12 +361,8 @@ body {
 #modal-edit-product{
     display: flex;
 }
-#modal-processor,
-#modal-display,
-#modal-amount,
-#modal-brand,
-#modal-category{
-    display: none;
+#modal-add-category{
+    display: flex;
 }
 #modal-edit-category{
     display: flex;

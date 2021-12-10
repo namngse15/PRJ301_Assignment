@@ -36,48 +36,34 @@ public class AdminCategoryUpdate extends HttpServlet {
         CategoryDAO cdb = new CategoryDAO();
         String add = request.getParameter("add");
         String edit = request.getParameter("edit");
-
-        String getAddType = request.getParameter("category");
-        String getCateId = request.getParameter("cateId");
-        String cateName = request.getParameter("cateName");
+        
+        String addType = request.getParameter("addType");
+        String editType = request.getParameter("editType");
+        String removeType = request.getParameter("removeType");
+        
         String getDisplay = request.getParameter("display");
-        String getEditType = request.getParameter("editType");
-        String getRemoveType = request.getParameter("removeType");
+        String getCateId = request.getParameter("cateEditId");
+        String cateName = request.getParameter("cateEditName");
         String getRemoveCateId = request.getParameter("removeCateById");
-
+        
         boolean checkAddCate = false;
         boolean checkEditCate = false;
         boolean checkRemoveCate = false;
-
+        
         int display = 0;
-        int addType = 0;
-        int editType = 0;
-        int removeType = 0;
         int cateId = 0;
         int removeCateId = 0;
         //add
-        try {
-            addType = Integer.parseInt(getAddType);
-        } catch (Exception e) {
-        }
         try {
             display = Integer.parseInt(getDisplay);
         } catch (Exception e) {
         }
         //edit
         try {
-            editType = Integer.parseInt(getEditType);
-        } catch (Exception e) {
-        }
-        try {
             cateId = Integer.parseInt(getCateId);
         } catch (Exception e) {
         }
         //remove
-        try {
-            removeType = Integer.parseInt(getRemoveType);
-        } catch (Exception e) {
-        }
         try {
             removeCateId = Integer.parseInt(getRemoveCateId);
         } catch (Exception e) {
@@ -85,62 +71,89 @@ public class AdminCategoryUpdate extends HttpServlet {
         //add
         if (add != null) {
             switch (addType) {
-                case 0:
+                case "brand":
                     checkAddCate = cdb.addBrand(cateName);
                     break;
-                case 1:
+                case "price":
                     checkAddCate = cdb.addPrice(cateName);
                     break;
-                case 2:
+                case "display":
                     checkAddCate = cdb.addDisplay(display);
                     break;
-                case 3:
+                case "category":
                     checkAddCate = cdb.addCategory(cateName);
                     break;
-                case 4:
+                case "processor":
                     checkAddCate = cdb.addProcessor(cateName);
+                    break;
+                case "ram":
+                    checkAddCate = cdb.addRam(cateName);
+                    break;
+                case "gpu":
+                    checkAddCate = cdb.addGpu(cateName);
+                    break;
+                case "hdd":
+                    checkAddCate = cdb.addHdd(cateName);
                     break;
             }
         }
         //edit
         if (edit != null) {
             switch (editType) {
-                case 0:
+                case "brand":
                     checkEditCate = cdb.editBrand(cateId, cateName);
                     break;
-                case 1:
+                case "category":
                     checkEditCate = cdb.editCategory(cateId, cateName);
                     break;
-                case 2:
+                case "price":
                     checkEditCate = cdb.editPrice(cateId, cateName);
                     break;
-                case 3:
+                case "processor":
                     checkEditCate = cdb.editProcessor(cateId, cateName);
                     break;
-
+                case "gpu":
+                    checkEditCate = cdb.editGpu(cateId, cateName);
+                    break;
+                case "ram":
+                    checkEditCate = cdb.editRam(cateId, cateName);
+                    break;
+                case "hdd":
+                    checkEditCate = cdb.editHdd(cateId, cateName);
+                    break;
             }
         }
         //remove
-        if (getRemoveType != null) {
+        if (removeType != null) {
             switch (removeType) {
-                case 0:
+                case "brand":
                     checkRemoveCate = cdb.removeBrand(removeCateId);
                     break;
-                case 1:
+                case "price":
                     checkRemoveCate = cdb.removePrice(removeCateId);
                     break;
-                case 2:
+                case "category":
                     checkRemoveCate = cdb.removeCategory(removeCateId);
                     break;
-                case 3:
+                case "display":
                     checkRemoveCate = cdb.removeDisplay(removeCateId);
                     break;
-                case 4:
+                case "processor":
                     checkRemoveCate = cdb.removeProcessor(removeCateId);
+                    break;
+                case "gpu":
+                    checkRemoveCate = cdb.removeGpu(removeCateId);
+                    break;
+                case "ram":
+                    checkRemoveCate = cdb.removeRam(removeCateId);
+                    break;
+                case "hdd":
+                    checkRemoveCate = cdb.removeHdd(removeCateId);
                     break;
             }
         }
-        request.getRequestDispatcher("admin-listProduct").forward(request, response);
+        
+        request.getRequestDispatcher("admin-category").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

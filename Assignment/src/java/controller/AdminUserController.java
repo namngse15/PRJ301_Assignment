@@ -11,7 +11,6 @@ import dal.OrderStatusDAO;
 import dal.OrdersDAO;
 import dal.ProductDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
@@ -118,7 +117,7 @@ public class AdminUserController extends HttpServlet {
         List<Orders> listOrders = odb.getAllUserOrders();
         List<Orders> listOrdersUser = odb.getAllOrders(accountId);
         List<OrderDetail> listOrDetails = odd.getOrderDetailByOrderID(orderId);
-        //view andedit order status
+        //view and edit order status
         int roleAdminId = 1;
         List<OrderStatus> listOrderStatus = osbd.getListStatusByRoleId(roleAdminId);
         boolean checkEditStatus = false;
@@ -139,18 +138,28 @@ public class AdminUserController extends HttpServlet {
         }
         //remove order
         boolean checkRemoveOrders = false;
-        if (ordRemoveId != 0 && ordReStatus == 4) {
-            int quantity = 0;
-            boolean checkUpQuantity = false;
-            List<OrderDetail> list = odd.getProductIDandQuantityByOrderID(ordRemoveId);
-            for (OrderDetail o : list) {
-                int quantityItem = pdb.getQuantityByProductId(o.getProductId());
-                System.out.println(quantityItem);
-                quantity = quantityItem + o.getProductQuantity();
-                checkUpQuantity = pdb.updateQuantity(quantity, o.getProductId());
-            }
-            if (checkUpQuantity) {
-                checkRemoveOrders = odb.deleteOrders(ordRemoveId);
+        if (ordRemoveId != 0) {
+            if (ordReStatus == 3 || ordReStatus == 7) {
+                int quantity = 0;
+                boolean checkUpQuantity = false;
+                List<OrderDetail> list = odd.getProductIDandQuantityByOrderID(ordRemoveId);
+                for (OrderDetail o : list) {
+                    int quantityItem = pdb.getQuantityByProductId(o.getProductId());
+                    System.out.println(quantityItem);
+                    quantity = quantityItem + o.getProductQuantity();
+                    checkUpQuantity = pdb.updateQuantity(quantity, o.getProductId());
+                }
+                if (checkUpQuantity) {
+                    boolean removeorderDetail = odd.deleteOrderDetail(ordRemoveId);
+                    if (removeorderDetail) {
+                        checkRemoveOrders = odb.deleteOrders(ordRemoveId);
+                    }
+                }
+            } else if (ordReStatus == 6) {
+                boolean removeorderDetail = odd.deleteOrderDetail(ordRemoveId);
+                if (removeorderDetail) {
+                    checkRemoveOrders = odb.deleteOrders(ordRemoveId);
+                }
             }
         }
         //upload list orders

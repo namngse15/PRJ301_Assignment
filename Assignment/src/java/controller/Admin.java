@@ -7,7 +7,6 @@ package controller;
 
 import dal.AccountDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.Date;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -21,8 +20,8 @@ import model.Account;
  *
  * @author tenhik
  */
-@WebServlet(name = "AdminController", urlPatterns = {"/admin"})
-public class AdminController extends HttpServlet {
+@WebServlet(name = "Admin", urlPatterns = {"/admin"})
+public class Admin extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -43,8 +42,7 @@ public class AdminController extends HttpServlet {
         //admin info  
         //check change info or view 
         String checkChange = request.getParameter("changeAccount");
-        if (checkChange != null) 
-        {
+        if (checkChange != null) {
             String pass = request.getParameter("oldPass");
             String fullName = request.getParameter("fullName");
             String email = request.getParameter("email");
@@ -61,11 +59,7 @@ public class AdminController extends HttpServlet {
             request.setAttribute("checkAccount", checkAccount);
         }
 
-        if (account != null) {
-                request.getRequestDispatcher("admin.jsp").forward(request, response);
-        } else {
-            response.sendRedirect("home");
-        }
+        request.getRequestDispatcher("admin.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

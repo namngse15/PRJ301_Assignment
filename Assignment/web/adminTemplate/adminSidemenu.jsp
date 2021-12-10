@@ -12,10 +12,26 @@
             <span>Laptop Manager</span>
         </div>
         <ul class="sidebar-list">
-            <li class="sidebar-items" ><button id="admin-btn" onclick="toggleAdministrator()"><i class="fas fa-user-shield mr-3" ></i><span>Admin</span></button>
+            <li class="sidebar-items" >
+                <button id="admin-btn" onclick="buttonAdmin()">
+                    <i class="fas fa-user-shield mr-3" ></i><span>Admin</span>
+                </button>
             </li>
-            <li class="sidebar-items"><button id="user-btn"onclick="toggleUser()"><i class="fas fa-users mr-3"></i><span>User</span></button></li>
-            <li class="sidebar-items"><button id="product-btn"onclick="toggleProduct()"><i class="fas fa-laptop mr-3"></i><span>Product</span></button></li>
+            <li class="sidebar-items">
+                <button id="user-btn" onclick="buttonUser()">
+                    <i class="fas fa-users mr-3"></i><span>User</span>
+                </button>
+            </li>
+            <li class="sidebar-items">
+                <button id="product-btn" onclick="buttonProduct()">
+                    <i class="fas fa-laptop mr-3"></i><span>Product</span>
+                </button>
+            </li>
+            <li class="sidebar-items">
+                <button id="category-btn" onclick="buttonCategory()">
+                    <i class="fas fa-laptop mr-3"></i><span>Category</span>
+                </button>
+            </li>
         </ul>
         <div class="sidebar-footer"></div>
     </div>

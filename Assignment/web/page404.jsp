@@ -26,12 +26,13 @@
                             </div>
                             <div class="contant_box_404">
                                 <h3 class="h2" style="font-family: 'Roboto', sans-serif;">
-                                    Ối, bạn vào nhầm trang rồi :))
+                                    Ối, bạn không nên vào trang này nhé :))
                                 </h3>
 
                                 <p style="font-family: 'Roboto', sans-serif;">the page you are looking for not avaible!</p>
 
                                 <a href="home" class="link_404" style="font-family: 'Roboto', sans-serif;">Go to Home</a>
+                                <a href="login" class="link_404" style="font-family: 'Roboto', sans-serif;">Log in</a>
                             </div>
                         </div>
                     </div>

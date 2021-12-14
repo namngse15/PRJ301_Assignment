@@ -70,7 +70,6 @@ public class AccessFilter implements Filter {
         }
 
     }
-
     /**
      * Return the filter configuration object for this filter.
      */

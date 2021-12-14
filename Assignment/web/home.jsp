@@ -18,15 +18,12 @@
         <link rel="stylesheet" href="assets/style.css">
         <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
         <!-- boostrap -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
         <!-- font awesome -->
-        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
-              integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     </head>
     <jsp:useBean id="getCategory" scope="page" class="dal.CategoryDAO"></jsp:useBean> 
         <body>
@@ -50,7 +47,7 @@
                             <jsp:include page="template/sort.jsp"/>
                             <jsp:include page="template/pagging.jsp"/>
                         </div>
-                        <div class="row">
+                        <div class="row mt-3">
                             <!--product item-->
                             <c:forEach items="${listProducts}" var="o">  
                                 <div class="col-xl-3 col-xs-6 col-sm-4 col-md-4 col-lg-3 mt-2" style="display: flex">
@@ -65,8 +62,10 @@
                                                          alt="" />
                                                 </c:forEach>
                                                 <div class="image_overlay"></div>
-                                                <a href="detail?productId=${o.id}" class=" view_details font-weight-bold text-uppercase text-center text-white" style="text-decoration:none">View
-                                                    details</a>
+                                                <a href="detail?productId=${o.id}" 
+                                                   class=" view_details font-weight-bold text-uppercase text-center text-white" 
+                                                   style="text-decoration:none">
+                                                    Xem chi tiết</a>
                                                 <div class="stats">
                                                     <div class="block"></div>
                                                     <div class="stats-container">
@@ -75,16 +74,16 @@
                                                         </div>
                                                         <span class="product_price">$ ${o.price}</span>
                                                         <c:if test="${o.cateId==1}">
-                                                            <p>Lightweight</p>
+                                                            <p>Mỏng, nhẹ</p>
                                                         </c:if>
                                                         <c:if test="${o.cateId==2 || o.cateId ==3}">
-                                                            <p>Powerful</p>
+                                                            <p>Mạnh mẽ</p>
                                                         </c:if>
                                                         <c:if test="${o.cateId==4}">
-                                                            <p>Convenient</p>
+                                                            <p>Tiện dụng</p>
                                                         </c:if>
                                                         <c:if test="${o.cateId==5}">
-                                                            <p>Easy access</p>
+                                                            <p>Dễ tiếp cận</p>
                                                         </c:if>
                                                         <div class="product-options">
                                                             <strong>CPU:</strong>

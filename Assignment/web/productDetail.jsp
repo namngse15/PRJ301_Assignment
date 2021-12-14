@@ -14,19 +14,16 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Product Detail</title>
+        <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
         <!--css file-->
         <link rel="stylesheet" href="assets/style.css">     
-        <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
         <!-- boostrap -->
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
         <!-- font awesome -->
-        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
-              integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     </head>
     <style>
         input::-webkit-outer-spin-button,
@@ -43,7 +40,7 @@
         <div class="container">
             <!--product info-->
             <div class="heading-section">
-                <h2>Product Details</h2>
+                <h2>Chi tiết sản phẩm</h2>
             </div>
             <div class="row">
                 <!--product image-->
@@ -100,18 +97,18 @@
                                         <label for="star1" title="text">1 star</label>
                                     </c:if>
                                 </div>
-                                <span>${reviewInfo.getNumberReviewByProduct(product.id)} Reviews</span>
+                                <span>${reviewInfo.getNumberReviewByProduct(product.id)} Phản hồi</span>
                             </div>
                             <!-- end product review score-->
                         </div>
                         <!--product price and color-->
-                        <div class="product-price-discount"><span>Price: <fmt:formatNumber value = "${product.price}" type = "currency"/></span></div>
+                        <div class="product-price-discount"><span>Giá: <fmt:formatNumber value = "${product.price}" type = "currency"/></span></div>
                         <div class="row combobox">
                             <!--add to cart-->
                             <form action="add-to-cart" method="post">
                                 <!--color-->
                                 <div class="col-lg-7">
-                                    <label for="color">Color</label>
+                                    <label for="color">Màu sản phẩm</label>
                                     <div class="product-choose"> 
                                         <select id="color" name="color" class="form-control form-control-lg p-0 pl-3 text-uppercase">
                                             <c:forTokens items="${product.color}" delims="," var="o" varStatus="status">
@@ -132,7 +129,7 @@
                                 <div class="col-lg-7"></div>
                                 <!--quantity-->
                                 <div class="product-count col-lg-6">
-                                    <label for="size">Quantity</label>
+                                    <label for="size">Số lượng: </label>
                                     <c:if test="${edit==1}">
                                         <div class="product-choose"> 
                                             <div class="display-flex">
@@ -145,7 +142,7 @@
                                             </div>
                                         </div>
                                         <div class="product-choose-submit">
-                                            <button type="submit" class="round-black-btn mb-5">Edit color</button>
+                                            <button type="submit" class="round-black-btn mb-5">Thay đổi màu</button>
                                         </div>
                                     </c:if>
                                     <c:if test="${edit!=1}"> 
@@ -159,7 +156,7 @@
                                         </div>
                                         <c:if test="${product.quantity>0}">         
                                             <div class="product-choose-submit">
-                                                <button type="submit" class="round-black-btn mb-5">Add to Cart</button>
+                                                <button type="submit" class="round-black-btn mb-5">Thêm hàng</button>
                                             </div>
                                         </c:if>
                                     </c:if>
@@ -225,17 +222,17 @@
                         <!--tablist-->
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
                             <li class="nav-item">
-                                <a class="nav-link acitve" id="description-tab" data-toggle="tab" href="#description">Description</a>
+                                <a class="nav-link acitve" id="description-tab" data-toggle="tab" href="#description">Mô tả</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" id="review-tab" data-toggle="tab" href="#review">Reviews (${reviewInfo.getNumberReviewByProduct(product.id)})</a>
+                                <a class="nav-link" id="review-tab" data-toggle="tab" href="#review">Phản hồi (${reviewInfo.getNumberReviewByProduct(product.id)})</a>
                             </li>
                         </ul>
                         <!--end tablist-->
                         <div class="tab-content" id="myTabContent">
                             <!--description-->
                             <div class="tab-pane fade in active" id="description">
-                                <h3>Descrption</h3>
+                                <h3>Mô tả chi tiết sản phẩm</h3>
                                 <ul>
                                     <li>Operating system: <span>${product.os}</span></li>
                                     <li>Display: <span>${product.display}</span></li>
@@ -250,10 +247,10 @@
                             <!--end description-->
                             <!--review-->
                             <div class="tab-pane fade" id="review">
-                                <div class="review-heading">REVIEWS</div>
+                                <div class="review-heading">PHẢN HỒI</div>
                                 <!--no review-->                                
                                 <c:if test="${reviewInfo.getNumberReviewByProduct(product.id) == 0}">
-                                    <p class="mb-20">There are no reviews yet.</p>
+                                    <p class="mb-20">Chưa có phản hồi nào.</p>
                                 </c:if>
                                 <!--review > 0 --> 
                                 <c:if test="${reviewInfo.getNumberReviewByProduct(product.id) > 0}">
@@ -313,7 +310,7 @@
                                 <!--user review form-->
                                 <form class="review-form" action="review" method="post">
                                     <div class="form-group">
-                                        <label>Your rating</label>
+                                        <label>Đánh giá</label>
                                         <div class="reviews-counter">
                                             <div class="rating">
                                                 <label>
@@ -350,7 +347,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group mt-5">
-                                        <label>Your message</label>
+                                        <label>Đánh giá bằng lời</label>
                                         <input type="text" name="productId" value="${product.id}" hidden>
                                         <input type="text" name="id" value="${id}" hidden>
                                         <textarea name="reviewmess" class="form-control" rows="10"></textarea>
@@ -358,18 +355,18 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <input type="text" name="" class="form-control" placeholder="Name*"
+                                                <input type="text" name="" class="form-control" placeholder="Name"
                                                        value="${userInfo.getAccountByUsernameAndPassword(currentLogin.username,currentLogin.password).name}" required>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <input type="text" name="" class="form-control" placeholder="Email Id*" 
+                                                <input type="text" name="" class="form-control" placeholder="Email" 
                                                        value="${userInfo.getAccountByUsernameAndPassword(currentLogin.username,currentLogin.password).email}" required>
                                             </div>
                                         </div>
                                     </div>
-                                    <button class="round-black-btn mb-5" type="submit">Submit Review</button>
+                                    <button class="round-black-btn mb-5" type="submit">Lưu phản hồi</button>
                                 </form>
                                 <!--end user review form-->
                             </div>
@@ -387,12 +384,12 @@
                 <div class="modal-nofi-overlay"></div>
                 <div class="modal-edit-body">
                     <div class="modal-edit-header">
-                        <h3>Edit review</h3>
+                        <h3>Thay đổi phản hồi</h3>
                     </div>
                     <div class="modal-edit-form">
                         <form class="review-form" action="editreview" method="post">
                             <div class="form-group">
-                                <label>Your rating</label>
+                                <label>Đánh giá</label>
                                 <div class="reviews-counter">
                                     <div class="rating">
                                         <label>
@@ -429,14 +426,14 @@
                                 </div>
                             </div> 
                             <div class="form-group mt-5">
-                                <label>Your message</label>
+                                <label>Đánh giá bằng lời</label>
                                 <input type="text" name="id" value="${id}" hidden>
                                 <input type="text" name="productId" value="${product.id}" hidden>
                                 <textarea name="reviewmess" class="form-control" rows="10"></textarea>
                             </div>
                             <div class="modal-change-button">
-                                <button class="btn" type="submit">Save Changes</button>
-                                <button class="btn" type="button" onclick="closeModal()">Cancel</button>
+                                <button class="btn" type="submit">Lưu</button>
+                                <button class="btn" type="button" onclick="closeModal()">Hủy</button>
                             </div>
                         </form>
                     </div>
@@ -452,7 +449,7 @@
                     <div class="modal-nofi-body">
                         <div class="modal-nofi-inner">
                             <i class="far fa-check-circle"></i>
-                            <p>Add to cart successfully </p>
+                            <p>Thêm vào giỏ hàng thành công </p>
                         </div>
                     </div>
                 </div>
@@ -466,7 +463,7 @@
                 <div class="modal-nofi-body">
                     <div class="modal-nofi-fail">
                         <i class="far fa-times-circle"></i>
-                        <p>Opps!..You have reviewed this product </p>
+                        <p>XIn lỗi ..! Bạn đã đánh giá sản phẩm này </p>
                     </div>
                 </div>
             </div>
@@ -477,7 +474,7 @@
                 <div class="modal-nofi-body">
                     <div class="modal-nofi-fail">
                         <i class="far fa-times-circle"></i>
-                        <p> Review failed </p>
+                        <p>Lưu phản hồi thất bại</p>
                     </div>
                 </div>
             </div>
@@ -495,7 +492,7 @@
             document.getElementById("modal-notifi").style.display = "none";
         }
         function deleteReview(id, productId) {
-            var option = confirm('Are you sure to delete');
+            var option = confirm('Bạn có muốn xóa phản hổi của bạn ?');
             if (option === true) {
                 window.location.href = 'removereview?id=' + id + '&productId=' + productId;
             }

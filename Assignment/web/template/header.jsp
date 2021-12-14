@@ -12,7 +12,7 @@
     <div class="search-border">
         <form action="search" method="post" class="">
             <div class="search-form">
-                <input  value="${text}" type="search" name="text" id="search-box" placeholder="search here...">
+                <input  value="${text}" type="search" name="text" id="search-box" placeholder="Tìm kiếm sản phẩm ở đây ...">
                 <label for="search-box" class="fas fa-search"></label>
             </div> 
         </form>
@@ -42,8 +42,8 @@
             <a href="profile?viewAccount=true" class="text-light"> <i class="far fa-user-circle"></i> ${sessionScope.currentLogin.username}</a>
         </c:if> 
         <c:if test="${currentLogin == null}">
-            <a href="login" class="text-light"><i class="fas fa-sign-in-alt"></i> Log in</a>
+            <a href="login" class="text-light"><i class="fas fa-sign-in-alt"></i> Đăng nhập</a>
         </c:if> 
-        <a href="logout" class="text-light"><i class="fas fa-sign-out-alt"></i> Log Out</a>
+        <a href="logout" class="text-light"><i class="fas fa-sign-out-alt"></i> Đăng xuất</a>
     </nav>
 </header>

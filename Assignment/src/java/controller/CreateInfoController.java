@@ -6,21 +6,30 @@
 package controller;
 
 import dal.AccountDAO;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.sql.Date;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 import model.Account;
 
 /**
  *
  * @author tenhik
  */
-@WebServlet(name = "CreateAccountController", urlPatterns = {"/create-account"})
-public class CreateAccountController extends HttpServlet {
+@MultipartConfig
+@WebServlet(name = "CreateInfoController", urlPatterns = {"/create-info"})
+public class CreateInfoController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,37 +43,27 @@ public class CreateAccountController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String email = request.getParameter("email");
-        String username = request.getParameter("user");
-        String password = request.getParameter("pass");
-        Account tempAcc = new Account(email, username, password);
-        boolean checkInsert = false;
-
+        String info = request.getParameter("info");
+        String image = request.getParameter("addImg");
         AccountDAO adb = new AccountDAO();
-        String userDb = adb.getAccountByUserName(username);
-        String emailDb = adb.getAccountByUserEmail(email);
-        int checkUser = 1;
+        
+        if (info != null) {
+            String username = request.getParameter("username");
+            String password = request.getParameter("password");
+            String email = request.getParameter("email");
+            String name = request.getParameter("name");
+            String phone = request.getParameter("phone");
+            String dob = request.getParameter("date");
+            Date date = Date.valueOf(dob);
+            String address = request.getParameter("address");
+            int roleId = 2;//user
+            int status = 0;//offline
 
-        //check user and email not equals user and email in db
-        if (username.equals(userDb) || email.equals(emailDb)) {
-            request.setAttribute("user", username);
-            request.setAttribute("email", email);
-            request.setAttribute("pass", password);
-            if (username.equals(userDb)) {
-                checkUser = 2;
-                request.setAttribute("checkUser", checkUser);
-            }
-            if (email.equals(emailDb)) {
-                checkUser = 3;
-                request.setAttribute("checkUser", checkUser);
-            }
-            request.getRequestDispatcher("login.jsp").forward(request, response);
-
-        } else {
-            HttpSession session = request.getSession();
-            session.setAttribute("tempAcc", tempAcc);
-            session.setMaxInactiveInterval(24*60*60);
-            request.getRequestDispatcher("profileCreate.jsp").forward(request, response);
+            Account a = new Account(roleId, name, phone, email, address, date, status, username, password);
+            boolean checkInsert = adb.insertAccount(a);
+            request.setAttribute("checkInsert", checkInsert);
+            request.getRequestDispatcher("login").forward(request, response);
+            
         }
     }
 

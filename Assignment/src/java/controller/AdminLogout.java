@@ -7,6 +7,7 @@ package controller;
 
 import dal.AccountDAO;
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,8 +20,8 @@ import model.Account;
  *
  * @author tenhik
  */
-@WebServlet(name = "CreateAccountController", urlPatterns = {"/create-account"})
-public class CreateAccountController extends HttpServlet {
+@WebServlet(name = "AdminLogout", urlPatterns = {"/admin-logout"})
+public class AdminLogout extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,37 +35,12 @@ public class CreateAccountController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String email = request.getParameter("email");
-        String username = request.getParameter("user");
-        String password = request.getParameter("pass");
-        Account tempAcc = new Account(email, username, password);
-        boolean checkInsert = false;
-
-        AccountDAO adb = new AccountDAO();
-        String userDb = adb.getAccountByUserName(username);
-        String emailDb = adb.getAccountByUserEmail(email);
-        int checkUser = 1;
-
-        //check user and email not equals user and email in db
-        if (username.equals(userDb) || email.equals(emailDb)) {
-            request.setAttribute("user", username);
-            request.setAttribute("email", email);
-            request.setAttribute("pass", password);
-            if (username.equals(userDb)) {
-                checkUser = 2;
-                request.setAttribute("checkUser", checkUser);
-            }
-            if (email.equals(emailDb)) {
-                checkUser = 3;
-                request.setAttribute("checkUser", checkUser);
-            }
-            request.getRequestDispatcher("login.jsp").forward(request, response);
-
-        } else {
-            HttpSession session = request.getSession();
-            session.setAttribute("tempAcc", tempAcc);
-            session.setMaxInactiveInterval(24*60*60);
-            request.getRequestDispatcher("profileCreate.jsp").forward(request, response);
+        try (PrintWriter out = response.getWriter()) {
+            AccountDAO db = new AccountDAO();
+            HttpSession session = request.getSession(true);
+            Account adminLogin = (Account) session.getAttribute("adminLogin");
+            session.removeAttribute("adminLogin");
+            response.sendRedirect("login");
         }
     }
 

@@ -14,19 +14,16 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Cart</title>
-        <!--css file-->
         <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+        <!--css file-->
         <link rel="stylesheet" href="assets/style.css">
         <!-- boostrap -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
         <!-- font awesome -->
-        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
-              integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     </head>
     <body>
         <jsp:include page="template/header.jsp"/>
@@ -39,7 +36,7 @@
                     <div class="col-lg-8">
                         <div class="mb-3">
                             <div class="pt-4 wish-list">
-                                <h5 class="mb-4">Cart (<span>${listCarts.size()}</span> items)</h5>
+                                <h5 class="mb-4">Giỏ hàng (<span>${listCarts.size()}</span> sản phẩm)</h5>
                                 <c:forEach items="${sessionScope.listCarts}" var="i">
                                     <!--product information-->
                                     <div class="row mb-4">
@@ -57,10 +54,10 @@
                                                     <div>
                                                         <h5>${i.name}</h5                                               
 
-                                                        <p class="mb-2 text-muted text-uppercase small">SKU: ${i.productId}</p>
+                                                        <p class="mb-2 text-muted text-uppercase small">ID: ${i.productId}</p>
 
-                                                        <p class="mb-2 text-muted text-uppercase small">Color: ${i.color}</p>
-                                                        <a href="detail?productId=${i.productId}&color=${i.color}&quanity=${i.quantity}&edit=${1}" class="text-uppercase text-muted small" style="color: #000"><i class="fas fa-edit"></i>Edit this color</a>
+                                                        <p class="mb-2 text-muted text-uppercase small">Màu: ${i.color}</p>
+                                                        <a href="detail?productId=${i.productId}&color=${i.color}&quanity=${i.quantity}&edit=${1}" class="text-uppercase text-muted small" style="color: #000"><i class="fas fa-edit"></i> Thay đổi màu sản phẩm</a>
                                                     </div>
                                                     <div>
                                                         <div class="input-group w-50 input-amount" style="float:right; display:flex">
@@ -82,7 +79,7 @@
                                                 <div class="d-flex justify-content-between align-items-center mt-3 edit-function">
                                                     <div class="remove-cart" style="border-radius:1rem;padding: 0.5rem;" >
                                                         <a href="#" onclick="showMess('${i.productId}')" class="text-uppercase mr-3" style="color: #000;text-decoration: none;">
-                                                            <i class="fas fa-trash-alt mr-1"></i> Remove item </a>
+                                                            <i class="fas fa-trash-alt mr-1"></i>Xóa sản phẩm</a>
                                                     </div>
                                                     <p class="mb-0"><span><strong id="summary"><fmt:formatNumber value = "${i.price}" type = "currency"/></strong></span></p class="mb-0">
                                                 </div>
@@ -98,8 +95,8 @@
                         </div>
                         <div class="mb-3">
                             <div class="pt-4">
-                                <h5 class="mb-4">Expected shipping delivery</h5>
-                                <p class="mb-0"> Thu., 12.03. - Mon., 16.03.</p>
+                                <h5 class="mb-4">Thời gian giao hàng dự kiến: </h5>
+                                <p class="mb-0">Sau 3 đến 5 ngày</p>
                             </div>
                         </div>
                         <div class="mb-3">
@@ -121,13 +118,13 @@
                                      alt="PayPal acceptance mark">
                             </div>
                         </div>
-                    </div>
+                    </div>       
                     <!--total price form-->
                     <div class="col-lg-4">
                         <div class="mb-3">
                             <div class="pt-4 addtocart-blue">
 
-                                <h5 class="mb-3 font-weight-bold">The total amount of</h5>
+                                <h5 class="mb-3 font-weight-bold">Tổng hóa đơn</h5>
 
                                 <ul class="list-group list-group-flush">
                                     <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
@@ -138,20 +135,20 @@
                                     </li>
                                     <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
                                         <div>
-                                            <strong>The total amount of</strong>
+                                            <strong>Tổng tiền</strong>
 
-                                            <p class="mb-0">(Not including shipping fee)</p>                                          
+                                            <p class="mb-0">(Chưa bao gồm thuế,phí)</p>                                          
                                         </div>
                                         <span><strong><fmt:formatNumber value = "${totalPrice}" type = "currency"/></strong></span>
                                     </li>
                                 </ul>
                                 <c:if test="${currentLogin != null}">
                                     <a  href="#" onclick="openCheckout(${totalPrice})" class="cartBtn btn-block"style="text-decoration: none"> 
-                                        <span class="text-uppercase font-weight-bold" >go to checkout</span></a>
+                                        <span class="text-uppercase font-weight-bold" >Thanh toán</span></a>
                                     </c:if>
                                     <c:if test="${currentLogin == null}">
                                     <a  href="login.jsp" class="cartBtn btn-block"style="text-decoration: none"> 
-                                        <span class="text-uppercase font-weight-bold" >go to checkout</span></a>
+                                        <span class="text-uppercase font-weight-bold" >Thanh toán</span></a>
                                     </c:if>
                             </div>
                         </div>
@@ -162,9 +159,11 @@
             <c:if test="${viewCart == 'empty'}">
                 <div class="empty-cart">
                 </div>
-                <p class="text-center text-uppercase font-weight-bold">Cart is empty!!</p>
+                <p class="text-center text-uppercase font-weight-bold">Rất tiếc, Không có sản phẩm nào trong giỏ hàng.</p>
                 <div class="empty-cart-home">
-                    <a href="home"class=" text-uppercase font-weight-bold" style="text-decoration:none ">Home</a>
+                    <a href="home"class=" text-uppercase font-weight-bold" style="text-decoration:none ">Trang chủ</a>
+                </div>
+                <div class="header-block">
                 </div>
             </c:if>
         </div>
@@ -173,11 +172,10 @@
             <div class="modal-nofi-overlay"></div>
             <div class="modal-checkout modal-dialog-scrollable">
                 <form action="payment" method="post">
-                    <h5 class="modal-checkout-title">Check out</h5>
+                    <h5 class="modal-checkout-title">Thanh toán</h5>
                     <div class="modal-checkout-body">
                         <div class="modal-upper">
                             <div class="modal-checkout-product border-bottom">
-                                <p>Cart:</p>
                                 <c:forEach items="${sessionScope.listCarts}" var="i">
                                     <div class="modal-product">
                                         <c:forEach var="o" items="${i.listImage}">
@@ -185,9 +183,9 @@
                                         </c:forEach>
                                         <div class="modal-product-des">
                                             <p>${i.name}</p>
-                                            <p>Price: <fmt:formatNumber value = "${i.price}" type = "currency"/></p>  
-                                            <p>Quanity: ${i.quantity}</p>
-                                            <p>Color: ${i.color}</p>  
+                                            <p>Giá: <fmt:formatNumber value = "${i.price}" type = "currency"/></p>  
+                                            <p>Số lượng: ${i.quantity}</p>
+                                            <p>Màu: ${i.color}</p>  
                                         </div>
                                     </div>
                                 </c:forEach>
@@ -200,19 +198,19 @@
                                 </div>
                                 <div class="modal-checkout-full border-bottom">
                                     <input type="email" placeholder="Enter email" value="${currentLogin.email}"required>  
-                                    <input  name="address" type="text" placeholder="Enter address"  required>
+                                    <input  name="address" type="text" placeholder="Địa chỉ nhận hàng..."  required>
                                     <input name ="totalPrice" value = "${totalPrice}"  hidden>
-                                    <textarea name="note" placeholder="Notes here..."></textarea>
+                                    <textarea name="note" placeholder="Ghi chú ..."></textarea>
                                 </div>   
 
-                                <h4>Total price: <fmt:formatNumber value = "${totalPrice}" type = "currency"/></h4>
+                                <h4>Tổng tiền: <fmt:formatNumber value = "${totalPrice}" type = "currency"/></h4>
                             </div>
                         </div>
                     </div>
                     <!--button check out-->
                     <div class="modal-footer">
-                        <button type="button" onclick="closeCheckout()" class="btn-close-modal" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn-save-modal">Check out</button>
+                        <button type="button" onclick="closeCheckout()" class="btn-close-modal" data-bs-dismiss="modal">Đóng</button>
+                        <button type="submit" class="btn-save-modal">Thanh toán</button>
                     </div>
                 </form>
             </div>
@@ -224,7 +222,7 @@
                 <div class="modal-nofi-body">
                     <div class="modal-nofi-inner">
                         <i class="far fa-check-circle"></i>
-                        <p>Edit successfully </p>
+                        <p>Thay đổi màu thành công</p>
                     </div>
                 </div>
             </div>
@@ -236,19 +234,15 @@
                 <div class="modal-nofi-body">
                     <div class="modal-nofi-inner">
                         <i class="far fa-check-circle"></i>
-                        <p>Check out successfully </p>
+                        <p>Thanh toán thành công</p>
                     </div>
                 </div>
             </div>
         </c:if>   
-
+        <div class="header-block">
+        </div>   
         <jsp:include page="template/footer.jsp"/>
         <script>
-//            var closeModalTime = setInterval(function () {
-//                document.getElementById("modal-edit").style.display = "none";
-//                clearInterval(closeModalTime);
-//            }, 5 * 1000);
-
             function closeModal() {
                 document.getElementById("modal-edit").style.display = "none";
             }
@@ -259,14 +253,14 @@
                 document.getElementById("modal-checkout").style.display = "flex";
             }
             function showMess(id) {
-                var option = confirm('Are you sure to remove this item');
+                var option = confirm('Bạn có muốn xóa sản phẩm này không ?');
                 if (option === true) {
                     window.location.href = 'removeProductInCart?productId=' + id;
                 }
             }
 
             function showConfirm(productId) {
-                var option = confirm('Are you sure to delete this item');
+                var option = confirm('Bạn có muốn xóa sản phẩm này không ?');
                 if (option === true) {
                     window.location.href = 'removeProductInCart?productId=' + productId;
                 }

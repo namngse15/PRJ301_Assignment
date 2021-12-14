@@ -20,7 +20,6 @@
                                 </c:if>    
                                 <c:if test="${priceId!=null||brandId!=null||displaySize!=null||processId!=null||ramId!=null||hddId!=null}"> 
                                 <form action="filterproduct" method="get">    
-                                    <input type="hidden" name="pageIndex" value="${pageIndex}"/>
                                     <c:if test="${brandId!=null}">
                                         <input type="hidden" name="brandId" value="${brandId}"/>
                                     </c:if>
@@ -49,7 +48,6 @@
                         <!--Choose category type-->
                         <div class="submenu-choose">
                             <form action="filterproduct" method="get">                     
-                                <input type="hidden" name="pageIndex" value="${pageIndex}"/>
                                 <c:forEach items="${CategoryDAO.allCategory}" var="o">
                                     <div class="radiobtn"> 
                                         <c:if test="${cateId == o.id}">
@@ -100,7 +98,6 @@
                                 </c:if> 
                                 <c:if test="${priceId!=null||cateId!=null||displaySize!=null||processId!=null||ramId!=null||hddId!=null}"> 
                                 <form action="filterproduct" method="get">    
-                                    <input type="hidden" name="pageIndex" value="${pageIndex}"/>
                                     <c:if test="${cateId!=null}">
                                         <input type="hidden" name="cateId" value="${cateId}"/>
                                     </c:if>    
@@ -129,7 +126,6 @@
                         <!--choose brand type-->
                         <div class="submenu-choose">
                             <form action="filterproduct" method="get">                                               
-                                <input type="hidden" name="pageIndex" value="${pageIndex}"/>
                                 <c:if test="${cateId!=null}">
                                     <input type="hidden" name="cateId" value="${cateId}"/>
                                 </c:if>    
@@ -209,7 +205,6 @@
                         <!--Choose display size-->
                         <div class="submenu-choose">
                             <form action="filterproduct" method="get">                                               
-                                <input type="hidden" name="pageIndex" value="${pageIndex}"/>
                                 <c:if test="${cateId!=null}">
                                     <input type="hidden" name="cateId" value="${cateId}"/>
                                 </c:if>    
@@ -260,7 +255,6 @@
                                 </c:if> 
                                 <c:if test="${priceId!=null||cateId!=null||brandId!=null||displaySize!=null||ramId!=null||hddId!=null}"> 
                                 <form action="filterproduct" method="get">    
-                                    <input type="hidden" name="pageIndex" value="${pageIndex}"/>
                                     <c:if test="${cateId!=null}">
                                         <input type="hidden" name="cateId" value="${cateId}"/>
                                     </c:if>    
@@ -289,7 +283,6 @@
                         <!--Choose Processor type-->
                         <div class="submenu-choose">
                             <form action="filterproduct" method="get">                                               
-                                <input type="hidden" name="pageIndex" value="${pageIndex}"/>
                                 <c:if test="${cateId!=null}">
                                     <input type="hidden" name="cateId" value="${cateId}"/>
                                 </c:if>    
@@ -337,7 +330,6 @@
                                 </c:if> 
                                 <c:if test="${priceId!=null||cateId!=null||brandId!=null||displaySize!=null||processId!=null||hddId!=null}"> 
                                 <form action="filterproduct" method="get">    
-                                    <input type="hidden" name="pageIndex" value="${pageIndex}"/>
                                     <c:if test="${cateId!=null}">
                                         <input type="hidden" name="cateId" value="${cateId}"/>
                                     </c:if>    
@@ -366,7 +358,6 @@
                         <!--ram chosen-->
                         <div class="submenu-choose">
                             <form action="filterproduct" method="get">                                               
-                                <input type="hidden" name="pageIndex" value="${pageIndex}"/>
                                 <c:if test="${cateId!=null}">
                                     <input type="hidden" name="cateId" value="${cateId}"/>
                                 </c:if>    
@@ -416,7 +407,6 @@
                                 </c:if> 
                                 <c:if test="${priceId!=null||cateId!=null||brandId!=null||displaySize!=null||processId!=null||ramId!=null}"> 
                                 <form action="filterproduct" method="get">    
-                                    <input type="hidden" name="pageIndex" value="${pageIndex}"/>
                                     <c:if test="${cateId!=null}">
                                         <input type="hidden" name="cateId" value="${cateId}"/>
                                     </c:if>    
@@ -445,7 +435,6 @@
                         <!--choose hdd type-->
                         <div class="submenu-choose">
                             <form action="filterproduct" method="get">                                               
-                                <input type="hidden" name="pageIndex" value="${pageIndex}"/>
                                 <c:if test="${cateId!=null}">
                                     <input type="hidden" name="cateId" value="${cateId}"/>
                                 </c:if>    
@@ -496,7 +485,6 @@
                                 </c:if> 
                                 <c:if test="${hddId!=null||cateId!=null||brandId!=null||displaySize!=null||processId!=null||ramId!=null}"> 
                                 <form action="filterproduct" method="get">    
-                                    <input type="hidden" name="pageIndex" value="${pageIndex}"/>
                                     <c:if test="${cateId!=null}">
                                         <input type="hidden" name="cateId" value="${cateId}"/>
                                     </c:if>    
@@ -524,7 +512,6 @@
                         </div>
                         <div class="submenu-choose">
                             <form action="filterproduct" method="get">                                               
-                                <input type="hidden" name="pageIndex" value="${pageIndex}"/>
                                 <c:if test="${cateId!=null}">
                                     <input type="hidden" name="cateId" value="${cateId}"/>
                                 </c:if>    

@@ -12,7 +12,7 @@
         <c:if test="${totalPage>0}">
             <form action="home" method="get">
                 <c:if test="${back>0}">
-                    <button type="submit" name="pageIndex" value="${back}">Previous</button>
+                    <button type="submit" name="pageIndex" value="${back}">Quay lại</button>
                 </c:if>  
                 <c:forEach begin="1" end="${totalPage}" step="1" var="i">
                     <c:if test="${i==pageIndex}">
@@ -23,7 +23,7 @@
                     </c:if>
                 </c:forEach>
                 <c:if test="${next<totalPage+1}">
-                    <button type="submit" name="pageIndex" value="${next}">Next</button>
+                    <button type="submit" name="pageIndex" value="${next}">Trang sau</button>
                 </c:if>
                 <c:if test="${sortId!=null}">
                     <input type="hidden" name="sortId" value="${sortId}"/>
@@ -37,7 +37,7 @@
             <form action="filterproduct" method="get">
                 <!--pagging-->
                 <c:if test="${back>0}">
-                    <button type="submit" name="pageIndex" value="${back}">Previous</button>
+                    <button type="submit" name="pageIndex" value="${back}">Quay lại</button>
                 </c:if>  
                 <c:forEach begin="1" end="${totalPage}" step="1" var="i">
                     <c:if test="${i==pageIndex}">
@@ -48,7 +48,7 @@
                     </c:if>
                 </c:forEach>
                 <c:if test="${next<totalPage+1}">
-                    <button type="submit" name="pageIndex" value="${next}">Next</button>
+                    <button type="submit" name="pageIndex" value="${next}">Trang sau</button>
                 </c:if>
                 <!--category-->
                 <c:if test="${cateId!=null}">
@@ -84,7 +84,7 @@
         <c:if test="${totalPage>0}">
             <form action="search" method="get">
                 <c:if test="${back>0}">
-                    <button type="submit" name="pageIndex" value="${back}">Previous</button>
+                    <button type="submit" name="pageIndex" value="${back}">Quay lại</button>
                 </c:if>  
                 <c:forEach begin="1" end="${totalPage}" step="1" var="i">
                     <c:if test="${i==pageIndex}">
@@ -95,7 +95,7 @@
                     </c:if>
                 </c:forEach>
                 <c:if test="${next<totalPage+1}">
-                    <button type="submit" name="pageIndex" value="${next}">Next</button>
+                    <button type="submit" name="pageIndex" value="${next}">Trang sau</button>
                 </c:if>
                 <c:if test="${sortId!=null}">
                     <input type="hidden" name="sortId" value="${sortId}"/>

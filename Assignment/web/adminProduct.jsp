@@ -14,30 +14,29 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Administrator's Categories</title>
+        <title>Products</title>
         <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
         <!--css file-->
         <link rel="stylesheet" href="assets/admin.css">
         <!-- boostrap -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap4.min.css">
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
         <!--datatable-->
-        <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
         <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
         <script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap4.min.js"></script>
         <!-- font awesome -->
-        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
-              integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     </head>
     <jsp:useBean id="getCategory" scope="page" class="dal.CategoryDAO"></jsp:useBean>  
     <jsp:useBean id="getProduct" scope="page" class="dal.ProductDAO"></jsp:useBean>  
     <jsp:useBean id="getReview" scope="page" class="dal.ReviewDAO"></jsp:useBean> 
     <jsp:useBean id="getNumber" scope="page" class="dal.OrdersDAO"></jsp:useBean> 
-    <body>
+    <jsp:useBean id="getAccount" scope="page" class="dal.AccountDAO"></jsp:useBean> 
+
+        <body>
         <jsp:include page="adminTemplate/adminHeader.jsp"/>
         <div class="header-block">
         </div>
@@ -86,7 +85,12 @@
                                             <a href="#" onclick="removeProduct('${o.id}')">Remove</a>
                                         </c:if>
                                     </td>
-                                    <td><a href="adminViewProductDetail?editProduct=true&viewProductDetail=true&productId=${o.id}&price=${o.price}&quantity=${o.quantity}">Edit</a></td>
+                                    <td>
+                                        <a href="adminViewProductDetail?editProduct=true&viewProductDetail=true&productId=${o.id}&price=${o.price}&quantity=${o.quantity}">Edit</a>
+                                        <c:if test="${checkEditProduct && o.id==productId}">
+                                            <p>Edited</p>
+                                        </c:if>
+                                    </td>
                                 </tr>                              
                             </c:forEach>
                         </tbody>
@@ -103,6 +107,7 @@
                     </div>
                 </div>         
             </c:if>
+            <!--table product review-->
             <c:if test="${viewProductReview != null}">
                 <div class="title" style="display:flex;margin-left:1rem;">
                     <h2>Product's Review</h2>
@@ -115,7 +120,7 @@
                                 <th scope="col">ID</th>
                                 <th scope="col">Rate</th>
                                 <th scope="col">Message</th>
-                                <th scope="col">Email</th>        
+                                <th scope="col">account</th>        
                                 <th scope="col"></th>
                             </tr>
                         </thead>
@@ -126,15 +131,14 @@
                                     <th scope="row">${o.id}</th>
                                     <td>${o.rate}</td>                                   
                                     <td>${o.message}</td>
-                                    <td>${o.email}</td>
-                                    <td><a href="#" onclick="removeReiew()">Remove</a></td>
+                                    <td>${getAccount.getAccountById(o.accountId).username}</td>
+                                    <td><a href="#" onclick="removeReiew(${o.id})">Remove</a></td>
                                 </tr>
                             </c:forEach>
                         </tbody>
                     </table>
                 </div>
             </c:if>
-            <!--end table product-->
             <!--table product detail-->
             <c:if test="${viewProductDetail != null}">
                 <div class="title" style="display:flex;margin-left:1rem;">
@@ -517,16 +521,34 @@
                 </div>
             </div>
         </c:if>
+        <!--modal remove success-->
+        <c:if test="${checkRemoveProduct}">
+            <div onclick="closeModal()" class="modal-nofi">
+                <div class="modal-nofi-overlay"></div>
+                <div class="modal-nofi-body">
+                    <div class="modal-nofi-inner">
+                        <i class="far fa-check-circle"></i>
+                        <p>Remove product ID:${productId} successfully </p>
+                    </div>
+                </div>
+            </div>
+        </c:if>
+        <!--modal add success-->
+        <c:if test="${checkAddProduct}">
+            <div onclick="closeModal()" class="modal-nofi">
+                <div class="modal-nofi-overlay"></div>
+                <div class="modal-nofi-body">
+                    <div class="modal-nofi-inner">
+                        <i class="far fa-check-circle"></i>
+                        <p>Add product ${productName} successfully </p>
+                    </div>
+                </div>
+            </div>
+        </c:if>
         <script>
             $(document).ready(function () {
                 $('#dataTable').DataTable();
             });
-            function removeProduct(productId) {
-                var option = confirm('Are you sure to delete this product');
-                if (option === true) {
-                    window.location.href = 'admin-crud?removeProductById=' + productId;
-                }
-            }
             function addProduct() {
                 document.getElementById("modal-product").style.display = "flex";
             }
@@ -537,6 +559,18 @@
                     if (x[i].style.display !== "none") {
                         x[i].style.display = "none";
                     }
+                }
+            }
+            function removeProduct(productId) {
+                var option = confirm('Are you sure to delete this product');
+                if (option === true) {
+                    window.location.href = 'admin-update-product?removeProductById=' + productId;
+                }
+            }
+            function removeReiew(reviewId) {
+                var option = confirm('Are you sure to delete this review');
+                if (option === true) {
+                    window.location.href = 'removereview?id=' + reviewId + "&page=admin";
                 }
             }
         </script>

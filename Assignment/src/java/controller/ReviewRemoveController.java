@@ -34,14 +34,21 @@ public class ReviewRemoveController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         ReviewDAO rdb = new ReviewDAO();
-
+        
+        String page = request.getParameter("page");
         String getId = request.getParameter("id");
         int id = Integer.parseInt(getId);
         String productId = request.getParameter("productId");
-
+        
         boolean removeReview = rdb.deleteReview(id);
-        request.getRequestDispatcher("detail?productId=" + productId).forward(request, response);
-
+        
+        if (page.equals("admin")) {
+            request.setAttribute("removeReview",removeReview);
+            request.getRequestDispatcher("admin-product").forward(request, response);
+        } else {
+            request.getRequestDispatcher("detail?productId=" + productId).forward(request, response);
+        }
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

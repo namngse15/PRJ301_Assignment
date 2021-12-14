@@ -13,11 +13,11 @@
             <form action="home" method="get">
                 <input type="hidden" name="pageIndex" value="${pageIndex}"/>
                 <select name="sortId" class="sorting-list" onchange="this.form.submit()">
-                    <option value="0" disabled selected>Sort by</option>
-                    <option value="1" ${sortId == 1 ? "selected" : ""}>From A to Z</option>
-                    <option value="2" ${sortId == 2 ? "selected" : ""}>From Z to A</option>
-                    <option value="3" ${sortId == 3 ? "selected" : ""} >Lowest to Highest</option>
-                    <option value="4" ${sortId == 4 ? "selected" : ""}>Highest to Lowest</option>
+                    <option value="0" disabled selected>Sắp xếp theo</option>
+                    <option value="1" ${sortId == 1 ? "selected" : ""}>Từ A đến Z</option>
+                    <option value="2" ${sortId == 2 ? "selected" : ""}>Từ Z đến A</option>
+                    <option value="3" ${sortId == 3 ? "selected" : ""} >Từ giá thấp đến cao</option>
+                    <option value="4" ${sortId == 4 ? "selected" : ""}>Từ giá cao đến thấp</option>
                 </select>
             </form>
         </div>
@@ -65,11 +65,11 @@
                 <input type="hidden" name="pageIndex" value="${pageIndex}"/>    
                 <input type="hidden" name="text" value="${text}"/>
                 <select name="sortId" class="sorting-list" onchange="this.form.submit()">
-                    <option value="0" disabled selected>Sort by</option>
-                    <option value="1" ${sortId == 1 ? "selected" : ""}>From A to Z</option>
-                    <option value="2" ${sortId == 2 ? "selected" : ""}>From Z to A</option>
-                    <option value="3" ${sortId == 3 ? "selected" : ""} >Lowest to Highest</option>
-                    <option value="4" ${sortId == 4 ? "selected" : ""}>Highest to Lowest</option>
+                    <option value="0" disabled selected>Sắp xếp theo</option>
+                    <option value="1" ${sortId == 1 ? "selected" : ""}>Từ A đến Z</option>
+                    <option value="2" ${sortId == 2 ? "selected" : ""}>Từ Z đến A</option>
+                    <option value="3" ${sortId == 3 ? "selected" : ""} >Từ giá thấp đến cao</option>
+                    <option value="4" ${sortId == 4 ? "selected" : ""}>Từ giá cao đến thấp</option>
                 </select>
             </form>
         </div>

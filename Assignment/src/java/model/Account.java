@@ -23,11 +23,11 @@ public class Account {
     private String username;
     private String password;
     private int status;
+    private String accountImg;
 
     public Account() {
     }
 //when user create acount
-
     public Account(int id, String name, String phone, String email,
             String address, Date dob, String username) {
         this.id = id;
@@ -40,7 +40,20 @@ public class Account {
     }
 
     public Account(int roleId, String name, String phone, String email,
-            String address, Date dob, String username, String password) {
+            String address, Date dob, int status, String username, String password) {
+        this.roleId = roleId;
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.dob = dob;
+        this.status = status;
+        this.username = username;
+        this.password = password;
+    }
+    
+        public Account(int roleId, String name, String phone, String email,
+            String address, Date dob, String username, String password,String accountImg) {
         this.roleId = roleId;
         this.name = name;
         this.phone = phone;
@@ -49,6 +62,7 @@ public class Account {
         this.dob = dob;
         this.username = username;
         this.password = password;
+        this.accountImg = accountImg;
     }
 
     public Account(int id, int roleId, String name, String phone, String email,
@@ -62,6 +76,19 @@ public class Account {
         this.dob = dob;
         this.username = username;
         this.password = password;
+    }
+     public Account(String email, String username, String password) {
+        this.email = email;
+        this.username = username;
+        this.password = password;
+    }
+
+    public String getAccountImg() {
+        return accountImg;
+    }
+
+    public void setAccountImg(String accountImg) {
+        this.accountImg = accountImg;
     }
 
     public int getStatus() {

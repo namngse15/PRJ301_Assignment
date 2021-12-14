@@ -778,54 +778,21 @@ public class ProductDAO extends BaseDAO<Product> {
         return check > 0;
     }
 
-//    public boolean removeProductbyId(String productId, List<Review> listReviews) {
-//        int check = 0;
-//        boolean checkRemoveOrders = false;
-//
-//        List<Orders> listOrdersByProduct = dao.getOrdersByProductId(productId);
-//        int countProductInOrder = dao.getTotalOrderByProductandStatus(productId);
-//        boolean checkReview = false;
-//        //remove reviews if product have
-//        if (listReviews.isEmpty()) {
-//            checkReview = true;
-//        } else {
-//            checkReview = r.deleteReviewByProduct(productId);
-//        }
-//        //remove orders if product have
-//        if (listOrdersByProduct.isEmpty()) {
-//            checkRemoveOrders = true;
-//        } else {
-//            if (countProductInOrder == 0) {
-//                for (Orders o : listOrdersByProduct) {
-//                    int quantity = 0;
-//                    List<OrderDetail> listProductByOrders = odd.getProductIDandQuantityByOrderID(o.getId());
-//                    for (OrderDetail p : listProductByOrders) {
-//                        if (!p.getProductId().equals(productId) && o.getStatusId() == 4) {
-//                            int quantityItem = getQuantityByProductId(p.getProductId());
-//                            quantity = quantityItem + p.getProductQuantity();
-//                            updateQuantity(quantity, p.getProductId());
-//                        }
-//                    }
-//                    checkRemoveOrders = dao.deleteOrders(o.getId());
-//                }
-//            }
-//        }
-//        if (checkRemoveOrders && checkReview) {
-//            //remove image if product have
-//            boolean checkRemoveImg = removeProducImgtbyId(productId);
-//            if (checkRemoveImg) {
-//                try {
-//                    String sql = "delete Product\n"
-//                            + "where id =?;";
-//                    PreparedStatement stm = connection.prepareStatement(sql);
-//                    stm.setString(1, productId);
-//                    check = stm.executeUpdate();
-//                } catch (Exception e) {
-//                }
-//            }
-//        }
-//        return check > 0;
-//    }
+    public boolean removeProductbyId(String productId) {
+        int check = 0;
+        boolean checkRemoveImg = removeProducImgtbyId(productId);
+        if (checkRemoveImg) {
+            try {
+                String sql = "delete Product\n"
+                        + "where id =?;";
+                PreparedStatement stm = connection.prepareStatement(sql);
+                stm.setString(1, productId);
+                check = stm.executeUpdate();
+            } catch (Exception e) {
+            }
+        }
+        return check > 0;
+    }
 //update product entity    
     public boolean updateQuantity(int quantityProduct, String productId) {
         int check = 0;

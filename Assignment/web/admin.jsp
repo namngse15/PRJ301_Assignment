@@ -18,19 +18,15 @@
         <link rel="stylesheet" href="assets/admin.css">
         <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
         <!-- boostrap -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
         <!-- font awesome -->
-        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
-              integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     </head>
     <body>
         <jsp:useBean id="adminInfo" scope="page" class="dal.AccountDAO"></jsp:useBean>
-
         <jsp:include page="adminTemplate/adminHeader.jsp"/>
         <div class="header-block">
         </div>
@@ -96,14 +92,16 @@
                 </div>
                 <div class="col-md-4 edit-image-title">
                     <div class="d-flex justify-content-between"><p>Edit Profile Avatar</p></div><br>
-                    <div class="p-3 py-5 edit-image">
-                        <div class="d-flex flex-column align-items-center text-center p-3 py-5 image_overlay">
-                            <img class="mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg">
+                    <form action="create-info" method="post" enctype="multipart/form-data">
+                        <div class="p-3 py-5 edit-image">
+                            <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg">
+                            </div>
+                            <input type="hidden" name="addImg" value="true">
+                            <input type="file" name="uploadfile" id="img" disabled style="display:none;"/>
+                            <label for="img">Tải ảnh lên *</label>
+                            <p style="font-size: 0.9rem;margin: 0.2rem">*Tính năng chưa sử dụng được</p>
                         </div>
-                        <input type="file" name="uploadfile" id="img" style="display:none;"/>
-                        <label for="img">Upload avatar</label>
-                    </div>
-                </div>
+                    </form>
                 <div class="header-block">
                 </div>
             </div> 

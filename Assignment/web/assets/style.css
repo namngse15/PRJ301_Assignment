@@ -1,4 +1,5 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300;500;800&family=Roboto:wght@400;700&display=swap');
+
 :root {
     --orange: #ff7800;
     --black: #130f40;
@@ -7,7 +8,7 @@
     --box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.1);
 }
 * {
-    font-family: "Poppins", sans-serif;
+    font-family: 'Roboto', sans-serif;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -236,6 +237,7 @@ select{
 .sortbar select{
     height: 3.8rem;
     width: 32%;
+    border-radius:10px !important;
     background-image: linear-gradient(140deg,#ddd6f3 33% ,#E4EBF5 170%)!important;
     box-shadow: inset 0.2rem 0.2rem 0.5rem #c8d0e7, 
         inset -0.2rem -0.2rem 0.5rem #FFFFFF;
@@ -257,6 +259,13 @@ select{
     border: none !important;
     box-shadow: 0.3rem 0.3rem 0.6rem #c8d0e7, 
         -0.2rem -0.2rem 0.5rem #FFFFFF;
+
+}
+.pagging button:first-child{
+        border-radius: 1rem 0 0 1rem;  
+}
+.pagging button:last-child{
+        border-radius: 0 1rem 1rem 0;  
 }
 .pagging button:hover{
     background:#E4EBF5;   
@@ -306,6 +315,7 @@ select{
 .submenu-choose form{
     display: grid;
     grid-template-columns: repeat(2, 13% 1fr);
+    border-radius: 10px;
     box-shadow: inset 0.2rem 0.2rem 0.5rem #c8d0e7, 
         inset -0.2rem -0.2rem 0.5rem #FFFFFF;
     padding: 1.2rem 0 0.5rem  1rem;
@@ -341,10 +351,6 @@ select{
     border-radius: 50%;
     height: 2.4rem;
     width: 2.4rem;
-    background-image: linear-gradient(71deg, #FBAB7E 0%, #F7CE68 100%);
-    box-shadow:
-        -8px -4px 8px 0px #ffffff,
-        8px 4px 12px 0px #d1d9e6;
     overflow: hidden;
 }
 .indicator::before,
@@ -410,6 +416,7 @@ select{
         -0.2rem -0.2rem 0.5rem #FFFFFF;
     transition: 100ms ease-out;
     margin-bottom: 0.5rem;
+   border-radius: 10px;
 }
 .product-card.animate {
     top: 0.05rem;
@@ -693,7 +700,7 @@ select{
 }
 .product-choose{
     padding: 0.3rem;
-    border-radius: 0.5rem;
+    border-radius: 1rem;
     background-color: #E4EBF5;
     box-shadow: 0.3rem 0.3rem 0.6rem #c8d0e7, 
         -0.2rem -0.2rem 0.5rem #FFFFFF;
@@ -730,10 +737,10 @@ select{
     cursor: pointer;
 }
 .product-count .qtyminus {
-    border-radius: 3px 0 0 3px; 
+    border-radius: 8px 0 0 8px; 
 }
 .product-count .qtyplus {
-    border-radius: 0 3px 3px 0; 
+    border-radius: 0 8px 8px 0; 
 }
 .product-count .qty {
     width: 6.1rem;
@@ -744,12 +751,12 @@ select{
     margin-top: 1rem;
     height: 5.8rem;
     padding: 0 0.5rem;
-    border-radius: 5px;
+    border-radius: 10px;
     box-shadow: 0.3rem 0.3rem 0.6rem #c8d0e7, 
         -0.2rem -0.2rem 0.5rem #FFFFFF;
 }
 .round-black-btn {
-    border-radius: 4px;
+    border-radius: 10px;
     background-image: linear-gradient(71deg, #FBAB7E 0%, #F7CE68 100%);
     box-shadow: rgb(224, 201, 129) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -4px -4px 7px 1px inset;
     color: #000;
@@ -769,10 +776,8 @@ select{
 }
 /*product relate*/
 .relate-product button{
-    box-shadow: inset 0.2rem 0.2rem 0.5rem #c8d0e7, 
-        inset -0.2rem -0.2rem 0.5rem #FFFFFF;
     background-image: linear-gradient(149deg, #facaa878 0%,#ddd6f3 10% ,#E4EBF5 116%);
-    border-radius: 6px;
+    border-radius: 10px;
     padding: 1.2rem 1rem;
     width: 100%;
     margin-bottom: 2rem;
@@ -782,8 +787,6 @@ select{
     width: 32%;
     height: 10.5rem;
     margin: auto;
-    box-shadow: 0.3rem 0.3rem 0.6rem #c8d0e7, 
-        -0.2rem -0.2rem 0.5rem #FFFFFF;
     background-color: #FFFFFF;
     border-radius: 5px;
     display: flex;
@@ -802,12 +805,9 @@ select{
     margin-left: 0.9rem;
     border-radius: 5px;
     padding: 0.2rem 0.6rem;
-    box-shadow: 0.3rem 0.3rem 0.6rem #c8d0e7, 
-        -0.2rem -0.2rem 0.5rem #FFFFFF;
 }
 .relate-product button:hover{
-    box-shadow: 0.3rem 0.3rem 0.6rem #c8d0e7, 
-        -0.2rem -0.2rem 0.5rem #FFFFFF;
+
 }
 .relate-des{
     text-align: start;
@@ -819,14 +819,6 @@ select{
 .checked button{
     box-shadow: 0.3rem 0.3rem 0.6rem #c8d0e7, 
         -0.2rem -0.2rem 0.5rem #FFFFFF !important;
-}
-.checked .relate-product-img{
-    box-shadow: inset 0.2rem 0.2rem 0.5rem #c8d0e7, 
-        inset -0.2rem -0.2rem 0.5rem #FFFFFF;
-}
-.checked .relate-product-content{
-    box-shadow: inset 0.2rem 0.2rem 0.5rem #c8d0e7, 
-        inset -0.2rem -0.2rem 0.5rem #FFFFFF;
 }
 /* product descrption*/
 .product-descrption {
@@ -908,7 +900,7 @@ select{
     margin: auto;
     position: relative;
     background-color: #fff;
-    border-radius:5px; 
+    border-radius:10px; 
 }
 .modal-edit-header h3{
     text-align: center;
@@ -938,7 +930,7 @@ select{
     margin: auto;
     position: relative;
     background-color: #fff;
-    border-radius:5px; 
+    border-radius:10px; 
 }
 .modal-nofi-inner{
     text-align: center; 
@@ -976,7 +968,7 @@ select{
     margin: auto;
     position: relative;
     background-color: #fff;
-    border-radius:5px; 
+    border-radius:10px; 
 }
 .modal-change-body a{
     background-color: #ebb734;
@@ -1026,7 +1018,7 @@ select{
     margin: auto;
     position: relative;
     background-color: #fff;
-    border-radius:5px; 
+    border-radius:10px; 
 }
 .modal-upper{
     max-height: calc(100vh - 210px);
@@ -1130,7 +1122,7 @@ select{
     width: 99%;
     margin: 0.4rem auto;
     text-align: center;
-    border-radius: 0.5rem;
+    border-radius: 10rem;
     background: rgb(255, 193, 79);
     color: #000;
     font-size: 1.5rem;

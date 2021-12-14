@@ -5,6 +5,8 @@
  */
 package controller;
 
+import dal.OrderDetailDAO;
+import dal.OrdersDAO;
 import dal.ProductDAO;
 import dal.ReviewDAO;
 import java.io.IOException;
@@ -14,6 +16,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.OrderDetail;
+import model.Orders;
 import model.Product;
 import model.Review;
 
@@ -38,6 +42,8 @@ public class AdminProductUpdate extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         ProductDAO pdb = new ProductDAO();
         ReviewDAO rdb = new ReviewDAO();
+        OrdersDAO odb = new OrdersDAO();
+        OrderDetailDAO odd = new OrderDetailDAO();
 
         String add = request.getParameter("add");
         String edit = request.getParameter("edit");
@@ -141,19 +147,64 @@ public class AdminProductUpdate extends HttpServlet {
         Boolean checkEditProductWithImg = false;
 
         if (add != null) {
-            Boolean checkAddProduct = pdb.addProduct(p);
+            boolean checkAddProduct = pdb.addProduct(p);
             if (checkAddProduct) {
                 checkAddProductWithImg = pdb.addProductWithImg(p.getId(), productImg1, productImg2);
             }
+            request.setAttribute("productName",p.getName());
+            request.setAttribute("checkAddProduct", checkAddProduct);
         } else if (edit != null) {
             checkEditProduct = pdb.updateProduct(p);
             if (productImg1 != null) {
                 checkEditProductWithImg = pdb.updateProductWithImg(p.getId(), productImg1, productImg2);
             }
+            request.setAttribute("productId",p.getId());
+            request.setAttribute("checkEditProduct", checkEditProduct);
+
         }
         if (removeProductId != null) {
+            boolean removeProduct = false;
+            /*
+            check order status if order = received, remove or canceled 
+            => delete orders         
+            => check delete orders success
+            => delete review if product have review          
+            => delete product
+             */
+            List<Orders> listOrders = odb.getOrdersByProductId(removeProductId);
+            boolean removeOrders = false;
+            boolean checkDeleteDetail = false;
+            if (!listOrders.isEmpty()) {
+                //delete order detail => delete orders                
+                for (Orders l : listOrders) {
+                    if (l.getStatusId() == 3 || l.getStatusId() == 6 || l.getStatusId() == 7) {
+                        checkDeleteDetail = odd.deleteOrderDetail(l.getId());
+                        if (checkDeleteDetail) {
+                            removeOrders = odb.deleteOrders(l.getId());
+                        }
+                    }
+                }
+
+            } else {
+                removeOrders = true;
+            }
+
             List<Review> listReview = rdb.getAllReviewByProductId(removeProductId);
-            //boolean checkReProduct = pdb.removeProductbyId(removeProductId, listReview);
+            boolean removeReviews = false;
+            if (!listReview.isEmpty()) {
+                for (Review r : listReview) {
+                    removeReviews = rdb.deleteReviewByProduct(removeProductId);
+                }
+            } else {
+                removeReviews = true;
+            }
+
+            if (removeReviews && removeOrders) {
+                removeProduct = pdb.removeProductbyId(removeProductId);
+            }
+             request.setAttribute("productId",removeProductId);
+            request.setAttribute("checkRemoveProduct",removeProduct);
+
         }
         request.getRequestDispatcher("admin-product").forward(request, response);
     }

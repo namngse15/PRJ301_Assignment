@@ -16,17 +16,13 @@
         <title>Login</title>
         <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
         <!-- boostrap -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
         <!--css file-->
         <link rel="stylesheet" href="assets/authentication.css">
         <!-- font awesome -->
-        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
-              integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
         <% Cookie[] cookies = request.getCookies();%>
     </head>
 
@@ -48,8 +44,8 @@
         %>
         <div class="form-modal">
             <div class="form-toggle">
-                <button id="login-toggle" onclick="toggleLogin()">log in</button>
-                <button id="signup-toggle" onclick="toggleSignup()">sign up</button>
+                <button id="login-toggle" onclick="toggleLogin()">Đăng nhập</button>
+                <button id="signup-toggle" onclick="toggleSignup()">Đăng kí</button>
             </div>
             <div class="login-block"></div>
 
@@ -57,13 +53,13 @@
                 <form action="login" method="post">
                     <input type="hidden" name="loginAction" value="true">
                     <div class="input-border">
-                        <input type="text"  name="username" value="<%=username%>" placeholder="Enter email or username" required/>
+                        <input type="text"  name="username" value="<%=username%>" placeholder="Tên đăng nhập" required/>
                     </div> 
                     <div class="input-border">
-                        <input type="password" name="password" value="<%=password%>" placeholder="Enter password" required/>
+                        <input type="password" name="password" value="<%=password%>" placeholder="Mật khẩu" required/>
                     </div>
                     <input type="checkbox" name ="remember" value="remember"/> Remember me <br/>
-                    <button type="submit" class="btn login" value="Login">login</button>
+                    <button type="submit" class="btn login" value="Login">Đăng nhập</button>
                     <c:if test="${statement != null}">
                         <div class="notification">
                             <p class="">${statement}</p>
@@ -75,12 +71,12 @@
 
             <div id="signup-form">
                 <form action="create-account" method="post">
-                    <input type="email" name="email" placeholder="Enter your email" value="${email}"required/>
-                    <input type="text" name="user" placeholder="Enter your username" onChange="checkUser()" value="${user}"required/>
-                    <input type="password" name="pass" placeholder="Create password" onChange="checkPass()" value="${pass}" required/>
+                    <input type="email" name="email" placeholder="Nhập email" value="${email}"required/>
+                    <input type="text" name="user" placeholder="Nhập tên tài khoản" onChange="checkUser()" value="${user}"required/>
+                    <input type="password" name="pass" placeholder="Nhập mật khẩu" onChange="checkPass()" value="${pass}" required/>
                     <input hidden />
-                    <input type="password" name="confirm" placeholder="Re-enter password" onChange="checkPass()" required/>
-                    <button type="submit" class="btn signup">create account</button>
+                    <input type="password" name="confirm" placeholder="Nhập lại mật khẩu" onChange="checkPass()" required/>
+                    <button type="submit" class="btn signup">Tạo tài khoản</button>
                     <hr />
                 </form>
             </div>
@@ -91,7 +87,7 @@
                 <div class="modal-nofi-body">
                     <div class="modal-nofi-fail">
                         <i class="far fa-times-circle"></i>
-                        <p>Account already exists</p>
+                        <p>Tài khoản đã tồn tại</p>
                     </div>
                 </div>
             </div>
@@ -102,22 +98,11 @@
                 <div class="modal-nofi-body">
                     <div class="modal-nofi-fail">
                         <i class="far fa-times-circle"></i>
-                        <p>Email already registered </p>
+                        <p>Email đã được đăng kí</p>
                     </div>
                 </div>
             </div>
         </c:if> 
-        <c:if test="${checkInsert==false}">
-            <div onclick="closeModal()" class="modal-nofi" id="modal-edit">
-                <div class="modal-nofi-overlay"></div>
-                <div class="modal-nofi-body">
-                    <div class="modal-nofi-fail">
-                        <i class="far fa-times-circle"></i>
-                        <p>Cannot register your account </p>
-                    </div>
-                </div>
-            </div>
-        </c:if>     
     </body>
     <script>
         function checkUser() {
@@ -126,7 +111,7 @@
             if (username.value.match(regex)) {
                 username.setCustomValidity('');
             } else {
-                username.setCustomValidity('Username mustcontain number and alphabet');
+                username.setCustomValidity('Tên đăng nhập phải chứa chữ và số');
             }
         }
 
@@ -135,12 +120,12 @@
             const confirm = document.querySelector('input[name=confirm]');
             var regex = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
             if (!regex.test(password.value)) {
-                password.setCustomValidity('Password must contains at least one number,uppercase and lowercase,special character and above 8 characters');
+                password.setCustomValidity('Mật khẩu có ít nhất 1 số, chữ hoa, thường, kí tự đặc biệt và trên 8 kí tự');
             } else {
                 if (confirm.value === password.value) {
                     confirm.setCustomValidity('');
                 } else {
-                    confirm.setCustomValidity('Passwords do not match');
+                    confirm.setCustomValidity('Mật khẩu không khớp');
                 }
             }
         }

@@ -186,14 +186,10 @@ public class AdminUserController extends HttpServlet {
             request.setAttribute("accountId", accountId);
             request.setAttribute("account", account);
         }
-        if (adminAccount != null) {
-            if (checkRemoveUser || checkRemoveOrders) {
-                request.getRequestDispatcher("admin-user").forward(request, response);
-            } else {
-                request.getRequestDispatcher("adminUser.jsp").forward(request, response);
-            }
+        if (checkRemoveUser || checkRemoveOrders) {
+            request.getRequestDispatcher("admin-user").forward(request, response);
         } else {
-            response.sendRedirect("home");
+            request.getRequestDispatcher("adminUser.jsp").forward(request, response);
         }
     }
 

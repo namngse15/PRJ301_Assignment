@@ -15,24 +15,20 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Profile</title>
+        <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
         <!--css file-->
         <link rel="stylesheet" href="assets/style.css">
-        <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
         <!-- boostrap -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
         <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap4.min.css">
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
         <!--datatable-->
-        <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
         <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
         <script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap4.min.js"></script>
         <!-- font awesome -->
-        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
-              integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     </head>
 
     <body>
@@ -52,9 +48,9 @@
                         <span> </span>
                     </div>
                     <ul class="profile-menu align-items-center text-center">
-                        <li><a href="javascript:;" onclick="openMenu1()">Account</a></li>
-                        <li><a href="javascript:;" onclick="openMenu2()">View order</a></li>
-                        <li><a href="javascript:;" onclick="openMenu3()">Change password</a></li>
+                        <li><a href="javascript:;" onclick="openMenu1()">Tài khoản</a></li>
+                        <li><a href="javascript:;" onclick="openMenu2()">Xem đơn hàng</a></li>
+                        <li><a href="javascript:;" onclick="openMenu3()">Đổi mật khẩu</a></li>
                             <c:if test="${userInfo.getAccountByUsernameAndPassword(currentLogin.username,currentLogin.password).status == 1}">
                             <li><img src="https://img.icons8.com/doodle/48/000000/online--v1.png"/></li>
                             </c:if> 
@@ -65,13 +61,13 @@
                     <div id="menu1">
                         <c:if test="${not empty accountView}">
                             <div class="d-flex justify-content-between align-items-center mb-3 profile-title">
-                                <p class="text-right">Profile Settings</p>
+                                <p class="text-right">Trang cá nhân</p>
                             </div>
                             <div class="mt-3 profile-input">
                                 <!--change info form-->
                                 <form action="changeInfo" method="post">
                                     <div class="col-md-12 mt-3">
-                                        <label class="labels">Full name</label>
+                                        <label class="labels">Họ và tên</label>
                                         <input name="fullName" type="text" class="form-control text-uppercase" 
                                                placeholder="Enter your name......." value="${userInfo.getAccountByUsernameAndPassword(currentLogin.username,currentLogin.password).name}"></div>
                                     <div for="email" class="col-md-12 mt-3">
@@ -80,35 +76,35 @@
                                                placeholder="Enter your email......." value="${userInfo.getAccountByUsernameAndPassword(currentLogin.username,currentLogin.password).email}">
                                     </div>
                                     <div class="col-md-12 mt-3">
-                                        <label class="labels">Phone</label>
+                                        <label class="labels">Số điện thoại</label>
                                         <input name="phone" type="text" class="form-control"
                                                placeholder="Enter your phone......." value="${userInfo.getAccountByUsernameAndPassword(currentLogin.username,currentLogin.password).phone}">
                                     </div>
                                     <div class="col-md-12 mt-3">
-                                        <label class="labels">Address</label>
+                                        <label class="labels">Địa chỉ</label>
                                         <input name="address" type="text" class="form-control text-capitalize" 
                                                placeholder="Enter your address......." value="${userInfo.getAccountByUsernameAndPassword(currentLogin.username,currentLogin.password).address}">
                                     </div>
                                     <div class="col-md-12 mt-3">
-                                        <label class="labels">Date of Birth</label>
+                                        <label class="labels">Ngày sinh</label>
                                         <input name="date" type="date" class="form-control" 
                                                placeholder="Enter your birth......." value="${userInfo.getAccountByUsernameAndPassword(currentLogin.username,currentLogin.password).dob}">
 
                                     </div>
                                     <div class="mt-5 text-center profile-save">
-                                        <button class="btn" type="button" onclick="openChangeInfo()">Save Change</button>
+                                        <button class="btn" type="button" onclick="openChangeInfo()">Lưu thay đổi</button>
                                     </div>
                                     <!--enter password when change info-->
                                     <div class="modal-nofi" id="modal-change">
                                         <div class="modal-nofi-overlay"></div>
                                         <div class="modal-change-body">
                                             <div class="modal-change-input">
-                                                <p>Enter password: </p>
-                                                <input type="password" class="form-control" name="pass" placeholder="Enter password......." value="">
+                                                <p>Nhập mật khẩu: </p>
+                                                <input type="password" class="form-control" name="pass" placeholder="Mật khẩu......." value="">
                                             </div>
                                             <div class="modal-change-button">
-                                                <button class="btn" type="submit">Save Changes</button>
-                                                <button class="btn" type="button" onclick="closeChangeInfo()">Cancel</button>
+                                                <button class="btn" type="submit">Lưu</button>
+                                                <button class="btn" type="button" onclick="closeChangeInfo()">Hủy</button>
                                             </div>
                                         </div>
                                     </div>
@@ -123,18 +119,18 @@
                     <div id="menu2">
                         <c:if test="${orderView != null &&listOrDetails == null}">
                             <div class="d-flex justify-content-between align-items-center mb-3 profile-title">
-                                <p class="text-right">View order</p>
+                                <p class="text-right">Xem đơn hàng</p>
                             </div>
                             <div class="table-responsive-lg">
                                 <table class="table table-striped table-hover" id="dataTable">
                                     <thead>
                                         <tr>
                                             <th scope="col">ID</th>
-                                            <th scope="col">Total price</th>
-                                            <th scope="col">Order date</th>
-                                            <th scope="col">Status</th>
-                                            <th scope="col">Received</th>
-                                            <th scope="col">Notes</th>
+                                            <th scope="col">Tổng tiền</th>
+                                            <th scope="col">Ngày mua</th>
+                                            <th scope="col">Tình trạng</th>
+                                            <th scope="col">Đã nhận</th>
+                                            <th scope="col">Ghi chú</th>
                                             <th scope="col"></th>
                                         </tr>
                                     </thead>
@@ -170,17 +166,17 @@
                         <!--user order detail-->
                         <c:if test="${orderView != null&&listOrDetails != null}">
                             <div class="d-flex justify-content-between align-items-center mb-3 profile-title">
-                                <p class="text-right">View Detail </p>
+                                <p class="text-right">Xem chi tiết đơn hàng </p>
                             </div>
                             <div class="table-responsive-lg">
                                 <table class="table table-striped table-hover" id="dataTable">
                                     <thead>
                                         <tr>
-                                            <th scope="col">Product ID</th>
-                                            <th scope="col">Product Name</th>
-                                            <th scope="col">Product Color</th>
-                                            <th scope="col">Price</th>
-                                            <th scope="col">Quantity</th>
+                                            <th scope="col">ID</th>
+                                            <th scope="col">Tên sản phẩm</th>
+                                            <th scope="col">Màu sản phẩm</th>
+                                            <th scope="col">Giá</th>
+                                            <th scope="col">Số lượng</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -208,19 +204,19 @@
                         <div class="mt-3 profile-input" style="margin: 0 5rem">
                             <form action="changePassword" method="post">
                                 <div class="col-md-12 mt-3">
-                                    <label class="labels">Enter old password</label>
-                                    <input type="password" class="form-control" name="oldPass" placeholder="Password"/>
+                                    <label class="labels">Nhập mật khẩu hiện tại</label>
+                                    <input type="password" class="form-control" name="oldPass" placeholder="mật khẩu cũ..."/>
                                 </div>
                                 <div class="col-md-12 mt-3">
-                                    <label class="labels">Enter new password</label>
-                                    <input type="password" class="form-control" name="newPass" placeholder="Password" onChange="checkPass()"/>
+                                    <label class="labels">Nhập mật khẩu mới</label>
+                                    <input type="password" class="form-control" name="newPass" placeholder="mật khẩu mới..." onChange="checkPass()"/>
                                 </div>
                                 <div class="col-md-12 mt-3">
-                                    <label class="labels">Re-enter new password</label>
-                                    <input type="password" class="form-control" name="confirm" placeholder="Password" onChange="checkPass()"/>
+                                    <label class="labels">Nhập lại mật khẩu mới</label>
+                                    <input type="password" class="form-control" name="confirm" placeholder="nhập lại mật khẩu mới..." onChange="checkPass()"/>
                                 </div>
                                 <div class="mt-5 text-center profile-save">
-                                    <button class="btn" type="submit">Save Changes</button>
+                                    <button class="btn" type="submit">Lưu thay đổi</button>
                                 </div>
                             </form> 
                         </div>
@@ -229,13 +225,17 @@
                 </div>
                 <!--update user avatar-->  
                 <div class="col-md-4 edit-image-title">
-                    <div class="d-flex justify-content-between"><p>Edit Profile Avatar</p></div><br>
-                    <div class="p-3 py-5 edit-image">
-                        <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg">
+                    <div class="d-flex justify-content-between"><p>Tải ảnh đại diện</p></div><br>
+                    <form action="create-info" method="post" enctype="multipart/form-data">
+                        <div class="p-3 py-5 edit-image">
+                            <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg">
+                            </div>
+                            <input type="hidden" name="addImg" value="true">
+                            <input type="file" name="uploadfile" id="img" disabled style="display:none;"/>
+                            <label for="img">Tải ảnh lên *</label>
+                            <p style="font-size: 0.9rem;margin: 0.2rem">*Tính năng chưa sử dụng được</p>
                         </div>
-                        <input type="file" name="uploadfile" id="img" style="display:none;"/>
-                        <label for="img">Upload avatar</label>
-                    </div>
+                    </form>
                 </div>
                 <!--end update user avatar-->  
             </div>
@@ -246,18 +246,7 @@
                     <div class="modal-nofi-body">
                         <div class="modal-nofi-inner">
                             <i class="far fa-check-circle"></i>
-                            <p>Change info successfully </p>
-                        </div>
-                    </div>
-                </div>
-            </c:if> 
-            <c:if test="${checkPass==true}">
-                <div onclick="closeModal()" class="modal-nofi" id="modal-edit">
-                    <div class="modal-nofi-overlay"></div>
-                    <div class="modal-nofi-body">
-                        <div class="modal-nofi-inner">
-                            <i class="far fa-check-circle"></i>
-                            <p>Change password successfully </p>
+                            <p>Thay đổi thông tin thành công</p>
                         </div>
                     </div>
                 </div>
@@ -268,7 +257,7 @@
                     <div class="modal-nofi-body">
                         <div class="modal-nofi-fail">
                             <i class="far fa-times-circle"></i>
-                            <p>Change password failed </p>
+                            <p>Thay đổi mật khẩu thất bại</p>
                         </div>
                     </div>
                 </div>
@@ -279,9 +268,9 @@
                     <div class="modal-change-body">
                         <div class="modal-nofi-inner">
                             <i class="far fa-check-circle"></i>
-                            <p>Change password successfully </p>
+                            <p>Thay đổi mật khẩu thành công</p>
                         </div>
-                        <a href="#" onclick="reDirect()">Close</a>
+                        <a href="#" onclick="reDirect()">Đóng</a>
                     </div>
                 </div>
             </c:if>
@@ -295,15 +284,15 @@
                 const confirm = document.querySelector('input[name=confirm]');
                 var regex = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
                 if (oldPassword.value === password.value) {
-                    password.setCustomValidity('New password same the old password');
+                    password.setCustomValidity('Mật khẩu mới trùng mật khẩu hiện tại');
                 } else {
                     if (!regex.test(password.value)) {
-                        password.setCustomValidity('Password must contains at least one number,uppercase and lowercase,special character and above 8 characters');
+                        password.setCustomValidity('Mật khẩu có ít nhất 1 số, chữ hoa, thường, kí tự đặc biệt và trên 8 kí tự');
                     } else {
                         if (confirm.value === password.value) {
                             confirm.setCustomValidity('');
                         } else {
-                            confirm.setCustomValidity('Passwords do not match');
+                            confirm.setCustomValidity('Mật khẩu không khớp');
                         }
                     }
                 }

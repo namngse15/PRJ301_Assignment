@@ -33,23 +33,25 @@ public class AdminCategoryUpdate extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
         CategoryDAO cdb = new CategoryDAO();
         String add = request.getParameter("add");
         String edit = request.getParameter("edit");
-        
+
         String addType = request.getParameter("addType");
         String editType = request.getParameter("editType");
         String removeType = request.getParameter("removeType");
-        
+
         String getDisplay = request.getParameter("display");
+        String cateName = request.getParameter("cateName");
         String getCateId = request.getParameter("cateEditId");
-        String cateName = request.getParameter("cateEditName");
+        String cateEditName = request.getParameter("cateEditName");
         String getRemoveCateId = request.getParameter("removeCateById");
-        
+
         boolean checkAddCate = false;
         boolean checkEditCate = false;
         boolean checkRemoveCate = false;
-        
+
         int display = 0;
         int cateId = 0;
         int removeCateId = 0;
@@ -101,25 +103,25 @@ public class AdminCategoryUpdate extends HttpServlet {
         if (edit != null) {
             switch (editType) {
                 case "brand":
-                    checkEditCate = cdb.editBrand(cateId, cateName);
+                    checkEditCate = cdb.editBrand(cateId, cateEditName);
                     break;
                 case "category":
-                    checkEditCate = cdb.editCategory(cateId, cateName);
+                    checkEditCate = cdb.editCategory(cateId, cateEditName);
                     break;
                 case "price":
-                    checkEditCate = cdb.editPrice(cateId, cateName);
+                    checkEditCate = cdb.editPrice(cateId, cateEditName);
                     break;
                 case "processor":
-                    checkEditCate = cdb.editProcessor(cateId, cateName);
+                    checkEditCate = cdb.editProcessor(cateId, cateEditName);
                     break;
                 case "gpu":
-                    checkEditCate = cdb.editGpu(cateId, cateName);
+                    checkEditCate = cdb.editGpu(cateId, cateEditName);
                     break;
                 case "ram":
-                    checkEditCate = cdb.editRam(cateId, cateName);
+                    checkEditCate = cdb.editRam(cateId, cateEditName);
                     break;
                 case "hdd":
-                    checkEditCate = cdb.editHdd(cateId, cateName);
+                    checkEditCate = cdb.editHdd(cateId, cateEditName);
                     break;
             }
         }
@@ -152,7 +154,7 @@ public class AdminCategoryUpdate extends HttpServlet {
                     break;
             }
         }
-        
+
         request.getRequestDispatcher("admin-category").forward(request, response);
     }
 

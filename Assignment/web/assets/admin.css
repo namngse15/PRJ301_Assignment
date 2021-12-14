@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300;500;800&family=Roboto:wght@400;700&display=swap');
 
 :root {
     --orange: #ff7800;
@@ -8,7 +8,7 @@
     --box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.1);
 }
 * {
-    font-family: "Poppins", sans-serif;
+   font-family: 'Roboto', sans-serif;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -160,14 +160,13 @@ body {
     width: 20%;
 }
 .sidebar{
-    box-shadow: inset 0.2rem 0.2rem 0.5rem #c8d0e7, 
-        inset -0.2rem -0.2rem 0.5rem #FFFFFF;
     height:77rem;
 }
 .sidebar .sidebar-header {
     padding: 1rem;
     box-shadow: inset 0.2rem 0.2rem 0.5rem #c8d0e7, 
         inset -0.2rem -0.2rem 0.5rem #FFFFFF;
+        border-radius: 1.5rem; 
 }
 .sidebar-header i{
     font-size: 2.2rem;
@@ -178,7 +177,6 @@ body {
 }
 .sidebar ul li {
     list-style: none;
-    border-bottom: 1px solid rgb(233, 230, 230);
     margin-left: 1rem;
     margin-right: 1rem;
     padding: 0.5rem 0;
@@ -187,8 +185,7 @@ body {
     width: 100%;
     height: 12rem;
     background-image: linear-gradient(149deg, #facaa878 0%,#ddd6f3 10% ,#E4EBF5 116%);
-    box-shadow: inset 0.2rem 0.2rem 0.5rem #c8d0e7, 
-        inset -0.2rem -0.2rem 0.5rem #FFFFFF;
+    border-radius: 1.5rem; 
     transition:0.2s;
     outline:none !important;
     cursor: pointer;
@@ -201,10 +198,7 @@ body {
 .sidebar ul li i{
     font-size: 2.2rem;
     color:var(--orange);
-}   
-.sidebar ul li:last-child {
-    border-bottom: 1px solid #fff;
-}
+}  
 .sidebar .sidebar-footer {
     height: 4rem;
     border-radius: 0 0 0.5rem 0.5rem;
@@ -480,6 +474,27 @@ input:focus{
 .btn-save-modal:hover{
     box-shadow: rgba(240, 156, 46, 0.4) 5px 5px, rgba(240, 179, 46, 0.3) 10px 10px, rgba(240, 172, 46, 0.2) 15px 15px, rgba(240, 188, 46, 0.1) 20px 20px, rgba(240, 162, 46, 0.05) 25px 25px;
     color:#fff;
+}
+
+.modal-nofi-body{
+    width: 30rem;
+    margin: auto;
+    position: relative;
+    background-color: #fff;
+    border-radius:5px; 
+}
+.modal-nofi-inner{
+    text-align: center; 
+    padding: 1rem 0;   
+}
+.modal-nofi-inner i{
+    font-size: 6.1rem;
+    margin-bottom: 1rem;
+    color: chartreuse;
+}
+.modal-nofi-inner p{
+    font-size: 1.4rem;
+    font-weight: bold;
 }
 /*datatale*/
 .table-product{

@@ -19,9 +19,9 @@ import model.Account;
  * @author tenhik
  */
 public class AccountDAO extends BaseDAO<Account> {
-
+    
     OrdersDAO o = new OrdersDAO();
-
+    
     public int getCountTotalUser(int roleId) {
         try {
             String sql = "select COUNT(*) \n"
@@ -40,9 +40,7 @@ public class AccountDAO extends BaseDAO<Account> {
         }
         return 0;
     }
-
-
-
+    
     public String getAccountByUserName(String username) {
         String result = "";
         try {
@@ -58,11 +56,11 @@ public class AccountDAO extends BaseDAO<Account> {
                 return result;
             }
         } catch (Exception e) {
-
+            
         }
         return null;
     }
-
+    
     public String getAccountByUserEmail(String email) {
         String result = "";
         try {
@@ -78,11 +76,11 @@ public class AccountDAO extends BaseDAO<Account> {
                 return result;
             }
         } catch (Exception e) {
-
+            
         }
         return null;
     }
-
+    
     public List<Account> getListUserAccount(int roleId) {
         List<Account> listUsers = new ArrayList<>();
         try {
@@ -108,7 +106,7 @@ public class AccountDAO extends BaseDAO<Account> {
         }
         return listUsers;
     }
-
+    
     public Account getAccountByUsernameAndPassword(String username,
             String password) {
         try {
@@ -140,7 +138,7 @@ public class AccountDAO extends BaseDAO<Account> {
         }
         return null;
     }
-
+    
     public Account getAccountById(int accountId) {
         try {
             String sql = "select a.*,r.*\n"
@@ -169,7 +167,7 @@ public class AccountDAO extends BaseDAO<Account> {
         }
         return null;
     }
-
+    
     public boolean updatePassword(String password, String username, String email) {
         int check = 0;
         try {
@@ -186,7 +184,7 @@ public class AccountDAO extends BaseDAO<Account> {
         }
         return check > 0;
     }
-
+    
     public boolean updateAccount(Account account) {
         int check = 0;
         try {
@@ -212,7 +210,7 @@ public class AccountDAO extends BaseDAO<Account> {
         }
         return check > 0;
     }
-
+    
     public void updateStatus(int status, String username) {
         try {
             String sql = "update Account\n"
@@ -225,23 +223,28 @@ public class AccountDAO extends BaseDAO<Account> {
         } catch (Exception e) {
         }
     }
-
-    public boolean insertAccount(String username, String password, String email) {
+    
+    public boolean insertAccount(Account a) {
         int check = 0;
         try {
-            String sql = "insert into Account(username,email,[password],roleId)\n"
-                    + "values(?,?,?,?)";
+            String sql = "INSERT INTO Account(name,phone,email,address,dob,username,password,roleId,status)\n"
+                    + "values(?,?,?,?,?,?,?,?,?)";
             PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setString(1, username);
-            statement.setString(2, email);
-            statement.setString(3, password);
-            statement.setInt(4, 2);
+            statement.setString(1,a.getName());
+            statement.setString(2,a.getPhone());
+            statement.setString(3,a.getEmail());
+            statement.setString(4,a.getAddress());
+            statement.setDate(5,a.getDob());
+            statement.setString(6,a.getUsername());
+            statement.setString(7,a.getPassword());
+            statement.setInt(8,a.getRoleId());
+            statement.setInt(9,a.getStatus());
             check = statement.executeUpdate();
         } catch (SQLException e) {
         }
         return check > 0;
     }
-
+    
     public boolean deleteAccount(int id) {
         int check = 0;
         boolean checkRemoveOrder = false;
@@ -263,7 +266,7 @@ public class AccountDAO extends BaseDAO<Account> {
         }
         return check > 0;
     }
-
+    
     public static void main(String[] args) {
         AccountDAO a = new AccountDAO();
         

@@ -18,7 +18,7 @@
     <!-- account -->
     <nav class="account-menu bg-dark">
         <c:if test="${adminLogin.name != null||account != null}">           
-            <a href="admin" class="text-light text-capitalize"> <i class="far fa-user-circle"></i> ${sessionScope.adminLogin.name} (Admin)</a>
+            <a href="admin" class="text-light text-capitalize"> <i class="fas fa-users-cog"></i> Administrator </a>
         </c:if> 
         <c:if test="${adminLogin == null}">
             <a href="login" class="text-light"><i class="fas fa-sign-in-alt"></i> Log in</a>

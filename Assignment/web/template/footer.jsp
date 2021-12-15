@@ -14,7 +14,7 @@
             <div class="col-6 col-md">
                 <h5 class="font-weight-bold ">Features</h5>
                 <ul class="list-unstyled text-small">
-                    <li><a class="text-muted" href="#">Home</a></li>
+                    <li><a class="text-muted" href="home">Home</a></li>
                     <li><a class="text-muted" href="#">Product</a></li>
                     <li><a class="text-muted" href="#">Contact</a></li>
                 </ul>

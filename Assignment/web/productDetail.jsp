@@ -231,256 +231,256 @@
                         <!--end tablist-->
                         <div class="tab-content" id="myTabContent">
                             <!--description-->
-                            <div class="tab-pane fade in active" id="description">
-                                <h3>Mô tả chi tiết sản phẩm</h3>
-                                <ul>
-                                    <li>Operating system: <span>${product.os}</span></li>
-                                    <li>Display: <span>${product.display}</span></li>
-                                    <li>Processor: <span>${product.processor}</span></li>
-                                    <li>Ram: <span>${product.ram}</span></li>
-                                    <li>Gpu: <span>${product.gpu}</span></li>
-                                    <li>Hard drive: <span>${product.harddrive}</span></li>
-                                    <li>Port: <span>${product.port}</span></li>
-                                    <li>Battery: <span>${product.battery}</span></li>
-                                </ul>
-                            </div>
-                            <!--end description-->
-                            <!--review-->
-                            <div class="tab-pane fade" id="review">
-                                <div class="review-heading">PHẢN HỒI</div>
-                                <!--no review-->                                
-                                <c:if test="${reviewInfo.getNumberReviewByProduct(product.id) == 0}">
-                                    <p class="mb-20">Chưa có phản hồi nào.</p>
-                                </c:if>
-                                <!--review > 0 --> 
-                                <c:if test="${reviewInfo.getNumberReviewByProduct(product.id) > 0}">
-                                    <c:forEach var="o" items="${reviewInfo.getAllReviewByProductId(product.id)}">
-                                        <div class="user-rating">
-                                            <div class="rating-content">
-                                                <p class="text-capitalize">${userInfo.getAccountById(o.accountId).name}</p>
+                                <div class="tab-pane fade in acitve" id="description">
+                                    <h3>Mô tả chi tiết sản phẩm</h3>
+                                    <ul>
+                                        <li>Operating system: <span>${product.os}</span></li>
+                                        <li>Display: <span>${product.display}</span></li>
+                                        <li>Processor: <span>${product.processor}</span></li>
+                                        <li>Ram: <span>${product.ram}</span></li>
+                                        <li>Gpu: <span>${product.gpu}</span></li>
+                                        <li>Hard drive: <span>${product.harddrive}</span></li>
+                                        <li>Port: <span>${product.port}</span></li>
+                                        <li>Battery: <span>${product.battery}</span></li>
+                                    </ul>
+                                </div>
+                                <!--end description-->
+                                <!--review-->
+                                <div class="tab-pane fade" id="review">
+                                    <div class="review-heading">PHẢN HỒI</div>
+                                    <!--no review-->                                
+                                    <c:if test="${reviewInfo.getNumberReviewByProduct(product.id) == 0}">
+                                        <p class="mb-20">Chưa có phản hồi nào.</p>
+                                    </c:if>
+                                    <!--review > 0 --> 
+                                    <c:if test="${reviewInfo.getNumberReviewByProduct(product.id) > 0}">
+                                        <c:forEach var="o" items="${reviewInfo.getAllReviewByProductId(product.id)}">
+                                            <div class="user-rating">
+                                                <div class="rating-content">
+                                                    <p class="text-capitalize">${userInfo.getAccountById(o.accountId).name}</p>
 
-                                                <!--user rating-->
-                                                <div class="rate">
-                                                    <c:if test="${reviewInfo.getSumReviewByProduct(product.id,o.accountId)>=5}"> 
-                                                        <input type="radio" id="star5" name="rate" value="5"/>
-                                                        <label for="star5" title="text">5 stars</label>
-                                                    </c:if>
-                                                    <c:if test="${reviewInfo.getSumReviewByProduct(product.id,o.accountId)>=4}"> 
-
-                                                        <input type="radio" id="star4" name="rate" value="4"/>
-                                                        <label for="star4" title="text">4 stars</label>
-                                                    </c:if>
-                                                    <c:if test="${reviewInfo.getSumReviewByProduct(product.id,o.accountId)>=3}"> 
-
-                                                        <input type="radio" id="star3" name="rate" value="3"/>
-                                                        <label for="star3" title="text">3 stars</label>
-                                                    </c:if>
-                                                    <c:if test="${reviewInfo.getSumReviewByProduct(product.id,o.accountId)>=2}"> 
-
-                                                        <input type="radio" id="star2" name="rate" value="2"/>
-                                                        <label for="star2" title="text">2 stars</label>
-                                                    </c:if>
-                                                    <c:if test="${reviewInfo.getSumReviewByProduct(product.id,o.accountId)>=1}"> 
-
-                                                        <input type="radio" id="star1" name="rate" value="1"/>
-                                                        <label for="star1" title="text">1 star</label>
-                                                    </c:if>
-                                                </div>
-                                                <!--end user rating-->
-                                                <!--user mess-->
-                                                <p>${o.message}</p>
-                                                <!--end user mess-->
-                                            </div>  
-                                            <!--user rating edit-->
-                                            <div class="rating-edit">
-                                                <c:if test="${o.accountId == currentLogin.id}">
-                                                    <c:if test="${checkUpdate==null}">    
-                                                        <a href="editreview?id=${o.id}&productId=${product.id}"><i class="far fa-edit"></i></a> 
+                                                    <!--user rating-->
+                                                    <div class="rate">
+                                                        <c:if test="${reviewInfo.getSumReviewByProduct(product.id,o.accountId)>=5}"> 
+                                                            <input type="radio" id="star5" name="rate" value="5"/>
+                                                            <label for="star5" title="text">5 stars</label>
                                                         </c:if>
-                                                        <c:if test="${checkUpdate==true}">    
-                                                        <a href="editreview?id=${o.id}&productId=${product.id}"><i class="far fa-edit"></i>Edited</a> 
-                                                    </c:if>
-                                                    <a href="#" onclick="deleteReview(${o.id}, '${product.id}')"><i class="far fa-trash-alt"></i></a>
-                                                    </c:if> 
+                                                        <c:if test="${reviewInfo.getSumReviewByProduct(product.id,o.accountId)>=4}"> 
+
+                                                            <input type="radio" id="star4" name="rate" value="4"/>
+                                                            <label for="star4" title="text">4 stars</label>
+                                                        </c:if>
+                                                        <c:if test="${reviewInfo.getSumReviewByProduct(product.id,o.accountId)>=3}"> 
+
+                                                            <input type="radio" id="star3" name="rate" value="3"/>
+                                                            <label for="star3" title="text">3 stars</label>
+                                                        </c:if>
+                                                        <c:if test="${reviewInfo.getSumReviewByProduct(product.id,o.accountId)>=2}"> 
+
+                                                            <input type="radio" id="star2" name="rate" value="2"/>
+                                                            <label for="star2" title="text">2 stars</label>
+                                                        </c:if>
+                                                        <c:if test="${reviewInfo.getSumReviewByProduct(product.id,o.accountId)>=1}"> 
+
+                                                            <input type="radio" id="star1" name="rate" value="1"/>
+                                                            <label for="star1" title="text">1 star</label>
+                                                        </c:if>
+                                                    </div>
+                                                    <!--end user rating-->
+                                                    <!--user mess-->
+                                                    <p>${o.message}</p>
+                                                    <!--end user mess-->
+                                                </div>  
+                                                <!--user rating edit-->
+                                                <div class="rating-edit">
+                                                    <c:if test="${o.accountId == currentLogin.id}">
+                                                        <c:if test="${checkUpdate==null}">    
+                                                            <a href="editreview?id=${o.id}&productId=${product.id}"><i class="far fa-edit"></i></a> 
+                                                            </c:if>
+                                                            <c:if test="${checkUpdate==true}">    
+                                                            <a href="editreview?id=${o.id}&productId=${product.id}"><i class="far fa-edit"></i>Edited</a> 
+                                                        </c:if>
+                                                        <a href="#" onclick="deleteReview(${o.id}, '${product.id}')"><i class="far fa-trash-alt"></i></a>
+                                                        </c:if> 
+                                                </div>
+                                                <!--end user rating edit-->                                            
                                             </div>
-                                            <!--end user rating edit-->                                            
-                                        </div>
-                                    </c:forEach>  
-                                </c:if>
-                                <!--user review form-->
-                                <form class="review-form" action="review" method="post">
-                                    <div class="form-group">
-                                        <label>Đánh giá</label>
-                                        <div class="reviews-counter">
-                                            <div class="rating">
-                                                <label>
-                                                    <input type="radio" name="stars" value="1" />
-                                                    <span class="icon">★</span>
-                                                </label>
-                                                <label>
-                                                    <input type="radio" name="stars" value="2" />
-                                                    <span class="icon">★</span>
-                                                    <span class="icon">★</span>
-                                                </label>
-                                                <label>
-                                                    <input type="radio" name="stars" value="3" />
-                                                    <span class="icon">★</span>
-                                                    <span class="icon">★</span>
-                                                    <span class="icon">★</span>   
-                                                </label>
-                                                <label>
-                                                    <input type="radio" name="stars" value="4" />
-                                                    <span class="icon">★</span>
-                                                    <span class="icon">★</span>
-                                                    <span class="icon">★</span>
-                                                    <span class="icon">★</span>
-                                                </label>
-                                                <label>
-                                                    <input type="radio" name="stars" value="5" />
-                                                    <span class="icon">★</span>
-                                                    <span class="icon">★</span>
-                                                    <span class="icon">★</span>
-                                                    <span class="icon">★</span>
-                                                    <span class="icon">★</span>
-                                                </label>
+                                        </c:forEach>  
+                                    </c:if>
+                                    <!--user review form-->
+                                    <form class="review-form" action="review" method="post">
+                                        <div class="form-group">
+                                            <label>Đánh giá</label>
+                                            <div class="reviews-counter">
+                                                <div class="rating">
+                                                    <label>
+                                                        <input type="radio" name="stars" value="1" />
+                                                        <span class="icon">★</span>
+                                                    </label>
+                                                    <label>
+                                                        <input type="radio" name="stars" value="2" />
+                                                        <span class="icon">★</span>
+                                                        <span class="icon">★</span>
+                                                    </label>
+                                                    <label>
+                                                        <input type="radio" name="stars" value="3" />
+                                                        <span class="icon">★</span>
+                                                        <span class="icon">★</span>
+                                                        <span class="icon">★</span>   
+                                                    </label>
+                                                    <label>
+                                                        <input type="radio" name="stars" value="4" />
+                                                        <span class="icon">★</span>
+                                                        <span class="icon">★</span>
+                                                        <span class="icon">★</span>
+                                                        <span class="icon">★</span>
+                                                    </label>
+                                                    <label>
+                                                        <input type="radio" name="stars" value="5" />
+                                                        <span class="icon">★</span>
+                                                        <span class="icon">★</span>
+                                                        <span class="icon">★</span>
+                                                        <span class="icon">★</span>
+                                                        <span class="icon">★</span>
+                                                    </label>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group mt-5">
-                                        <label>Đánh giá bằng lời</label>
-                                        <input type="text" name="productId" value="${product.id}" hidden>
-                                        <input type="text" name="id" value="${id}" hidden>
-                                        <textarea name="reviewmess" class="form-control" rows="10"></textarea>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <input type="text" name="" class="form-control" placeholder="Name"
-                                                       value="${userInfo.getAccountByUsernameAndPassword(currentLogin.username,currentLogin.password).name}" required>
+                                        <div class="form-group mt-5">
+                                            <label>Đánh giá bằng lời</label>
+                                            <input type="text" name="productId" value="${product.id}" hidden>
+                                            <input type="text" name="id" value="${id}" hidden>
+                                            <textarea name="reviewmess" class="form-control" rows="10"></textarea>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <input type="text" name="" class="form-control" placeholder="Name"
+                                                           value="${userInfo.getAccountByUsernameAndPassword(currentLogin.username,currentLogin.password).name}" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <input type="text" name="" class="form-control" placeholder="Email" 
+                                                           value="${userInfo.getAccountByUsernameAndPassword(currentLogin.username,currentLogin.password).email}" required>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <input type="text" name="" class="form-control" placeholder="Email" 
-                                                       value="${userInfo.getAccountByUsernameAndPassword(currentLogin.username,currentLogin.password).email}" required>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <button class="round-black-btn mb-5" type="submit">Lưu phản hồi</button>
-                                </form>
-                                <!--end user review form-->
+                                        <button class="round-black-btn mb-5" type="submit">Lưu phản hồi</button>
+                                    </form>
+                                    <!--end user review form-->
+                                </div>
+                                <!--end review-->
                             </div>
-                            <!--end review-->
+                        </div>
+                    </div>
+                    <!-- end product detai des and review-->
+                </div>
+                <!--product info-->
+            </div> 
+            <!--modal change review-->
+            <c:if test="${openModal == 1}">
+                <div class="modal-nofi" id="modal-notifi">
+                    <div class="modal-nofi-overlay"></div>
+                    <div class="modal-edit-body">
+                        <div class="modal-edit-header">
+                            <h3>Thay đổi phản hồi</h3>
+                        </div>
+                        <div class="modal-edit-form">
+                            <form class="review-form" action="editreview" method="post">
+                                <div class="form-group">
+                                    <label>Đánh giá</label>
+                                    <div class="reviews-counter">
+                                        <div class="rating">
+                                            <label>
+                                                <input type="radio" name="stars" value="1" />
+                                                <span class="icon">★</span>
+                                            </label>
+                                            <label>
+                                                <input type="radio" name="stars" value="2" />
+                                                <span class="icon">★</span>
+                                                <span class="icon">★</span>
+                                            </label>
+                                            <label>
+                                                <input type="radio" name="stars" value="3" />
+                                                <span class="icon">★</span>
+                                                <span class="icon">★</span>
+                                                <span class="icon">★</span>   
+                                            </label>
+                                            <label>
+                                                <input type="radio" name="stars" value="4" />
+                                                <span class="icon">★</span>
+                                                <span class="icon">★</span>
+                                                <span class="icon">★</span>
+                                                <span class="icon">★</span>
+                                            </label>
+                                            <label>
+                                                <input type="radio" name="stars" value="5" />
+                                                <span class="icon">★</span>
+                                                <span class="icon">★</span>
+                                                <span class="icon">★</span>
+                                                <span class="icon">★</span>
+                                                <span class="icon">★</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div> 
+                                <div class="form-group mt-5">
+                                    <label>Đánh giá bằng lời</label>
+                                    <input type="text" name="id" value="${id}" hidden>
+                                    <input type="text" name="productId" value="${product.id}" hidden>
+                                    <textarea name="reviewmess" class="form-control" rows="10"></textarea>
+                                </div>
+                                <div class="modal-change-button">
+                                    <button class="btn" type="submit">Lưu</button>
+                                    <button class="btn" type="button" onclick="closeModal()">Hủy</button>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
-                <!-- end product detai des and review-->
-            </div>
-            <!--product info-->
-        </div> 
-        <!--modal change review-->
-        <c:if test="${openModal == 1}">
-            <div class="modal-nofi" id="modal-notifi">
-                <div class="modal-nofi-overlay"></div>
-                <div class="modal-edit-body">
-                    <div class="modal-edit-header">
-                        <h3>Thay đổi phản hồi</h3>
-                    </div>
-                    <div class="modal-edit-form">
-                        <form class="review-form" action="editreview" method="post">
-                            <div class="form-group">
-                                <label>Đánh giá</label>
-                                <div class="reviews-counter">
-                                    <div class="rating">
-                                        <label>
-                                            <input type="radio" name="stars" value="1" />
-                                            <span class="icon">★</span>
-                                        </label>
-                                        <label>
-                                            <input type="radio" name="stars" value="2" />
-                                            <span class="icon">★</span>
-                                            <span class="icon">★</span>
-                                        </label>
-                                        <label>
-                                            <input type="radio" name="stars" value="3" />
-                                            <span class="icon">★</span>
-                                            <span class="icon">★</span>
-                                            <span class="icon">★</span>   
-                                        </label>
-                                        <label>
-                                            <input type="radio" name="stars" value="4" />
-                                            <span class="icon">★</span>
-                                            <span class="icon">★</span>
-                                            <span class="icon">★</span>
-                                            <span class="icon">★</span>
-                                        </label>
-                                        <label>
-                                            <input type="radio" name="stars" value="5" />
-                                            <span class="icon">★</span>
-                                            <span class="icon">★</span>
-                                            <span class="icon">★</span>
-                                            <span class="icon">★</span>
-                                            <span class="icon">★</span>
-                                        </label>
-                                    </div>
-                                </div>
-                            </div> 
-                            <div class="form-group mt-5">
-                                <label>Đánh giá bằng lời</label>
-                                <input type="text" name="id" value="${id}" hidden>
-                                <input type="text" name="productId" value="${product.id}" hidden>
-                                <textarea name="reviewmess" class="form-control" rows="10"></textarea>
+            </c:if> 
+            <!--modal change review-->
+            <!--modal add to cart success-->
+            <c:forEach items="${sessionScope.listCarts}" var="i">
+                <c:if test="${i.productId == product.id&&check==1}">
+                    <div onclick="closeModal()" class="modal-nofi" id="modal-notifi">
+                        <div class="modal-nofi-overlay"></div>
+                        <div class="modal-nofi-body">
+                            <div class="modal-nofi-inner">
+                                <i class="far fa-check-circle"></i>
+                                <p>Thêm vào giỏ hàng thành công </p>
                             </div>
-                            <div class="modal-change-button">
-                                <button class="btn" type="submit">Lưu</button>
-                                <button class="btn" type="button" onclick="closeModal()">Hủy</button>
-                            </div>
-                        </form>
+                        </div>
                     </div>
-                </div>
-            </div>
-        </c:if> 
-        <!--modal change review-->
-        <!--modal add to cart success-->
-        <c:forEach items="${sessionScope.listCarts}" var="i">
-            <c:if test="${i.productId == product.id&&check==1}">
+                </c:if>
+            </c:forEach>
+            <!--end modal add to cart success-->
+            <!--modal review fail-->
+            <c:if test="${checkReviewExist==1}">
                 <div onclick="closeModal()" class="modal-nofi" id="modal-notifi">
                     <div class="modal-nofi-overlay"></div>
                     <div class="modal-nofi-body">
-                        <div class="modal-nofi-inner">
-                            <i class="far fa-check-circle"></i>
-                            <p>Thêm vào giỏ hàng thành công </p>
+                        <div class="modal-nofi-fail">
+                            <i class="far fa-times-circle"></i>
+                            <p>XIn lỗi ..! Bạn đã đánh giá sản phẩm này </p>
                         </div>
                     </div>
                 </div>
-            </c:if>
-        </c:forEach>
-        <!--end modal add to cart success-->
-        <!--modal review fail-->
-        <c:if test="${checkReviewExist==1}">
-            <div onclick="closeModal()" class="modal-nofi" id="modal-notifi">
-                <div class="modal-nofi-overlay"></div>
-                <div class="modal-nofi-body">
-                    <div class="modal-nofi-fail">
-                        <i class="far fa-times-circle"></i>
-                        <p>XIn lỗi ..! Bạn đã đánh giá sản phẩm này </p>
+            </c:if>  
+            <c:if test="${checkReview==false &&checkReviewExist==0}">
+                <div onclick="closeModal()" class="modal-nofi" id="modal-notifi">
+                    <div class="modal-nofi-overlay"></div>
+                    <div class="modal-nofi-body">
+                        <div class="modal-nofi-fail">
+                            <i class="far fa-times-circle"></i>
+                            <p>Lưu phản hồi thất bại</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </c:if>  
-        <c:if test="${checkReview==false &&checkReviewExist==0}">
-            <div onclick="closeModal()" class="modal-nofi" id="modal-notifi">
-                <div class="modal-nofi-overlay"></div>
-                <div class="modal-nofi-body">
-                    <div class="modal-nofi-fail">
-                        <i class="far fa-times-circle"></i>
-                        <p>Lưu phản hồi thất bại</p>
-                    </div>
-                </div>
-            </div>
-        </c:if>  
-        <!-- end modal review fail-->
-        <jsp:include page="template/footer.jsp"/>
+            </c:if>  
+            <!-- end modal review fail-->
+            <jsp:include page="template/footer.jsp"/>
     </body>
     <script>
 
@@ -501,6 +501,17 @@
             console.log('New star rating: ' + this.value);
         }
         );
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function (event) {
+            var scrollpos = localStorage.getItem('scrollpos');
+            if (scrollpos)
+                window.scrollTo(0, scrollpos);
+        });
+
+        window.onbeforeunload = function (e) {
+            localStorage.setItem('scrollpos', window.scrollY);
+        };
     </script>
     <script src="assets/main.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

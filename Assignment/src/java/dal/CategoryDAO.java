@@ -351,46 +351,6 @@ public class CategoryDAO extends BaseDAO {
     }
 //CRUD processor
 
-    public boolean addProcessor(String processor) {
-        int check = 0;
-        try {
-            String sql = "INSERT INTO ProProcessor(name)\n"
-                    + "VALUES(?)";
-            PreparedStatement stm = connection.prepareStatement(sql);
-            stm.setString(1, processor);
-            check = stm.executeUpdate();
-        } catch (Exception e) {
-        }
-        return check > 0;
-    }
-
-    public boolean editProcessor(int id, String processor) {
-        int check = 0;
-        try {
-            String sql = "update ProProcessor\n"
-                    + "set name=?\n"
-                    + "where id =?";
-            PreparedStatement stm = connection.prepareStatement(sql);
-            stm.setString(1, processor);
-            stm.setInt(2, id);
-            check = stm.executeUpdate();
-        } catch (Exception e) {
-        }
-        return check > 0;
-    }
-
-    public boolean removeProcessor(int id) {
-        int check = 0;
-        try {
-            String sql = "delete ProProcessor\n"
-                    + "where id=?";
-            PreparedStatement stm = connection.prepareStatement(sql);
-            stm.setInt(1, id);
-            check = stm.executeUpdate();
-        } catch (Exception e) {
-        }
-        return check > 0;
-    }
 //Ram
 
     public List<Ram> getAllRam() {
@@ -750,46 +710,6 @@ public class CategoryDAO extends BaseDAO {
     }
 //CRUD gpu
 
-    public boolean addGpu(String gpu) {
-        int check = 0;
-        try {
-            String sql = "INSERT INTO ProGpu(name)\n"
-                    + "VALUES(?)";
-            PreparedStatement stm = connection.prepareStatement(sql);
-            stm.setString(1, gpu);
-            check = stm.executeUpdate();
-        } catch (Exception e) {
-        }
-        return check > 0;
-    }
-
-    public boolean editGpu(int id, String gpu) {
-        int check = 0;
-        try {
-            String sql = "update ProGpu\n"
-                    + "set name=?\n"
-                    + "where id =?";
-            PreparedStatement stm = connection.prepareStatement(sql);
-            stm.setString(1, gpu);
-            stm.setInt(2, id);
-            check = stm.executeUpdate();
-        } catch (Exception e) {
-        }
-        return check > 0;
-    }
-
-    public boolean removeGpu(int id) {
-        int check = 0;
-        try {
-            String sql = "delete ProGpu\n"
-                    + "where id=?";
-            PreparedStatement stm = connection.prepareStatement(sql);
-            stm.setInt(1, id);
-            check = stm.executeUpdate();
-        } catch (Exception e) {
-        }
-        return check > 0;
-    }
 //os    
 
     public List<Os> getAllOs() {

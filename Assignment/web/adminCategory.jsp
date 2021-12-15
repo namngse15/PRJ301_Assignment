@@ -296,7 +296,7 @@
                 <div class="col-sm-6 mb-3">
                     <div class="title" style="display:flex;margin-left:1rem;">
                         <h2>Product's GPU</h2>
-                        <a style="margin-left: 1rem;margin-top:2.2rem;" href="admin-category?addCategory=true&cateType=gpu"><i class=" fa-2x fas fa-plus"></i></a>
+                        <a style="margin-left: 1rem;margin-top:2.2rem;" href="admin-category?addCategory=true&cateType=gpu"><i class=" fa-2x fas fa-plus"></i> (chưa update)</a>
                     </div>
                     <div class="table-responsive-lg">
                         <table class="table table-striped table-hover" id="dataTable1">
@@ -317,10 +317,10 @@
                                         <td>${getProduct.getCountTotalProductByGpu(o.id)}</td>
                                         <td>
                                             <c:if test="${getProduct.getCountTotalProductByGpu(o.id)== 0}"> 
-                                                <a href="javascript:;" onclick="removeCate(${o.id},'gpu')">Remove</a>
+                                                <a href="javascript:;" onclick="removeCate(${o.id},'gpu')">Remove (chưa update) </a>
                                             </c:if>
                                         </td>
-                                        <td><a href="admin-category?editCategory=true&gpuId=${o.id}">Edit</a></td>
+                                        <td><a href="admin-category?editCategory=true&gpuId=${o.id}">Edit (chưa update) </a></td>
                                     </tr>
                                 </c:forEach>
 
@@ -338,7 +338,9 @@
                 <div class="col-sm-6 mb-3">
                     <div class="title" style="display:flex;margin-left:1rem;">
                         <h2>Product's Processor</h2>
-                        <a style="margin-left: 1rem;margin-top:2.2rem;" href="admin-category?addCategory=true&cateType=processor"><i class=" fa-2x fas fa-plus"></i></a>
+                        <a style="margin-left: 1rem;margin-top:2.2rem;" href="admin-category?addCategory=true&cateType=processor">
+                            <i class=" fa-2x fas fa-plus"></i> (chưa update)
+                        </a>
                     </div>
                     <div class="table-responsive-lg">
                         <table class="table table-striped table-hover" id="dataTable1">
@@ -359,10 +361,10 @@
                                         <td>${getProduct.getCountTotalProductByProcessor(o.id)}</td>
                                         <td>
                                             <c:if test="${getProduct.getCountTotalProductByProcessor(o.id)== 0}"> 
-                                                <a href="javascript:;" onclick="removeCate(${o.id},'processor')">Remove</a>
+                                                <a href="javascript:;" onclick="removeCate(${o.id},'processor')">Remove (chưa update)</a>
                                             </c:if>
                                         </td>
-                                        <td><a href="admin-category?editCategory=true&processorId=${o.id}">Edit</a></td>
+                                        <td><a href="admin-category?editCategory=true&processorId=${o.id}">Edit (chưa update)</a></td>
                                     </tr>
                                 </c:forEach>
 

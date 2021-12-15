@@ -10,6 +10,8 @@
 <html lang="en">
 
     <head>
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js" 
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -52,12 +54,8 @@
             <div id="login-form">
                 <form action="login" method="post">
                     <input type="hidden" name="loginAction" value="true">
-                    <div class="input-border">
-                        <input type="text"  name="username" value="<%=username%>" placeholder="Tên đăng nhập" required/>
-                    </div> 
-                    <div class="input-border">
-                        <input type="password" name="password" value="<%=password%>" placeholder="Mật khẩu" required/>
-                    </div>
+                    <input type="text"  name="username" value="<%=username%>" placeholder="Tên đăng nhập" required/>
+                    <input type="password" name="password" value="<%=password%>" placeholder="Mật khẩu" required/>
                     <input type="checkbox" name ="remember" value="remember"/> Remember me <br/>
                     <button type="submit" class="btn login" value="Login">Đăng nhập</button>
                     <c:if test="${statement != null}">
@@ -106,30 +104,31 @@
     </body>
     <script>
         function checkUser() {
-            const username = document.querySelector('input[name=user]');
+            var username = document.querySelector('input[name=user]');
             var regex = /[0-9a-zA-Z]{6,}/;
             if (username.value.match(regex)) {
                 username.setCustomValidity('');
             } else {
-                username.setCustomValidity('Tên đăng nhập phải chứa chữ và số');
+                username.setCustomValidity('Tên đăng nhập phải chứa chữ và số và trên 6 kí tự');
             }
         }
-
+        
         function checkPass() {
-            const password = document.querySelector('input[name=pass]');
-            const confirm = document.querySelector('input[name=confirm]');
-            var regex = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
-            if (!regex.test(password.value)) {
-                password.setCustomValidity('Mật khẩu có ít nhất 1 số, chữ hoa, thường, kí tự đặc biệt và trên 8 kí tự');
-            } else {
+            var password = document.querySelector('input[name=pass]');
+            var regexP = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
+            if (password.value.match(regexP)) {
+                password.setCustomValidity('');
+                var confirm = document.querySelector('input[name=confirm]');
                 if (confirm.value === password.value) {
                     confirm.setCustomValidity('');
                 } else {
                     confirm.setCustomValidity('Mật khẩu không khớp');
                 }
+            } else {
+                password.setCustomValidity('Mật khẩu có ít nhất 1 số, chữ hoa, thường, kí tự đặc biệt và trên 8 kí tự');
             }
         }
-
+        
         //login-signup
         function toggleSignup() {
             document.getElementById("login-form").style.display = "none";

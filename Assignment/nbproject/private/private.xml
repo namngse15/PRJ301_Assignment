@@ -3,9 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/tenhik/Documents/GitHub/Assignment/Assignment/src/java/dal/AccountDAO.java</file>
-            <file>file:/C:/Users/tenhik/Documents/GitHub/Assignment/Assignment/src/java/filter/AccessFilter.java</file>
-            <file>file:/C:/Users/tenhik/Documents/GitHub/Assignment/Assignment/web/profileCreate.jsp</file>
+            <file>file:/C:/Users/tenhik/Documents/GitHub/Assignment/Assignment/web/template/footer.jsp</file>
+            <file>file:/C:/Users/tenhik/Documents/GitHub/Assignment/Assignment/web/productDetail.jsp</file>
+            <file>file:/C:/Users/tenhik/Documents/GitHub/Assignment/Assignment/src/java/controller/ReviewRemoveController.java</file>
+            <file>file:/C:/Users/tenhik/Documents/GitHub/Assignment/Assignment/src/java/controller/ReviewController.java</file>
+            <file>file:/C:/Users/tenhik/Documents/GitHub/Assignment/Assignment/src/java/controller/ReviewEditController.java</file>
+            <file>file:/C:/Users/tenhik/Documents/GitHub/Assignment/Assignment/src/java/controller/CheckOutController.java</file>
         </group>
     </open-files>
 </project-private>

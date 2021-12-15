@@ -20,7 +20,7 @@ public class OrderDetailDAO extends BaseDAO<OrderDetail> {
 
     int check = 0;
 
-    public boolean addOrder(OrderDetail orderDetail) {
+    public boolean addOrderDetail(OrderDetail orderDetail) {
         try {
             String sql = "INSERT INTO OrderDetail(productName,productColor,productQuantity,ProductPrice,productId,orderId)\n"
                     + "VALUES(?,?,?,?,?,?)";

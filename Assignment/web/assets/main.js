@@ -23,7 +23,7 @@ videoBtn.forEach(btn => {
         btn.classList.add('active');
         //change vid src
         let src = btn.getAttribute('data-src');
-        document.querySelector('#video-slider').src=src;
+        document.querySelector('#video-slider').src = src;
     });
 });
 //product image
@@ -41,10 +41,8 @@ $(document).ready(function () {
     // Lift card and show stats on Mouseover
     $('.product-card').hover(function () {
         $(this).addClass('animate');
-        $('div.carouselNext, div.carouselPrev').addClass('visible');
     }, function () {
         $(this).removeClass('animate');
-        $('div.carouselNext, div.carouselPrev').removeClass('visible');
     });
 });
 // sub menu sidebar

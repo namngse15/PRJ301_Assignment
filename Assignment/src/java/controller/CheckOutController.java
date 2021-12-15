@@ -9,7 +9,6 @@ import dal.OrderDetailDAO;
 import dal.OrdersDAO;
 import dal.ProductDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -72,7 +71,7 @@ public class CheckOutController extends HttpServlet {
 
                 if (quantityInStock > 0 && quantityCart < quantityInStock) {
                     OrderDetail orderDetail = new OrderDetail(product.getName(), cart.getColor(), cart.getQuantity(), product.getPrice(), cart.getProductId(), orderId);
-                    boolean checkOdetail = odd.addOrder(orderDetail);
+                    boolean checkOdetail = odd.addOrderDetail(orderDetail);
                     int quantityAfter = quantityInStock - quantityCart;
                     pdb.updateQuantity(quantityAfter,product.getId());
 

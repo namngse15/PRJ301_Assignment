@@ -85,17 +85,17 @@ public class AdminCategoryUpdate extends HttpServlet {
                 case "category":
                     checkAddCate = cdb.addCategory(cateName);
                     break;
-                case "processor":
-                    checkAddCate = cdb.addProcessor(cateName);
+                case "hdd":
+                    checkAddCate = cdb.addHdd(cateName);
                     break;
                 case "ram":
                     checkAddCate = cdb.addRam(cateName);
                     break;
                 case "gpu":
-                    checkAddCate = cdb.addGpu(cateName);
+                    //update
                     break;
-                case "hdd":
-                    checkAddCate = cdb.addHdd(cateName);
+                case "processor":
+                    //update
                     break;
             }
         }
@@ -112,10 +112,10 @@ public class AdminCategoryUpdate extends HttpServlet {
                     checkEditCate = cdb.editPrice(cateId, cateEditName);
                     break;
                 case "processor":
-                    checkEditCate = cdb.editProcessor(cateId, cateEditName);
+                    //update
                     break;
                 case "gpu":
-                    checkEditCate = cdb.editGpu(cateId, cateEditName);
+                    //update
                     break;
                 case "ram":
                     checkEditCate = cdb.editRam(cateId, cateEditName);
@@ -141,10 +141,10 @@ public class AdminCategoryUpdate extends HttpServlet {
                     checkRemoveCate = cdb.removeDisplay(removeCateId);
                     break;
                 case "processor":
-                    checkRemoveCate = cdb.removeProcessor(removeCateId);
+                    //update
                     break;
                 case "gpu":
-                    checkRemoveCate = cdb.removeGpu(removeCateId);
+                    //update
                     break;
                 case "ram":
                     checkRemoveCate = cdb.removeRam(removeCateId);

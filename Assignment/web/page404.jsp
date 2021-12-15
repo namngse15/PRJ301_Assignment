@@ -26,13 +26,13 @@
                             </div>
                             <div class="contant_box_404">
                                 <h3 class="h2" style="font-family: 'Roboto', sans-serif;">
-                                    Ối, bạn không nên vào trang này nhé :))
+                                    Ôi, Thật buồn vì đã có lỗi :((
                                 </h3>
 
-                                <p style="font-family: 'Roboto', sans-serif;">the page you are looking for not avaible!</p>
+                                <p style="font-family: 'Roboto', sans-serif;">Trang bạn tìm kiếm không có!</p>
 
-                                <a href="home" class="link_404" style="font-family: 'Roboto', sans-serif;">Go to Home</a>
-                                <a href="login" class="link_404" style="font-family: 'Roboto', sans-serif;">Log in</a>
+                                <a href="home" class="link_404" style="font-family: 'Roboto', sans-serif;">Trang chủ</a>
+                                <a href="login" class="link_404" style="font-family: 'Roboto', sans-serif;">Đăng nhập</a>
                             </div>
                         </div>
                     </div>
